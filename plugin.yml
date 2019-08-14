@@ -1,0 +1,53 @@
+name: PrisonFoundations
+main: Me.JeNDS.MainFolder.Main
+api-version: 1.13
+version: 1.0
+author: JeNDS
+description: -no desc-
+depend: [Vault]
+permissions:
+  PF.Admin:
+    children:
+      PF.Rankup.Others: true
+      PF.Sell.Others: true
+      PF.AutoSell.Others: true
+      PF.AutoSmelt.Others: true
+      PF.AutoBlock.Others: true
+  PF.Rankup:
+    description: ''
+  PF.Rankup.Others:
+    children:
+      PF.Rankup: true
+  PF.Sell:
+    description: ''
+  PF.Sell.Others:
+    children:
+      PF.Sell: true
+  PF.AutoSell:
+    description: ''
+  PF.AutoSell.Others:
+    children:
+      PF.AutoSell: true
+  PF.AutoSmelt:
+    description: ''
+  PF.AutoBlock:
+    description: ''
+  PF.AutoSmelt.Others:
+    children:
+      PF.AutoSmelt: true
+  PF.AutoBlock.Others:
+    children:
+      PF.AutoBlock: true
+commands:
+  rankup:
+    description: 'Command to Rankup'
+  sell:
+    description: 'Command to sell'
+  autosell:
+    description: 'Command to autosell'
+  autosmelt:
+    description: 'Command to autosmelt'
+  autoBlock:
+    description: 'Command to Block'
+  pf:
+    description: 'Main game command'
