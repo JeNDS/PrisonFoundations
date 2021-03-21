@@ -37,8 +37,8 @@ public class MinesMenuListener implements Listener {
             }
             if (!Catch.RunningMines.isEmpty()) {
                 for (Mine mine : Catch.RunningMines) {
-                    if (player.getOpenInventory().getTopInventory().getTitle().contains(mine.getName()) ||
-                            player.getOpenInventory().getTopInventory().getTitle().contains("Mines List")) {
+                    if (player.getOpenInventory().getTitle().contains(mine.getName()) ||
+                            player.getOpenInventory().getTitle().contains("Mines List")) {
                         if (ifPercentAddReset(player, mine.getName(), event.getCurrentItem())) {
                             found = true;
                         }
@@ -75,8 +75,8 @@ public class MinesMenuListener implements Listener {
 
 
     public boolean minesMenu(Player player, ItemStack clickItem) {
-        if (player.getOpenInventory().getTopInventory() != null) {
-            if (player.getOpenInventory().getTopInventory().getTitle().contains("Mines List")) {
+        if (player.getOpenInventory() != null) {
+            if (player.getOpenInventory().getTitle().contains("Mines List")) {
                 if (sameItem(clickItem, Presets.BackButton)) {
                     if (Catch.lastPlayerMenu.containsKey(player)) {
                         player.openInventory(Catch.lastPlayerMenu.get(player));
@@ -102,7 +102,7 @@ public class MinesMenuListener implements Listener {
     }
 
     public boolean mineMenuOptions(Player player, ItemStack clickItem, Mine mine) {
-        if (player.getOpenInventory().getTopInventory().getTitle().contains(mine.getName())) {
+        if (player.getOpenInventory().getTitle().contains(mine.getName())) {
             if (inventoryCheckIfSame(player.getOpenInventory().getTopInventory().getContents(), MinesMenu.MainMenuPreset(mine.getName()).getContents())) {
                 if (sameItem(Presets.ResetMineButton, clickItem)) {
                     player.sendMessage(Presets.DefaultColor + "Resetting Mine " + Presets.StandOutColor + mine.getName());
@@ -203,7 +203,7 @@ public class MinesMenuListener implements Listener {
     }
 
     private boolean ifPercentAddBlock(Player player, String mine, ItemStack clickItem) {
-        String[] splitTitle = player.getOpenInventory().getTopInventory().getTitle().split("\\s");
+        String[] splitTitle = player.getOpenInventory().getTitle().split("\\s");
         Material material = null;
         Integer percentage = 0;
         for (String s : splitTitle) {
@@ -294,8 +294,8 @@ public class MinesMenuListener implements Listener {
 
 
     private boolean ifPercentAddReset(Player player, String mine, ItemStack clickItem) {
-        if (player.getOpenInventory().getTopInventory().getTitle().contains(mine)) {
-            Integer percentage = (int) getNumberFromName(player.getOpenInventory().getTopInventory().getTitle());
+        if (player.getOpenInventory().getTitle().contains(mine)) {
+            Integer percentage = (int) getNumberFromName(player.getOpenInventory().getTitle());
             if (inventoryCheckIfSame(player.getOpenInventory().getTopInventory().getContents(), MinesMenu.ResetPercentageMenu(mine, percentage).getContents())) {
                 if (percentage != null) {
                     if (!Catch.RunningMines.isEmpty()) {
@@ -375,7 +375,7 @@ public class MinesMenuListener implements Listener {
     }
 
     private boolean ifTimeAddReset(Player player, String mine, ItemStack clickItem) {
-        double time = getNumberFromName(player.getOpenInventory().getTopInventory().getTitle());
+        double time = getNumberFromName(player.getOpenInventory().getTitle());
         if (inventoryCheckIfSame(player.getOpenInventory().getTopInventory().getContents(), MinesMenu.TimeResetMenu(mine, time).getContents())) {
             if (!Catch.RunningMines.isEmpty()) {
                 for (Mine m : Catch.RunningMines) {
@@ -570,7 +570,7 @@ public class MinesMenuListener implements Listener {
 
         }
         else {
-            if(player.getOpenInventory().getTopInventory().getTitle().contains(string)){
+            if(player.getOpenInventory().getTitle().contains(string)){
                 return true;
             }
         }
@@ -583,7 +583,7 @@ public class MinesMenuListener implements Listener {
             v = player.getOpenInventory().getTitle();
         }
         else {
-            player.getOpenInventory().getTopInventory().getTitle();
+            player.getOpenInventory().getTitle();
 
         }
 

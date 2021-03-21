@@ -6,7 +6,6 @@ import Me.JeNDS.Events.ShopEvents;
 import Me.JeNDS.Files.MineFile;
 import Me.JeNDS.Files.RankFile;
 import Me.JeNDS.Files.ShopsFile;
-import Me.JeNDS.Objects.Mine;
 import Me.JeNDS.PlayerMenus.Listeners.MinesMenuListener;
 import Me.JeNDS.Reagions.RegionCreator;
 import Me.JeNDS.Static.Presets;
@@ -16,8 +15,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import java.io.File;
 
 public class Main extends JavaPlugin {
 
@@ -30,13 +27,11 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        if(Bukkit.getVersion().contains("1.3.2")){
+        if (Bukkit.getVersion().contains("1.3.2")) {
 
-        }
-        else if(Bukkit.getVersion().contains("1.4.4")){
+        } else if (Bukkit.getVersion().contains("1.4.4")) {
 
-        }
-        else {
+        } else {
 
 
         }
@@ -64,7 +59,7 @@ public class Main extends JavaPlugin {
         getCommand("autosmelt").setExecutor(new CommandsClass());
         MineFile.LoadMines();
         //dont remove
-        RankFile Rankfile= new RankFile();
+        RankFile Rankfile = new RankFile();
         ShopsFile shopsFile = new ShopsFile();
     }
 

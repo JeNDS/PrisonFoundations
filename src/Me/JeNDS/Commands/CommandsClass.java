@@ -983,7 +983,7 @@ class Signs extends CommandsClass {
         }
         else{
             //1.3.2
-            itemStack.setType(Material.SIGN);
+            //itemStack.setType(Material.SIGN);
         }
 
         ItemMeta itemMeta = itemStack.getItemMeta();
