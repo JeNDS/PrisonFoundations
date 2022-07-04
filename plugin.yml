@@ -1,5 +1,5 @@
 name: PrisonFoundations
-main: Me.JeNDS.MainFolder.Main
+main: Me.JeNDS.MainFolder.PF
 api-version: 1.13
 version: 1.0
 author: JeNDS
