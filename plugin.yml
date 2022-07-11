@@ -1,5 +1,5 @@
 name: PrisonFoundations
-main: Me.JeNDS.MainFolder.PF
+main: Me.JeNDS.Main.PF
 api-version: 1.13
 version: 1.0
 author: JeNDS
@@ -45,9 +45,7 @@ commands:
     description: 'Command to sell'
   autosell:
     description: 'Command to autosell'
-  autosmelt:
-    description: 'Command to autosmelt'
-  autoBlock:
-    description: 'Command to Block'
+  pfenchant:
+    description: 'custom enchants'
   pf:
     description: 'Main game command'

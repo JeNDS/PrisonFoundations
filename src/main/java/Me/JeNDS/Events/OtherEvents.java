@@ -15,33 +15,18 @@ public class OtherEvents implements Listener {
     @EventHandler
     public void giveCatchOnJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        if (player.hasPermission("PF.AutoSmelt")) {
-            if (!Catch.autoSmelt.containsKey(event.getPlayer())) {
-                Catch.autoSmelt.put(event.getPlayer(), true);
-            }
-        }
         if (player.hasPermission("PF.AutoSell")) {
             if (!Catch.autoSell.containsKey(event.getPlayer())) {
                 Catch.autoSell.put(event.getPlayer(), true);
-            }
-        }
-        if (player.hasPermission("PF.AutoBlock")) {
-            if (!Catch.autoBlock.containsKey(event.getPlayer())) {
-                Catch.autoBlock.put(event.getPlayer(), true);
             }
         }
     }
 
     @EventHandler
     public void clearCatchOnLeave(PlayerQuitEvent event) {
-        if (Catch.autoSmelt.containsKey(event.getPlayer())) {
-            Catch.autoSmelt.remove(event.getPlayer());
-        }
+
         if (Catch.autoSell.containsKey(event.getPlayer())) {
             Catch.autoSell.remove(event.getPlayer());
-        }
-        if (Catch.autoBlock.containsKey(event.getPlayer())) {
-            Catch.autoBlock.remove(event.getPlayer());
         }
         if (Catch.inventoryFullTimeWait.containsKey(event.getPlayer())) {
             Catch.inventoryFullTimeWait.remove(event.getPlayer());

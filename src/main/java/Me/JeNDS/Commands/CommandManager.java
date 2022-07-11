@@ -4,21 +4,14 @@ import Me.JeNDS.Files.MineFile;
 import Me.JeNDS.Files.RankFile;
 import Me.JeNDS.Files.ShopsFile;
 import Me.JeNDS.Main.PF;
-import Me.JeNDS.Objects.MineObjects.Mine;
-import Me.JeNDS.Static.Catch;
 import Me.JeNDS.Static.Presets;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class CommandManager implements CommandExecutor, TabCompleter {
+public class CommandManager implements CommandExecutor {
     protected static CommandSender sender;
     protected static Command cmd;
     protected static String commandLabel;
@@ -26,6 +19,19 @@ public class CommandManager implements CommandExecutor, TabCompleter {
     protected static ChatColor defaultColor = Presets.DefaultColor;
     protected static ChatColor standOutColor = Presets.StandOutColor;
     private PF plugin = PF.getPlugin(PF.class);
+
+
+    public static void LoadCommands() {
+        LoadCommand("pf");
+        LoadCommand("rankup");
+        LoadCommand("pfenchant");
+        LoadCommand("sell");
+        LoadCommand("autosell");
+    }
+    private static void LoadCommand(String command){
+        PF.getInstance().getCommand(command).setExecutor(new CommandManager());
+        PF.getInstance().getCommand(command).setTabCompleter(new CommandsTabComplete());
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
@@ -42,10 +48,7 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         if (ShopCommands.AutoSell()) {
             return true;
         }
-        if (ShopCommands.AutoBlock()) {
-            return true;
-        }
-        if (ShopCommands.AutoSmelt()) {
+        if (EnchantmentCommands.PFEnchant()) {
             return true;
         }
         if (cmd.getName().equalsIgnoreCase("pf") || cmd.getName().equalsIgnoreCase("PrisonFoundations")) {
@@ -55,18 +58,11 @@ public class CommandManager implements CommandExecutor, TabCompleter {
                     return true;
                 }
             }
-            if (Signs.SignsCommands()) {
-                return true;
-            }
-            if (MineCommands.LoadMines()) {
-                return true;
-            }
-            if (pfHelp()) {
-                return true;
-            }
-            if (pfReload()) {
-                return true;
-            }
+            if (UtilityCommands.LoadUtility()) return true;
+            if (SignCommands.SignsCommands()) return true;
+            if (MineCommands.LoadMines()) return true;
+            if (pfHelp()) return true;
+            if (pfReload()) return true;
             sender.sendMessage(defaultColor + "/PF Help");
             return true;
         }
@@ -74,169 +70,6 @@ public class CommandManager implements CommandExecutor, TabCompleter {
         return false;
     }
 
-
-    @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
-        List<String> result = new ArrayList<>();
-        if (command.getName().equalsIgnoreCase("pf") || command.getName().equalsIgnoreCase("PrisonFoundations")) {
-            if (!(sender instanceof Player) || sender.hasPermission("PF.Admin")) {
-                if (args.length == 1) {
-                    if ("mines".startsWith(args[0].toLowerCase())) {
-                        result.add("mines");
-                    }
-                    if ("reload".startsWith(args[0].toLowerCase())) {
-                        result.add("reload");
-                    }
-                    if ("help".startsWith(args[0].toLowerCase())) {
-                        result.add("help");
-                    }
-                }
-                if (args.length == 2) {
-                    if (args[0].equalsIgnoreCase("mines")) {
-                        if ("regiontool".startsWith(args[1].toLowerCase())) {
-                            result.add("regiontool");
-                        }
-                        if ("setspawn".startsWith(args[1].toLowerCase())) {
-                            result.add("setspawn");
-                        }
-                        if ("menu".startsWith(args[1].toLowerCase())) {
-                            result.add("menu");
-                        }
-                        if ("createmine".startsWith(args[1].toLowerCase())) {
-                            result.add("createmine");
-                        }
-                        if ("help".startsWith(args[1].toLowerCase())) {
-                            result.add("help");
-                        }
-                    }
-                }
-                //command tp mines
-                if (args.length >= 2) {
-                    if (args[0].equalsIgnoreCase("mines")) {
-                        if (args.length == 2) {
-                            if ("tp".startsWith(args[1].toLowerCase())) {
-                                result.add("tp");
-                            }
-                        }
-                        if (args[1].equalsIgnoreCase("tp")) {
-                            if (args.length >= 3) {
-                                if (args.length == 3) {
-                                    if (!Catch.RunningMines.isEmpty()) {
-                                        for (Mine mine : Catch.RunningMines) {
-                                            if (mine.getName().startsWith(args[2].toLowerCase())) {
-                                                result.add(mine.getName());
-                                            }
-                                        }
-                                    }
-                                    result.addAll(Bukkit.getOnlinePlayers().stream().map(Player::getName).filter(name -> name.toLowerCase().startsWith(args[2].toLowerCase())).toList());
-                                }
-                                if (args.length == 4) {
-                                    if (Bukkit.getPlayer(args[2]) != null) {
-                                        if (!Catch.RunningMines.isEmpty()) {
-                                            for (Mine mine : Catch.RunningMines) {
-                                                if (mine.getName().startsWith(args[3].toLowerCase())) {
-                                                    result.add(mine.getName());
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-
-                            }
-                        }
-                    }
-                }
-                //reload
-                if (args.length >= 2) {
-                    if (args[0].equalsIgnoreCase("reload")) {
-                        if ("mines".startsWith(args[1].toLowerCase())) {
-                            result.add("mines");
-                        }
-                        if ("ranks".startsWith(args[1].toLowerCase())) {
-                            result.add("ranks");
-                        }
-                        if ("shops".startsWith(args[1].toLowerCase())) {
-                            result.add("shops");
-                        }
-                    }
-                }
-            }
-        }
-        //AutoSell
-        if (command.getName().equalsIgnoreCase("autosell")) {
-            if ((sender.hasPermission("PF.Admin") || (sender.hasPermission("PF.AutoSell.Others")) && sender instanceof Player) || !(sender instanceof Player)) {
-                //AutoSell
-                if (args.length == 1) {
-                    result.addAll(Bukkit.getOnlinePlayers().stream().map(Player::getName).filter(name -> name.toLowerCase().startsWith(args[0].toLowerCase())).toList());
-                }
-                if (args.length == 2) {
-                    if (Bukkit.getPlayer(args[0]) != null) {
-                        if ("on".startsWith(args[1].toLowerCase())) {
-                            result.add("on");
-                        }
-                        if ("off".startsWith(args[1].toLowerCase())) {
-                            result.add("off");
-                        }
-                    }
-                }
-            }
-        }
-        if (command.getName().equalsIgnoreCase("autosmelt")) {
-            if ((sender.hasPermission("PF.Admin") || (sender.hasPermission("PF.AutoSmelt.Others")) && sender instanceof Player) || !(sender instanceof Player)) {
-                //AutoSell
-                if (args.length == 1) {
-                    result.addAll(Bukkit.getOnlinePlayers().stream().map(Player::getName).filter(name -> name.toLowerCase().startsWith(args[0].toLowerCase())).toList());
-                }
-                if (args.length == 2) {
-                    if (Bukkit.getPlayer(args[0]) != null) {
-                        if ("on".startsWith(args[1].toLowerCase())) {
-                            result.add("on");
-                        }
-                        if ("off".startsWith(args[1].toLowerCase())) {
-                            result.add("off");
-                        }
-                    }
-                }
-            }
-        }
-        if (command.getName().equalsIgnoreCase("autoblock")) {
-            if ((sender.hasPermission("PF.Admin") || sender.hasPermission("PF.AutoBlock.Others")) || !(sender instanceof Player)) {
-                //AutoSell
-                if (args.length == 1) {
-                    result.addAll(Bukkit.getOnlinePlayers().stream().map(Player::getName).filter(name -> name.toLowerCase().startsWith(args[0].toLowerCase())).toList());
-                }
-                if (args.length == 2) {
-                    if (Bukkit.getPlayer(args[0]) != null) {
-                        if ("on".startsWith(args[1].toLowerCase())) {
-                            result.add("on");
-                        }
-                        if ("off".startsWith(args[1].toLowerCase())) {
-                            result.add("off");
-                        }
-                    }
-                }
-            }
-        }
-        //Sell
-        if (command.getName().equalsIgnoreCase("sell")) {
-            if ((sender.hasPermission("PF.Admin") || sender.hasPermission("PF.Sell.Others")) || !(sender instanceof Player)) {
-                //AutoSell
-                if (args.length == 1) {
-                    result.addAll(Bukkit.getOnlinePlayers().stream().map(Player::getName).filter(name -> name.toLowerCase().startsWith(args[0].toLowerCase())).toList());
-                }
-            }
-        }
-        if (command.getName().equalsIgnoreCase("rankup")) {
-            if ((sender.hasPermission("PF.Admin") || sender.hasPermission("PF.Rankup.Others")) || !(sender instanceof Player)) {
-                if (args.length == 1) {
-                    result.addAll(Bukkit.getOnlinePlayers().stream().map(Player::getName).filter(name -> name.toLowerCase().startsWith(args[0].toLowerCase())).toList());
-                }
-            }
-        }
-
-
-        return result;
-    }
 
     public boolean pfHelp() {
         if (args.length >= 1) {

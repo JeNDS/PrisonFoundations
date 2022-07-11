@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class RankFile {
 
-    private static YMLFile ranksFile = JDAPI.getFileManipulation().copyFile("Ranks.yml", PF.getInstance());
+    private static final YMLFile ranksFile = JDAPI.getFileManipulation.copyFile("Ranks.yml", PF.getInstance());
 
     public static void LoadRanks(){
         ConfigurationSection section = ranksFile.getFileConfiguration().getConfigurationSection("");
@@ -27,6 +27,7 @@ public class RankFile {
             boolean lastRank = false;
             if (ranksFile.getFileConfiguration().get(rankName + ".Prefix") != null) {
                prefix =  ranksFile.getFileConfiguration().getString(rankName + ".Prefix");
+               prefix = JDAPI.getTools.formatString(prefix);
             }
             if (ranksFile.getFileConfiguration().get(rankName + ".Next Rank") != null) {
                 priority = ranksFile.getFileConfiguration().getInt(rankName + ".Priority");

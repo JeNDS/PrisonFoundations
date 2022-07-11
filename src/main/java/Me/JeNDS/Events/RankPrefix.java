@@ -15,7 +15,6 @@ public class RankPrefix implements Listener {
         if (Rank.GetPlayerRank(event.getPlayer()) != null) {
             Rank rank = Rank.GetPlayerRank(event.getPlayer());
             if (rank.getPrefix() != null) {
-                //event.getPlayer().setDisplayName(rank.getPrefix() + event.getPlayer().getDisplayName());
                 event.setFormat(Presets.ColorReplacer(rank.getPrefix()) +" "+ event.getFormat());
             }
         }

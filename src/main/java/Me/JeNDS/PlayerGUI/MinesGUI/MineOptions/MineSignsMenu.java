@@ -9,6 +9,9 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import static Me.JeNDS.Static.Presets.DefaultColor;
+import static Me.JeNDS.Static.Presets.StandOutColor;
+
 public class MineSignsMenu extends PFGUI {
 
     private final PFGUI lastMenu;
@@ -17,10 +20,10 @@ public class MineSignsMenu extends PFGUI {
     public MineSignsMenu(PFGUI lastMenu, Mine mine){
         this.lastMenu = lastMenu;
         this.mine = mine;
-        addItems(Material.OAK_SIGN,name+"Mine Percentage",null,11,this);
-        addItems(Material.OAK_SIGN,name+"Time Until Reset",null,15,this);
-        addItems(Material.REDSTONE_BLOCK,name+"Back",null,45,this);
-        setMenuAndInterface(title1 + mine.getName() + " Signs Menu", 54, InventoryType.CHEST, true, fillItem(), PF.getInstance());
+        addItems(Material.OAK_SIGN, DefaultColor +"Mine Percentage",null,11,this);
+        addItems(Material.OAK_SIGN, DefaultColor +"Time Until Reset",null,15,this);
+        addItems(Material.REDSTONE_BLOCK, DefaultColor +"Back",null,45,this);
+        setMenuAndInterface(StandOutColor + mine.getName() + " Signs Menu", 54, InventoryType.CHEST, true, fillItem(), PF.getInstance());
     }
 
 
@@ -33,12 +36,15 @@ public class MineSignsMenu extends PFGUI {
     protected boolean leftClickEvents(ItemStack itemStack, Player player) {
         if(itemAndSlot.get(45).isSimilar(itemStack)){
             player.openInventory(lastMenu.getMenu());
+            return true;
         }
         if(itemAndSlot.get(11).isSimilar(itemStack)){
-            giveSign(player, name+mine.getName() + " Mine Percentage");
+            giveSign(player, DefaultColor +mine.getName() + " Mine Percentage");
+            return true;
         }
         if(itemAndSlot.get(15).isSimilar(itemStack)){
-            giveSign(player,name+mine.getName() + " Time Until Reset");
+            giveSign(player, DefaultColor +mine.getName() + " Time Until Reset");
+            return true;
         }
         return false;
     }
@@ -47,7 +53,7 @@ public class MineSignsMenu extends PFGUI {
         ItemStack itemStack = new ItemStack(Material.OAK_SIGN);
         ItemMeta meta = itemStack.getItemMeta();
         assert meta != null;
-        meta.setDisplayName(name+ signName);
+        meta.setDisplayName(DefaultColor + signName);
         itemStack.setItemMeta(meta);
         if(!player.getInventory().contains(itemStack)) {
             player.getInventory().addItem(itemStack);

@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-class Signs extends CommandManager {
+class SignCommands extends CommandManager {
     public static boolean SignsCommands() {
         if (args.length >= 1) {
             if (args[0].equalsIgnoreCase("signs")) {

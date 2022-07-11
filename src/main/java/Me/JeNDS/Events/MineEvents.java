@@ -17,7 +17,7 @@ import org.bukkit.event.player.PlayerLevelChangeEvent;
 public class MineEvents extends EventManager {
 
 
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler()
     public void mineEvent(BlockBreakEvent event) {
         Player player = event.getPlayer();
         if (isBlockInMines(event.getBlock().getLocation())) {

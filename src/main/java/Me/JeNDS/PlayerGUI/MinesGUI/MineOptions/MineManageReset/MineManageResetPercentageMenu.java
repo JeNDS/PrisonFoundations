@@ -9,6 +9,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 
+import static Me.JeNDS.Static.Presets.DefaultColor;
+import static Me.JeNDS.Static.Presets.StandOutColor;
+
 public class MineManageResetPercentageMenu extends PFGUI {
 
     private final PFGUI lastMenu;
@@ -18,17 +21,17 @@ public class MineManageResetPercentageMenu extends PFGUI {
         this.lastMenu = lastMenu;
         this.mine = mine;
 
-        addItems(Material.EMERALD_BLOCK, name + "Add 5%", null, 12, this);
-        addItems(Material.EMERALD_BLOCK, name + "Add 10%", null, 21, this);
-        addItems(Material.EMERALD_BLOCK, name + "Add 25%", null, 30, this);
-        addItems(Material.EMERALD_BLOCK, name + "Add 50%", null, 39, this);
-        addItems(Material.REDSTONE_BLOCK, name + "Remove 5%", null, 14, this);
-        addItems(Material.REDSTONE_BLOCK, name + "Remove 10%", null, 23, this);
-        addItems(Material.REDSTONE_BLOCK, name + "Remove 25%", null, 32, this);
-        addItems(Material.REDSTONE_BLOCK, name + "Remove 50%", null, 41, this);
-        addItems(Material.REDSTONE_BLOCK, name + "Back", null, 45, this);
+        addItems(Material.EMERALD_BLOCK, DefaultColor + "Add 5%", null, 12, this);
+        addItems(Material.EMERALD_BLOCK, DefaultColor + "Add 10%", null, 21, this);
+        addItems(Material.EMERALD_BLOCK, DefaultColor + "Add 25%", null, 30, this);
+        addItems(Material.EMERALD_BLOCK, DefaultColor + "Add 50%", null, 39, this);
+        addItems(Material.REDSTONE_BLOCK, DefaultColor + "Remove 5%", null, 14, this);
+        addItems(Material.REDSTONE_BLOCK, DefaultColor + "Remove 10%", null, 23, this);
+        addItems(Material.REDSTONE_BLOCK, DefaultColor + "Remove 25%", null, 32, this);
+        addItems(Material.REDSTONE_BLOCK, DefaultColor + "Remove 50%", null, 41, this);
+        addItems(Material.REDSTONE_BLOCK, DefaultColor + "Back", null, 45, this);
 
-        setMenuAndInterface(title1 + mine.getName() + " Manage Percentage Reset Menu " + mine.getMinePercentageReset() + "%", 54, InventoryType.CHEST, true, fillItem(), PF.getInstance());
+        setMenuAndInterface(StandOutColor + mine.getName() + " Manage Percentage Reset Menu " + mine.getMinePercentageReset() + "%", 54, InventoryType.CHEST, true, fillItem(), PF.getInstance());
     }
 
 
@@ -41,30 +44,39 @@ public class MineManageResetPercentageMenu extends PFGUI {
     protected boolean leftClickEvents(ItemStack itemStack, Player player) {
         if (itemAndSlot.get(45).isSimilar(itemStack)) {
             player.openInventory(lastMenu.getMenu());
+            return true;
         }
         if (itemAndSlot.get(12).isSimilar(itemStack)) {
             modifyMenuPercentage(player, +5);
+            return true;
         }
         if (itemAndSlot.get(21).isSimilar(itemStack)) {
             modifyMenuPercentage(player, +10);
+            return true;
         }
         if (itemAndSlot.get(30).isSimilar(itemStack)) {
             modifyMenuPercentage(player, +25);
+            return true;
         }
         if (itemAndSlot.get(39).isSimilar(itemStack)) {
             modifyMenuPercentage(player, +50);
+            return true;
         }
         if (itemAndSlot.get(14).isSimilar(itemStack)) {
             modifyMenuPercentage(player, -5);
+            return true;
         }
         if (itemAndSlot.get(23).isSimilar(itemStack)) {
             modifyMenuPercentage(player, -10);
+            return true;
         }
         if (itemAndSlot.get(32).isSimilar(itemStack)) {
             modifyMenuPercentage(player, -25);
+            return true;
         }
         if (itemAndSlot.get(41).isSimilar(itemStack)) {
             modifyMenuPercentage(player, -50);
+            return true;
         }
         return false;
     }

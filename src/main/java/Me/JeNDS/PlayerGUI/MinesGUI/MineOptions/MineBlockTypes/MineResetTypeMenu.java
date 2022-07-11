@@ -13,6 +13,8 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
 
+import static Me.JeNDS.Static.Presets.*;
+
 public class MineResetTypeMenu extends PFGUI {
 
     private final PFGUI lastMenu;
@@ -22,9 +24,9 @@ public class MineResetTypeMenu extends PFGUI {
         this.lastMenu = lastMenu;
         this.mine = mine;
         addBlockTypes();
-        addItems(Material.EMERALD_BLOCK,name+"Add",null,49,this);
-        addItems(Material.REDSTONE_BLOCK,name+"Back",null,45,this);
-        setMenuAndInterface(title1 + mine.getName() + " Reset Type Menu "+mine.getTotalPercentage()+ "%", 54, InventoryType.CHEST, true, fillItem(), PF.getInstance());
+        addItems(Material.EMERALD_BLOCK, DefaultColor +"Add",null,49,this);
+        addItems(Material.REDSTONE_BLOCK, DefaultColor +"Back",null,45,this);
+        setMenuAndInterface(StandOutColor + mine.getName() + " Reset Type Menu "+mine.getTotalPercentage()+ "%", 54, InventoryType.CHEST, true, fillItem(), PF.getInstance());
     }
 
 
@@ -41,7 +43,7 @@ public class MineResetTypeMenu extends PFGUI {
         }
         if(itemAndSlot.get(49).isSimilar(itemStack)){
             if(mine.getBlockTypes().size()<45){
-                player.sendMessage(title1 + " Select a Block in your inventory to add");
+                player.sendMessage(StandOutColor + " Select a Block in your inventory to add");
                 Catch.selectingBlockType.put(player, this);
                 Bukkit.getScheduler().scheduleSyncDelayedTask(PF.getInstance(), new Runnable() {
                     @Override
@@ -70,10 +72,10 @@ public class MineResetTypeMenu extends PFGUI {
         for(BlockType blockType : mine.getBlockTypes()){
             if(i<45){
                 ArrayList<String> lore = new ArrayList<>();
-                lore.add(lore2+"Click to");
-                lore.add(lore2+"Modify");
-                lore.add(lore2+blockType.getPercentage()+"%");
-                addItems(blockType.getMaterial(),name+blockType.getMaterial().name(),lore,i-1,this);
+                lore.add(StandOutColor2 +"Click to");
+                lore.add(StandOutColor2 +"Modify");
+                lore.add(StandOutColor2 + ""+ blockType.getPercentage()+"%");
+                addItems(blockType.getMaterial(), DefaultColor +blockType.getMaterial().name(),lore,i-1,this);
             }
             i++;
         }

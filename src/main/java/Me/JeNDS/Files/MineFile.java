@@ -36,7 +36,7 @@ public class MineFile {
 
     public MineFile(String mineName) {
         Name = mineName;
-        mineFile = JDAPI.getFileManipulation().createFile("Mine Data", mineName + ".yml" ,PF.getInstance());
+        mineFile = JDAPI.getFileManipulation.createFile("Mine Data", mineName + ".yml" ,PF.getInstance());
         loadConfig();
     }
 

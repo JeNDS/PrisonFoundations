@@ -1,6 +1,5 @@
 package Me.JeNDS.Objects;
 
-import Me.JeNDS.Main.PF;
 import Me.JeNDS.Static.Catch;
 import Me.JeNDS.Static.Presets;
 import org.bukkit.Material;
@@ -8,6 +7,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
+
+import static Me.JeNDS.Implementations.EconomyImport.Economy;
 
 public class Shop {
     private String shopName;
@@ -44,7 +45,7 @@ public class Shop {
                                 foundToSell = true;
                                 sold = sold + money;
                                 itemsSold = itemsSold + itemStack.getAmount();
-                                PF.economy.depositPlayer(player, money);
+                                Economy.depositPlayer(player, money);
                                 player.getInventory().remove(itemStack);
                             }
                         }

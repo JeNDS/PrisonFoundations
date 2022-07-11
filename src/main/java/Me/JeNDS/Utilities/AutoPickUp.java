@@ -13,9 +13,6 @@ public class AutoPickUp extends Utility {
         if (SpaceInInventory(player)) {
             addItems(player,event.getBlock().getDrops());
             new AutoEXP(player,event);
-            new AutoBlock(player);
-            new AutoSmelt(player);
-
         } else {
             new AutoSell(player);
         }

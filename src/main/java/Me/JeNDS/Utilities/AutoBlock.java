@@ -1,6 +1,5 @@
 package Me.JeNDS.Utilities;
 
-import Me.JeNDS.Static.Catch;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -9,19 +8,16 @@ public class AutoBlock extends Utility {
 
 
     public AutoBlock(Player player) {
-        if (Catch.autoBlock.containsKey(player))
-            if (Catch.autoBlock.get(player)) {
-                blockMaking(player, Material.GOLD_INGOT, Material.GOLD_BLOCK);
-                blockMaking(player, Material.LAPIS_LAZULI, Material.LAPIS_BLOCK);
-                blockMaking(player, Material.IRON_INGOT, Material.IRON_BLOCK);
-                blockMaking(player, Material.COAL, Material.COAL_BLOCK);
-                blockMaking(player, Material.REDSTONE, Material.REDSTONE_BLOCK);
-                blockMaking(player, Material.DIAMOND, Material.DIAMOND_BLOCK);
-                blockMaking(player, Material.EMERALD, Material.EMERALD_BLOCK);
-                blockMaking(player, Material.QUARTZ, Material.QUARTZ_BLOCK);
-                blockMaking(player, Material.GOLD_NUGGET, Material.GOLD_INGOT);
-                blockMaking(player, Material.IRON_NUGGET, Material.IRON_INGOT);
-            }
+        blockMaking(player, Material.GOLD_INGOT, Material.GOLD_BLOCK);
+        blockMaking(player, Material.LAPIS_LAZULI, Material.LAPIS_BLOCK);
+        blockMaking(player, Material.IRON_INGOT, Material.IRON_BLOCK);
+        blockMaking(player, Material.COAL, Material.COAL_BLOCK);
+        blockMaking(player, Material.REDSTONE, Material.REDSTONE_BLOCK);
+        blockMaking(player, Material.DIAMOND, Material.DIAMOND_BLOCK);
+        blockMaking(player, Material.EMERALD, Material.EMERALD_BLOCK);
+        blockMaking(player, Material.QUARTZ, Material.QUARTZ_BLOCK);
+        blockMaking(player, Material.GOLD_NUGGET, Material.GOLD_INGOT);
+        blockMaking(player, Material.IRON_NUGGET, Material.IRON_INGOT);
     }
 
 
@@ -51,9 +47,8 @@ public class AutoBlock extends Utility {
 
                             }
                         }
-                        if (availableBlocks != itemStack.getAmount() / 9 || availableBlocks == 0) {
-                            itemStack.setAmount(leftOvers);
-                        }
+                        itemStack.setAmount(leftOvers);
+                        combinePlayerInventory(player);
                     }
                 }
             }

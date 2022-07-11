@@ -11,7 +11,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import java.util.HashMap;
 
 public class ShopsFile {
-    public static YMLFile shopFile = JDAPI.getFileManipulation().copyFile("Shops.yml", PF.getPlugin(PF.class));
+    public static YMLFile shopFile = JDAPI.getFileManipulation.copyFile("Shops.yml", PF.getPlugin(PF.class));
 
 
     public static void LoadShopFile() {

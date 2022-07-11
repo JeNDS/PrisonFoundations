@@ -8,12 +8,6 @@
     <artifactId>PrisonFoundations</artifactId>
     <version>1.0.0</version>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <dir>C:\Users\jends\Desktop\Spgiot\1.7.1\plugins</dir>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-    </properties>
     <build>
         <defaultGoal>clean package</defaultGoal>
         <plugins>

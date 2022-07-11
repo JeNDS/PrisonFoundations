@@ -1,8 +1,6 @@
 package Me.JeNDS.PlayerGUI;
 
 import JeNDS.Plugins.PluginAPI.GUI.GUInterface;
-import Me.JeNDS.Static.Presets;
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -12,13 +10,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.List;
 
 public abstract class PFGUI extends GUInterface {
-
-    protected String title1 = Presets.StandOutColor + "";
-    protected String name = Presets.DefaultColor + "";
-    protected String lore2 = Presets.StandOutColor2 + "";
-
-
-
 
     protected boolean hasSameName(ItemStack itemStack, String name){
         if(itemStack!=null)

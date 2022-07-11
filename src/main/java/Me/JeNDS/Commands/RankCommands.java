@@ -1,10 +1,11 @@
 package Me.JeNDS.Commands;
 
-import Me.JeNDS.Main.PF;
 import Me.JeNDS.Objects.Rank;
 import Me.JeNDS.Static.Presets;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import static Me.JeNDS.Implementations.EconomyImport.Economy;
 
 public class RankCommands extends CommandManager {
     public static boolean Rankup() {
@@ -13,11 +14,11 @@ public class RankCommands extends CommandManager {
                 if (args.length == 0) {
                     Rank rank = Rank.GetPlayerRank(player);
                     if (!rank.isLastRank()) {
-                        if (PF.economy.getBalance(player) >= rank.getRankUpCost()) {
-                            PF.economy.withdrawPlayer(player, rank.getRankUpCost());
+                        if (Economy.getBalance(player) >= rank.getRankUpCost()) {
+                            Economy.withdrawPlayer(player, rank.getRankUpCost());
                             Rank.RankUpPlayer(player);
                         } else {
-                            double temp = rank.getRankUpCost() - PF.economy.getBalance(player);
+                            double temp = rank.getRankUpCost() - Economy.getBalance(player);
                             player.sendMessage(defaultColor + "You still need " + standOutColor + temp + defaultColor + " to rankup!");
                         }
                     } else {
@@ -30,14 +31,14 @@ public class RankCommands extends CommandManager {
                 if (Bukkit.getPlayer(args[0]) != null) {
                     Player player = Bukkit.getPlayer(args[0]);
                     Rank rank = Rank.GetPlayerRank(player);
-                    if (sender.hasPermission("PF.Rankup.Others") || sender.hasPermission("PF.Admin")) {
+                    if (sender.hasPermission("Rankup.Others") || sender.hasPermission("Admin")) {
                         if (!rank.isLastRank()) {
                             Rank.RankUpPlayer(player);
                         } else {
                             sender.sendMessage(Presets.StandOutColor + args[0] + Presets.DefaultColor + " is on his final Rank!");
                         }
                     } else {
-                        sender.sendMessage(Presets.DefaultColor + "You don't have Permissions " + Presets.StandOutColor + "PF.Rankup.Others");
+                        sender.sendMessage(Presets.DefaultColor + "You don't have Permissions " + Presets.StandOutColor + "Rankup.Others");
                     }
                 } else {
                     sender.sendMessage(Presets.StandOutColor + args[0] + Presets.DefaultColor + " is not a valid player!");

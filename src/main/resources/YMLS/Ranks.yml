@@ -1,3 +1,15 @@
+#There are 3 Times of rewards
+#  [Broadcast]
+#  [Message]
+#  [Command]
+#
+#There are 5 Placeholders that you can use
+#  %player%
+#  %rank%
+#  %rankPrefix%
+#  %nextRank%
+#  %nextRankPrefix%
+
 A:
   Prefix: "&6A"
   Priority: 3
