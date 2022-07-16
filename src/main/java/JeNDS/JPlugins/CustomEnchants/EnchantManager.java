@@ -26,7 +26,7 @@ public class EnchantManager {
         new EffectEnchantment(new EnchantmentWrapper("flight", "Flight", 1), 0);
     }
 
-    // TODO: 7/10/2022 Flight,Explossions,supper jump,
+    // TODO: 7/10/2022 Explossions
     public static ItemStack AddCustomEnchantment(Enchantment enchantment, ItemStack itemStack) {
         if (!itemStack.getEnchantments().containsKey(enchantment)) {
             itemStack.addUnsafeEnchantment(enchantment, 1);

@@ -11,6 +11,9 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Cat;
+import org.checkerframework.checker.units.qual.A;
+import org.checkerframework.checker.units.qual.C;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -41,7 +44,6 @@ public class MineFile {
     }
 
     public static void LoadMines() {
-
         if (!Catch.RunningMines.isEmpty()) {
             for (Mine mine : Catch.RunningMines) {
                 if (mine.getPercentageResetTaskID() != null) {
@@ -71,6 +73,21 @@ public class MineFile {
         }
 
 
+    }
+
+
+    public static void ReloadMines(){
+        for(Mine mine : Catch.RunningMines){
+            for(PFSign pfSign : mine.getMineSigns()){
+                pfSign.stopUpdate();
+            }
+            for(PFHologram pfHologram : mine.getHolograms()){
+                pfHologram.stopUpdate();
+            }
+            mine.stopUpdate();
+        }
+        Catch.RunningMines = new ArrayList<>();
+        LoadMines();
     }
 
     public void createMineFile(String worldName, ArrayList<Location> region, Location Position1, Location Position2, HashMap<Material, Integer> blocktypes, Integer resetTime, Integer resetPercentage) {
@@ -192,6 +209,7 @@ public class MineFile {
 
     public void updateBlockTypes(ArrayList<BlockType> newBlockTypes) {
         for (BlockType blockType : newBlockTypes) {
+            mineFile.getFileConfiguration().set("Block Types",null);
             mineFile.getFileConfiguration().set("Block Types." + blockType.getMaterial().toString() + ".Percentage", blockType.getPercentage());
             mineFile.save();
         }

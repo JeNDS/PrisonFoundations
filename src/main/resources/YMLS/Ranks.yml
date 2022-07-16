@@ -15,15 +15,15 @@ A:
   Priority: 3
   RankUp Price: 1000
   RankUp Rewards:
-    - "[Broadcast] &A %player% rankUp to %nextRank%"
-    - "[Command] lp user %player% permission set PF.Rank.%nextRank% true"
+    - "[Broadcast] &A%player% rankUp to %nextRank%"
+    - "[Command] lp user %player% permission set PF.Ranks.%nextRank% true"
 B:
   Prefix: "&7B"
   Priority: 2
   RankUp Price: 2000
   RankUp Rewards:
-    - "[Broadcast] &A %player% rankUp to %nextRank%"
-    - "[Command] lp user %player% permission set PF.Rank.%nextRank% true"
+    - "[Broadcast] &A%player% rankUp to %nextRank%"
+    - "[Command] lp user %player% permission set PF.Ranks.%nextRank% true"
 C:
   Prefix: "&8C"
   Priority: 1

@@ -104,16 +104,14 @@ public class MineCommands extends CommandManager {
     }
     private static boolean HologramTool() {
         if (args[1].equalsIgnoreCase("hologramRemover")) {
-            if (sender instanceof Player) {
-                Player player = (Player) sender;
+            if (sender instanceof Player player) {
                 ItemStack itemStack = JDItem.CustomItemStack(Material.BLAZE_ROD,defaultColor+ "Hologram Remover",null);
                 player.getInventory().addItem(itemStack);
                 player.sendMessage(defaultColor + "you received a Hologram Remover ");
-                return true;
             } else {
                 sender.sendMessage(defaultColor + "You must be a player to do this!");
-                return true;
             }
+            return true;
         } else {
             return false;
         }
@@ -122,22 +120,23 @@ public class MineCommands extends CommandManager {
 
     private static boolean SetMineSpawn() {
         if (args[1].equalsIgnoreCase("setSpawn")) {
-            if (sender instanceof Player) {
-                Player player = (Player) sender;
-                for (Mine mine : Catch.RunningMines) {
-                    if (Mine.PlayerCloseToMine(player, mine)) {
+            if (sender instanceof Player player) {
+                if(args.length >= 3){
+                    if(Mine.GetMineFromName(args[2])!=null){
+                        Mine mine = Mine.GetMineFromName(args[2]);
+                        assert mine != null;
                         mine.setSpawn(player.getLocation());
                         player.sendMessage(Presets.DefaultColor + "You have set " + Presets.StandOutColor + mine.getName() + Presets.DefaultColor + " spawn!");
-                        return true;
+                    }
+                    else {
+                        sender.sendMessage(Presets.DefaultColor + args[2]+" is not a valid mine");
                     }
                 }
-                sender.sendMessage(Presets.DefaultColor + "No Mine found close to you!");
-                return true;
 
             } else {
                 sender.sendMessage(defaultColor + "You must be a player to do this!");
-                return true;
             }
+            return true;
         } else {
             return false;
         }
@@ -175,20 +174,18 @@ public class MineCommands extends CommandManager {
                                 if (mine.getSpawn() != null) {
                                     player.teleport(mine.getSpawn());
                                     sender.sendMessage(defaultColor + "You been teleported  to mine " + standOutColor + args[2]);
-                                    return true;
                                 } else {
                                     sender.sendMessage(standOutColor + args[2] + defaultColor + " does not have a spawn!");
-                                    return true;
                                 }
+                                return true;
                             }
                         }
                         sender.sendMessage(standOutColor + args[2] + defaultColor + " is not a valid Mine!");
-                        return true;
                     } else {
                         sender.sendMessage(defaultColor + "/PF Mines TP " + standOutColor + "<MineName>");
                         sender.sendMessage(defaultColor + "/PF Mines TP " + standOutColor + "<Player> <MineName>");
-                        return true;
                     }
+                    return true;
 
 
                 }

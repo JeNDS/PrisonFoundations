@@ -1,5 +1,6 @@
 package JeNDS.JPlugins.Commands;
 
+import JeNDS.JPlugins.Files.UtilitiesFile;
 import JeNDS.JPlugins.Main.PF;
 import JeNDS.JPlugins.Files.MineFile;
 import JeNDS.JPlugins.Files.RankFile;
@@ -87,24 +88,31 @@ public class CommandManager implements CommandExecutor {
         if (args.length >= 1) {
             if (args[0].equalsIgnoreCase("reload")) {
                 if (args.length == 1) {
-                    ShopsFile shopsFile = new ShopsFile();
-                    RankFile rankFile = new RankFile();
-                    MineFile.LoadMines();
+                    MineFile.ReloadMines();
+                    ShopsFile.ReloadShops();
+                    RankFile.ReloadRanks();
+                    UtilitiesFile.ReloadUtilities();
+                    sender.sendMessage(defaultColor + "You have reloaded all files");
                     return true;
                 } else {
                     if (args[1].equalsIgnoreCase("mines")) {
-                        MineFile.LoadMines();
-                        sender.sendMessage(defaultColor + "You have reloaded all mine and its files");
+                        MineFile.ReloadMines();
+                        sender.sendMessage(defaultColor + "You have reloaded all mines");
                         return true;
                     }
                     if (args[1].equalsIgnoreCase("shops")) {
-                        ShopsFile shopsFile = new ShopsFile();
-                        sender.sendMessage(defaultColor + "You have reloaded all shops and its files");
+                        ShopsFile.ReloadShops();
+                        sender.sendMessage(defaultColor + "You have reloaded all shops");
                         return true;
                     }
                     if (args[1].equalsIgnoreCase("ranks")) {
-                        RankFile rankFile = new RankFile();
-                        sender.sendMessage(defaultColor + "You have reloaded all ranks and its files");
+                        RankFile.ReloadRanks();
+                        sender.sendMessage(defaultColor + "You have reloaded all ranks");
+                        return true;
+                    }
+                    if (args[1].equalsIgnoreCase("utilities")) {
+                        UtilitiesFile.ReloadUtilities();
+                        sender.sendMessage(defaultColor + "You have reloaded all utilities");
                         return true;
                     }
                 }

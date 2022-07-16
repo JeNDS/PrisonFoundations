@@ -10,22 +10,26 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Cat;
+import org.checkerframework.checker.units.qual.C;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 public class UtilitiesFile {
 
-    private static final YMLFile utilityFile = JDAPI.getFileManipulation.createFile("Utilities.yml", PF.getInstance());
+    private static YMLFile utilityFile;
 
     public static void LoadUtilities() {
+        utilityFile = JDAPI.getFileManipulation.createFile("Utilities.yml", PF.getInstance());
         ConfigurationSection section = utilityFile.getFileConfiguration().getConfigurationSection("");
         assert section != null;
         for (String utility : section.getKeys(false)) {
             LoadUtility(utility);
         }
+    }
+    public static void ReloadUtilities() {
+        Catch.blockUtilities = new ArrayList<>();
+        LoadUtilities();
     }
 
     private static void LoadUtility(String ID) {
@@ -43,6 +47,7 @@ public class UtilitiesFile {
             }
         }
     }
+
 
 
     public static void saveUtility(BlockUtility blockUtility) {

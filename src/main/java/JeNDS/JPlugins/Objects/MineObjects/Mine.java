@@ -1,8 +1,8 @@
 package JeNDS.JPlugins.Objects.MineObjects;
 
+import JeNDS.JPlugins.Files.MineFile;
 import JeNDS.JPlugins.Main.PF;
 import JeNDS.JPlugins.Reagions.RegionCreator;
-import JeNDS.JPlugins.Files.MineFile;
 import JeNDS.JPlugins.Static.Catch;
 import JeNDS.JPlugins.Static.Presets;
 import org.bukkit.Bukkit;
@@ -63,11 +63,12 @@ public class Mine {
         }
         return false;
     }
+
     public static Mine GetMineFromHologramLocation(Location location) {
-        for(JeNDS.JPlugins.Objects.MineObjects.Mine mine : RunningMines){
-            for(PFHologram pfHologram : mine.getHolograms()){
-                for(ArmorStand stand : pfHologram.getArmorStands()){
-                    if(stand.getLocation().equals(location)){
+        for (JeNDS.JPlugins.Objects.MineObjects.Mine mine : RunningMines) {
+            for (PFHologram pfHologram : mine.getHolograms()) {
+                for (ArmorStand stand : pfHologram.getArmorStands()) {
+                    if (stand.getLocation().equals(location)) {
                         return mine;
                     }
                 }
@@ -75,11 +76,12 @@ public class Mine {
         }
         return null;
     }
+
     public static boolean RemoveMineHologramFromLocation(Location location) {
-        for(JeNDS.JPlugins.Objects.MineObjects.Mine mine : RunningMines){
-            for(PFHologram pfHologram : mine.getHolograms()){
-                for(ArmorStand stand : pfHologram.getArmorStands()){
-                    if(stand.getLocation().equals(location)){
+        for (JeNDS.JPlugins.Objects.MineObjects.Mine mine : RunningMines) {
+            for (PFHologram pfHologram : mine.getHolograms()) {
+                for (ArmorStand stand : pfHologram.getArmorStands()) {
+                    if (stand.getLocation().equals(location)) {
                         mine.deleteHologram(pfHologram);
                         return true;
                     }
@@ -89,26 +91,35 @@ public class Mine {
         return false;
     }
 
-    public static Mine GetMineFromName(String name){
-        for(JeNDS.JPlugins.Objects.MineObjects.Mine mine : RunningMines){
-            if(mine.getName().contains(name)) return mine;
+    public static Mine GetMineFromName(String name) {
+        for (JeNDS.JPlugins.Objects.MineObjects.Mine mine : RunningMines) {
+            if (mine.getName().contains(name)) return mine;
         }
         return null;
     }
 
-    public void deleteMine(){
+    public void deleteMine() {
         MineFile mineFile = mineFile();
-        for(PFSign pfSign: mineSigns) {
-                pfSign.stopUpdate();
-                mineFile.removeSignFile(pfSign.getID());
-            }
-        Bukkit.getScheduler().cancelTask(getPercentageResetTaskID());
-        Bukkit.getScheduler().cancelTask(getTimeResetTaskID());
-        mineFile.deleteConfig();
-        for(PFHologram pfHologram : getHolograms()){
+        for (PFSign pfSign : mineSigns) {
+            pfSign.delete();
+            mineFile.removeSignFile(pfSign.getID());
+        }
+        stopUpdate();
+        for (PFHologram pfHologram : getHolograms()) {
             pfHologram.removeHologram();
         }
+        mineFile.deleteConfig();
         Catch.RunningMines.remove(this);
+    }
+
+    public void startUpdate() {
+        timeCounter();
+        percentageCheck();
+    }
+
+    public void stopUpdate() {
+        Bukkit.getScheduler().cancelTask(getPercentageResetTaskID());
+        Bukkit.getScheduler().cancelTask(getTimeResetTaskID());
     }
 
     public void loadMine() {
@@ -123,22 +134,21 @@ public class Mine {
         TimeBeforeReset = mineFile.getLastTime();
         PvP = mineFile.isPvpRule();
         for (Material material : mineFile.getBlockTypes().keySet()) {
-            BlockType bt = new BlockType(material,mineFile.getBlockTypes().get(material));
+            BlockType bt = new BlockType(material, mineFile.getBlockTypes().get(material));
             blockTypes.add(bt);
         }
         if (!RunningMines.contains(this)) {
             RunningMines.add(this);
         }
-        timeCounter();
-        percentageCheck();
+        startUpdate();
     }
 
     public void createMine() {
         HashMap<Material, Integer> types = new HashMap<>();
         PvP = false;
-        BlockType Default = new BlockType(Material.STONE,50);
+        BlockType Default = new BlockType(Material.STONE, 50);
         types.put(Material.STONE, 50);
-        BlockType Default2 = new BlockType(Material.COAL_ORE,50);
+        BlockType Default2 = new BlockType(Material.COAL_ORE, 50);
         types.put(Material.COAL_ORE, 50);
         blockTypes.add(Default);
         blockTypes.add(Default2);
@@ -155,28 +165,29 @@ public class Mine {
 
     }
 
-    public void createMineSign(Location location, UpdateType singType){
-        for(PFSign pfSign : mineSigns){
-            if(pfSign.getLocation().equals(location)) return;
+    public void createMineSign(Location location, UpdateType singType) {
+        for (PFSign pfSign : mineSigns) {
+            if (pfSign.getLocation().equals(location)) return;
         }
-        PFSign pfSign = new PFSign(Name,location,singType,null);
+        PFSign pfSign = new PFSign(Name, location, singType, null);
         mineSigns.add(pfSign);
-        mineFile().createSignFile(pfSign.getID(),pfSign.getSingType(),pfSign.getLocation());
+        mineFile().createSignFile(pfSign.getID(), pfSign.getSingType(), pfSign.getLocation());
 
     }
-    public boolean createHologram(Location location, UpdateType updateType){
-        for(PFHologram pfHologram : holograms){
-            if(pfHologram.isHologram(location)) return false;
+
+    public boolean createHologram(Location location, UpdateType updateType) {
+        for (PFHologram pfHologram : holograms) {
+            if (pfHologram.isHologram(location)) return false;
         }
-        PFHologram pfHologram = new PFHologram(location,Name,updateType,null);
+        PFHologram pfHologram = new PFHologram(location, Name, updateType, null);
         holograms.add(pfHologram);
-        mineFile().createHologramFile(pfHologram.getId(),pfHologram.getUpdateType(),location);
+        mineFile().createHologramFile(pfHologram.getId(), pfHologram.getUpdateType(), location);
         return true;
     }
 
-    public boolean deleteMineSing(Location location){
-        for(PFSign pfSign: mineSigns){
-            if(pfSign.getLocation().equals(location)){
+    public boolean deleteMineSing(Location location) {
+        for (PFSign pfSign : mineSigns) {
+            if (pfSign.getLocation().equals(location)) {
                 pfSign.delete();
                 mineFile().removeSignFile(pfSign.getID());
                 return true;
@@ -184,12 +195,14 @@ public class Mine {
         }
         return false;
     }
-    public void deleteHologram(PFHologram pFHologram){
+
+    public void deleteHologram(PFHologram pFHologram) {
         mineFile().removeHologramFile(pFHologram.getId());
         holograms.remove(pFHologram);
         pFHologram.removeHologram();
     }
-    private MineFile mineFile(){
+
+    private MineFile mineFile() {
         return new MineFile(Name);
     }
 
@@ -265,23 +278,22 @@ public class Mine {
         }
     }
 
-    public void updateBlockTypes(ArrayList<BlockType> newBlockTypes){
-        MineFile file = new MineFile(Name);
-        file.updateBlockTypes(newBlockTypes);
+    public void updateBlockTypes(ArrayList<BlockType> newBlockTypes) {
+        mineFile().updateBlockTypes(newBlockTypes);
         this.blockTypes = newBlockTypes;
     }
 
-    public Integer getTotalPercentage(){
+    public Integer getTotalPercentage() {
         int i = 0;
-        for(BlockType blockType : blockTypes){
-            i = i+ blockType.getPercentage();
+        for (BlockType blockType : blockTypes) {
+            i = i + blockType.getPercentage();
         }
         return i;
     }
 
-    public boolean containsBlockType(Material material){
-        for(BlockType blockType : blockTypes){
-            if(blockType.getMaterial().equals(material)) return true;
+    public boolean containsBlockType(Material material) {
+        for (BlockType blockType : blockTypes) {
+            if (blockType.getMaterial().equals(material)) return true;
         }
         return false;
     }
@@ -319,12 +331,8 @@ public class Mine {
             int amountNotAir = 0;
             if (!BlockLocation.isEmpty()) {
                 for (Location location : BlockLocation) {
-                    location.getBlock();
-                    location.getBlock().getType();
-                    for (BlockType blockType : blockTypes) {
-                        if (blockType.getMaterial() == location.getBlock().getType()) {
-                            amountNotAir++;
-                        }
+                    if (Material.AIR != location.getBlock().getType()) {
+                        amountNotAir++;
                     }
                 }
                 MinePercentage = amountNotAir * 100 / totalAmount;
@@ -337,8 +345,6 @@ public class Mine {
             }
         }, 0L, 40L);
     }
-
-
 
 
     public String getName() {
@@ -365,7 +371,7 @@ public class Mine {
     public void setBlockTypes(HashMap<Material, Integer> types) {
         ArrayList<BlockType> temp = new ArrayList<>();
         for (Material material : types.keySet()) {
-            BlockType blockType = new BlockType(material,types.get(material));
+            BlockType blockType = new BlockType(material, types.get(material));
             temp.add(blockType);
         }
         this.blockTypes = temp;

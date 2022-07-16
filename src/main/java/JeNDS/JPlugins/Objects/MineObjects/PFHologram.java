@@ -38,13 +38,16 @@ public class PFHologram extends JDHologram {
             }
         },80L,80L);
     }
+    public void stopUpdate(){
+        if(task!=null){
+            Bukkit.getScheduler().cancelTask(task);
+        }
+    }
 
     @Override
     public void removeHologram() {
         super.removeHologram();
-        if(task!=null){
-            Bukkit.getScheduler().cancelTask(task);
-        }
+        stopUpdate();
     }
 
     private void updateHologram(){

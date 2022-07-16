@@ -5,6 +5,7 @@ import JeNDS.JPlugins.Static.Presets;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 
@@ -31,9 +32,8 @@ public class PFSign {
 
     public void delete(){
         stopUpdate();
-        BlockState blockState = location.getBlock().getState();
-        blockState.setType(Material.AIR);
-        blockState.update(true,false);
+        Block block = location.getBlock();
+        block.setType(Material.AIR);
     }
 
     private void startUpdate() {

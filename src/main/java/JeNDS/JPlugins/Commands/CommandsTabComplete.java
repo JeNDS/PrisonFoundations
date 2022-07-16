@@ -41,9 +41,6 @@ public class CommandsTabComplete implements TabCompleter {
                         if ("hologramremover".startsWith(args[1].toLowerCase())) {
                             result.add("hologramremover");
                         }
-                        if ("setspawn".startsWith(args[1].toLowerCase())) {
-                            result.add("setspawn");
-                        }
                         if ("menu".startsWith(args[1].toLowerCase())) {
                             result.add("menu");
                         }
@@ -115,6 +112,26 @@ public class CommandsTabComplete implements TabCompleter {
                         }
                     }
                 }
+                //set spawn
+                if (args.length >= 2) {
+                    if (args[0].equalsIgnoreCase("mines")) {
+                        if (args.length == 2) {
+                            if ("setspawn".startsWith(args[1].toLowerCase())) {
+                                result.add("setspawn");
+                            }
+                        }
+                        if (args.length == 3) {
+                            if (args[1].equalsIgnoreCase("setspawn")) {
+                                for (Mine mine : Catch.RunningMines) {
+                                    if (mine.getName().startsWith(args[2].toLowerCase())) {
+                                        result.add(mine.getName());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
             }
         }
         //AutoSell

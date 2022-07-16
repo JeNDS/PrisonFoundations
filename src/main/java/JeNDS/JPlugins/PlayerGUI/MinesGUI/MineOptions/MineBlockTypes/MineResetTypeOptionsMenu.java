@@ -97,11 +97,11 @@ public class MineResetTypeOptionsMenu extends PFGUI {
         if (!Catch.RunningMines.isEmpty()) {
             for (Mine m : Catch.RunningMines) {
                 if (m.getName().contains(mine.getName())) {
-                    if (blockType.getPercentage() + percentage <= 95 &&blockType.getPercentage() + percentage >= 5) {
+                    if (blockType.getPercentage() + percentage <= 100 &&blockType.getPercentage() + percentage >= 5) {
                         resetPercentage(blockType.getPercentage() + percentage, mine, player);
                     } else {
-                        if (blockType.getPercentage()+ percentage > 95) {
-                            resetPercentage(95, mine, player);
+                        if (blockType.getPercentage()+ percentage > 100) {
+                            resetPercentage(100, mine, player);
                         }
                         if (blockType.getPercentage() + percentage < 5) {
                             resetPercentage(5, mine, player);

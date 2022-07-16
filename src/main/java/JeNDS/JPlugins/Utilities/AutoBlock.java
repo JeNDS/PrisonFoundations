@@ -1,8 +1,11 @@
 package JeNDS.JPlugins.Utilities;
 
+import JeNDS.JPlugins.Main.PF;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+
+import static JeNDS.JPlugins.Static.Presets.ValidVersion;
 
 public class AutoBlock extends Utility {
 
@@ -17,7 +20,12 @@ public class AutoBlock extends Utility {
         blockMaking(player, Material.EMERALD, Material.EMERALD_BLOCK);
         blockMaking(player, Material.QUARTZ, Material.QUARTZ_BLOCK);
         blockMaking(player, Material.GOLD_NUGGET, Material.GOLD_INGOT);
-        blockMaking(player, Material.IRON_NUGGET, Material.IRON_INGOT);
+        if(ValidVersion(1.13)){
+            blockMaking(player, Material.IRON_NUGGET, Material.IRON_INGOT);
+        }
+        if(ValidVersion(1.15)){
+            blockMaking(player, Material.NETHER_BRICK, Material.NETHER_BRICKS);
+        }
     }
 
 

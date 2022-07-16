@@ -7,14 +7,17 @@ import JeNDS.Plugins.PluginAPI.Files.YMLFile;
 import JeNDS.Plugins.PluginAPI.JDAPI;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
+import org.checkerframework.checker.units.qual.A;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ShopsFile {
-    public static YMLFile shopFile = JDAPI.getFileManipulation.copyFile("Shops.yml", PF.getPlugin(PF.class));
+    public static YMLFile shopFile;
 
 
     public static void LoadShopFile() {
+        shopFile = JDAPI.getFileManipulation.copyFile("Shops.yml", PF.getPlugin(PF.class));
         ConfigurationSection section = shopFile.getFileConfiguration().getConfigurationSection("");
         assert section != null;
         if (!section.getKeys(false).isEmpty()) {
@@ -29,6 +32,11 @@ public class ShopsFile {
 
         }
 
+    }
+
+    public static void ReloadShops(){
+        Catch.Shops = new ArrayList<>();
+        LoadShopFile();
     }
 
     private static HashMap<Material, Double> combineShopItems(String shop) {
