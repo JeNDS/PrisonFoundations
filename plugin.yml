@@ -1,5 +1,5 @@
 name: PrisonFoundations
-main: Me.JeNDS.Main.PF
+main: JeNDS.JPlugins.Main.PF
 api-version: 1.13
 version: 1.0
 author: JeNDS
