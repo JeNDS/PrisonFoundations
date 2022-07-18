@@ -126,10 +126,10 @@ public class MineCommands extends CommandManager {
                         Mine mine = Mine.GetMineFromName(args[2]);
                         assert mine != null;
                         mine.setSpawn(player.getLocation());
-                        player.sendMessage(Presets.DefaultColor + "You have set " + Presets.StandOutColor + mine.getName() + Presets.DefaultColor + " spawn!");
+                        player.sendMessage(Presets.MainColor + "You have set " + Presets.SecondaryColor + mine.getName() + Presets.MainColor + " spawn!");
                     }
                     else {
-                        sender.sendMessage(Presets.DefaultColor + args[2]+" is not a valid mine");
+                        sender.sendMessage(Presets.MainColor + args[2]+" is not a valid mine");
                     }
                 }
 

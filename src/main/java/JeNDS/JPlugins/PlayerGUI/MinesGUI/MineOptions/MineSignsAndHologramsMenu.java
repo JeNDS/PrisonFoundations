@@ -9,8 +9,8 @@ import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import static JeNDS.JPlugins.Static.Presets.DefaultColor;
-import static JeNDS.JPlugins.Static.Presets.StandOutColor;
+import static JeNDS.JPlugins.Static.Presets.MainColor;
+import static JeNDS.JPlugins.Static.Presets.SecondaryColor;
 
 public class MineSignsAndHologramsMenu extends PFGUI {
 
@@ -20,12 +20,12 @@ public class MineSignsAndHologramsMenu extends PFGUI {
     public MineSignsAndHologramsMenu(PFGUI lastMenu, Mine mine){
         this.lastMenu = lastMenu;
         this.mine = mine;
-        addItems(Material.OAK_SIGN, DefaultColor +"Mine Percentage",null,11,this);
-        addItems(Material.OAK_SIGN, DefaultColor +"Time Until Reset",null,15,this);
-        addItems(Material.ARMOR_STAND, DefaultColor +"Mine Percentage",null,29,this);
-        addItems(Material.ARMOR_STAND, DefaultColor +"Time Until Reset",null,33,this);
-        addItems(Material.REDSTONE_BLOCK, DefaultColor +"Back",null,45,this);
-        setMenuAndInterface(StandOutColor + mine.getName() + " Signs&Holograms Menu", 54, InventoryType.CHEST, true, fillItem(), PF.getInstance());
+        addItems(Material.OAK_SIGN, MainColor +"Mine Percentage",null,11,this);
+        addItems(Material.OAK_SIGN, MainColor +"Time Until Reset",null,15,this);
+        addItems(Material.ARMOR_STAND, MainColor +"Mine Percentage",null,29,this);
+        addItems(Material.ARMOR_STAND, MainColor +"Time Until Reset",null,33,this);
+        addItems(Material.REDSTONE_BLOCK, MainColor +"Back",null,45,this);
+        setMenuAndInterface(SecondaryColor + mine.getName() + " Signs&Holograms Menu", 54, InventoryType.CHEST, true, fillItem(), PF.getInstance());
     }
 
 
@@ -41,19 +41,19 @@ public class MineSignsAndHologramsMenu extends PFGUI {
             return true;
         }
         if(itemAndSlot.get(11).isSimilar(itemStack)){
-            giveItem(player, DefaultColor +mine.getName() + " Mine Percentage",Material.OAK_SIGN);
+            giveItem(player, MainColor +mine.getName() + " Mine Percentage",Material.OAK_SIGN);
             return true;
         }
         if(itemAndSlot.get(15).isSimilar(itemStack)){
-            giveItem(player, DefaultColor +mine.getName() + " Time Until Reset",Material.OAK_SIGN);
+            giveItem(player, MainColor +mine.getName() + " Time Until Reset",Material.OAK_SIGN);
             return true;
         }
         if(itemAndSlot.get(29).isSimilar(itemStack)){
-            giveItem(player, DefaultColor +mine.getName() + " Mine Percentage",Material.ARMOR_STAND);
+            giveItem(player, MainColor +mine.getName() + " Mine Percentage",Material.ARMOR_STAND);
             return true;
         }
         if(itemAndSlot.get(33).isSimilar(itemStack)){
-            giveItem(player, DefaultColor +mine.getName() + " Time Until Reset",Material.ARMOR_STAND);
+            giveItem(player, MainColor +mine.getName() + " Time Until Reset",Material.ARMOR_STAND);
             return true;
         }
         return false;
@@ -63,7 +63,7 @@ public class MineSignsAndHologramsMenu extends PFGUI {
         ItemStack itemStack = new ItemStack(material);
         ItemMeta meta = itemStack.getItemMeta();
         assert meta != null;
-        meta.setDisplayName(DefaultColor + name);
+        meta.setDisplayName(MainColor + name);
         itemStack.setItemMeta(meta);
         if(!player.getInventory().contains(itemStack)) {
             player.getInventory().addItem(itemStack);

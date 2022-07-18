@@ -2,12 +2,16 @@ package JeNDS.JPlugins.CustomEnchants;
 
 import JeNDS.JPlugins.Main.PF;
 import JeNDS.Plugins.PluginAPI.Enchants.CustomEnchant;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.entity.EntityPickupItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryDragEvent;
+import org.bukkit.event.inventory.InventoryMoveItemEvent;
+import org.bukkit.event.inventory.InventoryPickupItemEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.event.player.PlayerSwapHandItemsEvent;
@@ -35,86 +39,133 @@ public class EffectEnchantment extends CustomEnchant {
         this.level = level;
         register(enchantment, this, PF.getInstance());
     }
-
-    protected void potionUpdater(Player player, ItemStack itemStack) {
-        if (itemStack != null) {
-            if (ItemHasEnchantment(customEnchant, itemStack)) {
-                PotionEffect potionEffect = new PotionEffect(potionType, Integer.MAX_VALUE, level - 1, false, false, false);
-                player.addPotionEffect(potionEffect);
-                return;
-            }
-        }
-        player.removePotionEffect(potionType);
-    }
-
-    protected void gameModeUpdate(Player player, ItemStack itemStack) {
-        if (player.getGameMode().equals(GameMode.SURVIVAL)) {
-            if (itemStack != null) {
-                if (ItemHasEnchantment(customEnchant, itemStack)) {
-                    player.setAllowFlight(true);
-                    player.setFlying(true);
-                    return;
-                }
-            }
-            player.setAllowFlight(false);
-            player.setFlying(false);
-        }
-    }
-
-    private void switcher(Player player, ItemStack itemStack) {
-        if (potionType != null) {
-            potionUpdater(player, itemStack);
-        } else {
-            gameModeUpdate(player, itemStack);
-        }
-    }
-
     @EventHandler
     protected void itemHeldCheck(PlayerItemHeldEvent event) {
-        switcher(event.getPlayer(), event.getPlayer().getInventory().getItem(event.getNewSlot()));
+        Player player = event.getPlayer();
+        ItemStack itemStack = event.getPlayer().getInventory().getItem(event.getNewSlot());
+        if (itemStack != null) {
+            if (ItemHasEnchantment(customEnchant, itemStack)) {
+                if (player.getGameMode().equals(GameMode.SURVIVAL)) {
+                    player.setAllowFlight(true);
+                    player.setFlying(true);
+                }
+                if (potionType != null) {
+                    PotionEffect potionEffect = new PotionEffect(potionType, Integer.MAX_VALUE, level - 1, false, false, false);
+                    player.addPotionEffect(potionEffect);
+                }
+            }
+        }
+        if (player.getInventory().getItem(event.getPreviousSlot()) != null) {
+            if (ItemHasEnchantment(customEnchant, Objects.requireNonNull(player.getInventory().getItem(event.getPreviousSlot())))) {
+                if (player.getGameMode().equals(GameMode.SURVIVAL)) {
+                    player.setAllowFlight(false);
+                    player.setFlying(false);
+                }
+                if (potionType != null) {
+                    player.removePotionEffect(potionType);
+                }
+            }
+
+        }
+
     }
 
     @EventHandler
     protected void dropChecker(PlayerDropItemEvent event) {
-        switcher(event.getPlayer(), event.getPlayer().getInventory().getItemInMainHand());
+        Player player = event.getPlayer();
+        ItemStack itemStack = event.getItemDrop().getItemStack();
+        if (ItemHasEnchantment(customEnchant, itemStack)) {
+            if (player.getGameMode().equals(GameMode.SURVIVAL)) {
+                player.setAllowFlight(false);
+                player.setFlying(false);
+            }
+            if (potionType != null) {
+                player.removePotionEffect(potionType);
+            }
+        }
     }
 
     @EventHandler
     protected void pickUpCheck(EntityPickupItemEvent event) {
         if (event.getEntity() instanceof Player player) {
-            switcher(player, event.getItem().getItemStack());
+            Bukkit.getScheduler().scheduleSyncDelayedTask(PF.getInstance(), new Runnable() {
+                @Override
+                public void run() {
+                    ItemStack itemStack = event.getItem().getItemStack();
+                    if (ItemHasEnchantment(customEnchant, itemStack)) {
+                        if (player.getGameMode().equals(GameMode.SURVIVAL)) {
+                            player.setAllowFlight(true);
+                            player.setFlying(true);
+                        }
+                        if (potionType != null) {
+                            PotionEffect potionEffect = new PotionEffect(potionType, Integer.MAX_VALUE, level - 1, false, false, false);
+                            player.addPotionEffect(potionEffect);
+                        }
+                    }
+                }
+            }, 1L);
+
         }
     }
 
     @EventHandler
     protected void swapCheck(PlayerSwapHandItemsEvent event) {
-        switcher(event.getPlayer(), event.getMainHandItem());
+        Player player = event.getPlayer();
+        ItemStack itemStack = event.getMainHandItem();
+        assert itemStack != null;
+        if (ItemHasEnchantment(customEnchant, itemStack)) {
+            if (player.getGameMode().equals(GameMode.SURVIVAL)) {
+                player.setAllowFlight(true);
+                player.setFlying(true);
+            }
+            if (potionType != null) {
+                PotionEffect potionEffect = new PotionEffect(potionType, Integer.MAX_VALUE, level - 1, false, false, false);
+                player.addPotionEffect(potionEffect);
+            }
+        }
     }
 
     @EventHandler
     protected void inventoryCheck(InventoryClickEvent event) {
         if (event.getWhoClicked() instanceof Player player) {
-            if (event.getCursor() != null) {
-                if (ItemHasEnchantment(customEnchant, event.getCursor())) {
-                    if (player.getInventory().getHeldItemSlot() == event.getSlot()) {
-                        switcher(player, event.getCursor());
-                    } else {
-                        switcher(player, player.getInventory().getItemInMainHand());
+            int slot = player.getInventory().getHeldItemSlot();
+            ItemStack itemStack = event.getCurrentItem();
+            ItemStack itemStack2 = event.getCursor();
+            assert itemStack != null;
+            if (ItemHasEnchantment(customEnchant, itemStack)) {
+                if (ItemHasEnchantment(customEnchant,player.getInventory().getItemInMainHand())) {
+                    if (player.getGameMode().equals(GameMode.SURVIVAL)) {
+                        player.setAllowFlight(false);
+                        player.setFlying(false);
                     }
-                } else {
-                    if (ItemHasEnchantment(customEnchant, player.getInventory().getItemInMainHand())) {
-                        if (event.getCursor() == null) {
-                            switcher(player, null);
-                        } else {
-                            if (ItemHasEnchantment(customEnchant, Objects.requireNonNull(event.getCurrentItem()))) {
-                                switcher(player, null);
-                            }
-                        }
+                    if (potionType != null) {
+                        player.removePotionEffect(potionType);
+                    }
+                }
+                return;
 
+            }
+            if(slot == event.getSlot()){
+                assert itemStack2 != null;
+                if(ItemHasEnchantment(customEnchant,itemStack2)){
+                    if (player.getGameMode().equals(GameMode.SURVIVAL)) {
+                        player.setAllowFlight(true);
+                        player.setFlying(true);
+                    }
+                    if (potionType != null) {
+                        PotionEffect potionEffect = new PotionEffect(potionType, Integer.MAX_VALUE, level - 1, false, false, false);
+                        player.addPotionEffect(potionEffect);
                     }
                 }
             }
-
+        }
+    }
+    @EventHandler
+    protected void inventoryCheck2(InventoryDragEvent event) {
+        if (event.getWhoClicked() instanceof Player) {
+            ItemStack itemStack = event.getCursor();
+            assert itemStack != null;
+            if(ItemHasEnchantment(customEnchant,itemStack)) event.setCancelled(true);
         }
     }
 

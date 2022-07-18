@@ -77,7 +77,7 @@ class SignCommands extends CommandManager {
         }
 
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(Presets.DefaultColor + mineName + " " + todo);
+        itemMeta.setDisplayName(Presets.MainColor + mineName + " " + todo);
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }

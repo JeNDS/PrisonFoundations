@@ -35,13 +35,13 @@ public class RankCommands extends CommandManager {
                         if (!rank.isLastRank()) {
                             Rank.RankUpPlayer(player);
                         } else {
-                            sender.sendMessage(Presets.StandOutColor + args[0] + Presets.DefaultColor + " is on his final Rank!");
+                            sender.sendMessage(Presets.SecondaryColor + args[0] + Presets.MainColor + " is on his final Rank!");
                         }
                     } else {
-                        sender.sendMessage(Presets.DefaultColor + "You don't have Permissions " + Presets.StandOutColor + "Rankup.Others");
+                        sender.sendMessage(Presets.MainColor + "You don't have Permissions " + Presets.SecondaryColor + "Rankup.Others");
                     }
                 } else {
-                    sender.sendMessage(Presets.StandOutColor + args[0] + Presets.DefaultColor + " is not a valid player!");
+                    sender.sendMessage(Presets.SecondaryColor + args[0] + Presets.MainColor + " is not a valid player!");
                 }
                 return true;
             }

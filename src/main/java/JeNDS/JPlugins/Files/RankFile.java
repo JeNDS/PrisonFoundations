@@ -3,19 +3,16 @@ package JeNDS.JPlugins.Files;
 import JeNDS.JPlugins.Main.PF;
 import JeNDS.JPlugins.Objects.Rank;
 import JeNDS.JPlugins.Static.Catch;
-import JeNDS.JPlugins.Static.Presets;
 import JeNDS.Plugins.PluginAPI.Files.YMLFile;
 import JeNDS.Plugins.PluginAPI.JDAPI;
-import org.bukkit.Bukkit;
+import JeNDS.Plugins.PluginAPI.Other.JTools;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.entity.Player;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 
 public class RankFile {
 
-    public static void LoadRanks(){
+    public static void LoadRanks() {
         YMLFile ranksFile = JDAPI.getFileManipulation.copyFile("Ranks.yml", PF.getInstance());
         ConfigurationSection section = ranksFile.getFileConfiguration().getConfigurationSection("");
         assert section != null;
@@ -26,8 +23,9 @@ public class RankFile {
             ArrayList<String> rewards = new ArrayList<>();
             boolean lastRank = false;
             if (ranksFile.getFileConfiguration().get(rankName + ".Prefix") != null) {
-               prefix =  ranksFile.getFileConfiguration().getString(rankName + ".Prefix");
-               prefix = JDAPI.getTools.formatString(prefix);
+                prefix = ranksFile.getFileConfiguration().getString(rankName + ".Prefix");
+                assert prefix != null;
+                prefix = JTools.FormatString(prefix);
             }
             if (ranksFile.getFileConfiguration().get(rankName + ".Priority") != null) {
                 priority = ranksFile.getFileConfiguration().getInt(rankName + ".Priority");
@@ -41,21 +39,18 @@ public class RankFile {
             if (ranksFile.getFileConfiguration().get(rankName + ".RankUp Rewards") != null) {
                 rewards = new ArrayList<>(ranksFile.getFileConfiguration().getStringList(rankName + ".RankUp Rewards"));
             }
-            Rank rank = new Rank(rankName,priority,prefix,lastRank,rankUpPrice,rewards);
-            if(!Catch.Ranks.contains(rank)){
+            Rank rank = new Rank(rankName, priority, prefix, lastRank, rankUpPrice, rewards);
+            if (!Catch.Ranks.contains(rank)) {
                 Catch.Ranks.add(rank);
             }
         }
     }
 
 
-    public static void ReloadRanks(){
+    public static void ReloadRanks() {
         Catch.Ranks = new ArrayList<>();
         LoadRanks();
     }
-
-
-
 
 
 }

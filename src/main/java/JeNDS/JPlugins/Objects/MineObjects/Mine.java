@@ -24,7 +24,7 @@ public class Mine {
     private final Mine Mine = this;
     private String Name;
     private World world;
-    private ArrayList<Location> BlockLocation = new ArrayList<>();
+    private ArrayList<Location> BlockLocations = new ArrayList<>();
     private ArrayList<PFSign> mineSigns = new ArrayList<>();
     private ArrayList<PFHologram> holograms = new ArrayList<>();
     private ArrayList<BlockType> blockTypes = new ArrayList<>();
@@ -50,18 +50,39 @@ public class Mine {
         this.Name = Name;
         this.PointOne = Point1;
         this.PointTwo = Point2;
-        BlockLocation = RegionCreator.regionCreator(Point1, Point2);
+        BlockLocations = RegionCreator.regionCreator(Point1, Point2);
         this.world = Point1.getWorld();
     }
 
     public static boolean PlayerCloseToMine(Player player, Mine mine) {
-        for (Location location : mine.getBlockLocation()) {
+        for (Location location : mine.getBlockLocations()) {
             double range = Math.sqrt(Math.pow(location.getX() - player.getLocation().getX(), 2) + Math.pow(location.getY() - player.getLocation().getY(), 2) + Math.pow(location.getZ() - player.getLocation().getZ(), 2));
             if ((int) range <= 15) {
                 return true;
             }
         }
         return false;
+    }
+
+    public static boolean LocationInMine(Location location){
+        for(JeNDS.JPlugins.Objects.MineObjects.Mine mine : RunningMines){
+            if(mine.getBlockLocations().contains(location)){
+                return true;
+            }
+            for(Location location1 : mine.getBlockLocations()){
+                int distance = (int) location.distance(location1);
+                if(distance == 0){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public static Mine GetMineFromLocation(Location location){
+        for(JeNDS.JPlugins.Objects.MineObjects.Mine mine : RunningMines){
+            if(mine.getBlockLocations().contains(location)) return mine;
+        }
+        return null;
     }
 
     public static Mine GetMineFromHologramLocation(Location location) {
@@ -125,7 +146,7 @@ public class Mine {
     public void loadMine() {
         MineFile mineFile = new MineFile(this.Name);
         world = Bukkit.getWorld(mineFile.getWorld());
-        BlockLocation = mineFile.getBlockLocation();
+        BlockLocations = mineFile.getBlockLocation();
         Spawn = mineFile.getSpawn();
         PointOne = mineFile.getPointOne();
         PointTwo = mineFile.getPointTwo();
@@ -161,7 +182,7 @@ public class Mine {
         MinePercentageReset = 50;
         timeCounter();
         percentageCheck();
-        mineFile().createMineFile(world.getName(), BlockLocation, PointOne, PointTwo, types, MineResetTime, MinePercentageReset);
+        mineFile().createMineFile(world.getName(), BlockLocations, PointOne, PointTwo, types, MineResetTime, MinePercentageReset);
 
     }
 
@@ -214,25 +235,25 @@ public class Mine {
 
             if (!blockTypes.isEmpty()) {
                 for (BlockType block : blockTypes) {
-                    amountOfBlocks.put(block.getMaterial(), BlockLocation.size() * block.getPercentage() / 100);
-                    totalBlocksUsed = (totalBlocksUsed + BlockLocation.size()) * block.getPercentage() / 100;
+                    amountOfBlocks.put(block.getMaterial(), BlockLocations.size() * block.getPercentage() / 100);
+                    totalBlocksUsed = (totalBlocksUsed + BlockLocations.size()) * block.getPercentage() / 100;
                     Percentage = Percentage + block.getPercentage();
                 }
                 if (Percentage == 100) {
                     if (Spawn != null) {
                         for (Player player : Mine.getWorld().getPlayers()) {
                             if (PlayerCloseToMine(player, Mine)) {
-                                player.sendMessage(Presets.DefaultColor + "Resetting Mine");
+                                player.sendMessage(Presets.MainColor + "Resetting Mine");
                             }
                             teleportToMineSpawn(player);
                         }
                     }
-                    ArrayList<Location> temLoc1 = new ArrayList<>(BlockLocation);
-                    ArrayList<Location> temLoc2 = new ArrayList<>(BlockLocation);
+                    ArrayList<Location> temLoc1 = new ArrayList<>(BlockLocations);
+                    ArrayList<Location> temLoc2 = new ArrayList<>(BlockLocations);
                     HashMap<Location, Material> locationMaterial = new HashMap<>();
                     if (!fullReset) {
                         temLoc1 = new ArrayList<>();
-                        for (Location location : BlockLocation) {
+                        for (Location location : BlockLocations) {
                             if (location.getBlock().getType() == Material.AIR) temLoc1.add(location);
                         }
                         temLoc2 = new ArrayList<>(temLoc1);
@@ -299,7 +320,7 @@ public class Mine {
     }
 
     private void teleportToMineSpawn(Player player) {
-        for (Location location : this.getBlockLocation()) {
+        for (Location location : this.getBlockLocations()) {
             double range = Math.sqrt(Math.pow(location.getX() - player.getLocation().getX(), 2) + Math.pow(location.getY() - player.getLocation().getY(), 2) + Math.pow(location.getZ() - player.getLocation().getZ(), 2));
             if ((int) range <= 2) {
                 if (Spawn != null) {
@@ -327,10 +348,10 @@ public class Mine {
 
     private void percentageCheck() {
         PercentageResetTaskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(PF.getProvidingPlugin(PF.class), () -> {
-            int totalAmount = BlockLocation.size();
+            int totalAmount = BlockLocations.size();
             int amountNotAir = 0;
-            if (!BlockLocation.isEmpty()) {
-                for (Location location : BlockLocation) {
+            if (!BlockLocations.isEmpty()) {
+                for (Location location : BlockLocations) {
                     if (Material.AIR != location.getBlock().getType()) {
                         amountNotAir++;
                     }
@@ -360,8 +381,8 @@ public class Mine {
         return world;
     }
 
-    public ArrayList<Location> getBlockLocation() {
-        return BlockLocation;
+    public ArrayList<Location> getBlockLocations() {
+        return BlockLocations;
     }
 
     public ArrayList<BlockType> getBlockTypes() {

@@ -16,7 +16,7 @@ public class ShopCommands extends CommandManager {
                         if (Shop.GetPlayerShop(player) != null) {
                             Shop.SellPlayerItems(player, true);
                         } else {
-                            sender.sendMessage(Presets.DefaultColor + "Could Not Find A Shop To Sell Your Items");
+                            sender.sendMessage(Presets.MainColor + "Could Not Find A Shop To Sell Your Items");
                             return true;
                         }
                     }
@@ -32,7 +32,7 @@ public class ShopCommands extends CommandManager {
                                 return true;
                             }
                         } else {
-                            sender.sendMessage(Presets.DefaultColor + "Could Not Find A Shop To Sell the Items");
+                            sender.sendMessage(Presets.MainColor + "Could Not Find A Shop To Sell the Items");
                             return true;
                         }
                     }

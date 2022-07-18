@@ -89,7 +89,7 @@ public class RegionCreator implements Listener {
                                     }
                                 }
                                 PlayerMinePositionTwo.put(event.getPlayer(), event.getClickedBlock().getLocation());
-                                event.getPlayer().sendMessage(Presets.DefaultColor + "you have selected position 2");
+                                event.getPlayer().sendMessage(Presets.MainColor + "you have selected position 2");
                                 event.setCancelled(true);
                                 return;
 
@@ -104,7 +104,7 @@ public class RegionCreator implements Listener {
                                     }
                                 }
                                 PlayerMinePositionOne.put(event.getPlayer(), event.getClickedBlock().getLocation());
-                                event.getPlayer().sendMessage(Presets.DefaultColor + "you have selected position 1");
+                                event.getPlayer().sendMessage(Presets.MainColor + "you have selected position 1");
                                 event.getClickedBlock().setType(event.getClickedBlock().getType());
                                 event.setCancelled(true);
                                 return;

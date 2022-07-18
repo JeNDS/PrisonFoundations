@@ -55,10 +55,10 @@ public class PFHologram extends JDHologram {
         if(mine!=null) {
             ArmorStand armorStand = getArmorStands().get(2);
             if (updateType.equals(UpdateType.MINE_PERCENTAGE)) {
-                armorStand.setCustomName(Presets.StandOutColor2 + "" + mine.getMinePercentage() + "%");
+                armorStand.setCustomName(Presets.ThirdColor + "" + mine.getMinePercentage() + "%");
             }
             if (updateType.equals(UpdateType.MINE_TIME_RESET)) {
-                armorStand.setCustomName(Presets.StandOutColor2 + "" + mine.getTimeBeforeReset() + "M");
+                armorStand.setCustomName(Presets.ThirdColor + "" + mine.getTimeBeforeReset() + "M");
             }
         }
 
@@ -66,14 +66,14 @@ public class PFHologram extends JDHologram {
     private  static String[] lines(String mineName, UpdateType updateType) {
         Mine mine = Mine.GetMineFromName(mineName);
         String[] lines = new String[4];
-        lines[0] = Presets.DefaultColor + "" + mine.getName();
-        lines[1] = Presets.StandOutColor + "" + updateType.getName();
+        lines[0] = Presets.MainColor + "" + mine.getName();
+        lines[1] = Presets.SecondaryColor + "" + updateType.getName();
         lines[2] = "";
         if (updateType.equals(UpdateType.MINE_PERCENTAGE)) {
-            lines[3] = Presets.StandOutColor2 + "" + mine.getMinePercentage() + "%";
+            lines[3] = Presets.ThirdColor + "" + mine.getMinePercentage() + "%";
         }
         if (updateType.equals(UpdateType.MINE_TIME_RESET)) {
-            lines[3] = Presets.StandOutColor2 + "" + mine.getTimeBeforeReset() + "M";
+            lines[3] = Presets.ThirdColor + "" + mine.getTimeBeforeReset() + "M";
         }
         return lines;
     }

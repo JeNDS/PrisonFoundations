@@ -1,11 +1,12 @@
 package JeNDS.JPlugins.Events;
 
-import JeNDS.Plugins.PluginAPI.Other.JDItem;
 import JeNDS.JPlugins.Objects.MineObjects.Mine;
 import JeNDS.JPlugins.Static.Catch;
 import JeNDS.JPlugins.Static.Presets;
+import JeNDS.JPlugins.Utilities.AutoEXP;
 import JeNDS.JPlugins.Utilities.AutoPickUp;
-import org.bukkit.ChatColor;
+import JeNDS.JPlugins.Utilities.Utility;
+import JeNDS.Plugins.PluginAPI.Other.JDItem;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -15,6 +16,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
@@ -28,11 +30,23 @@ public class MineEvents extends EventManager {
         if (isBlockInMines(event.getBlock().getLocation())) {
             if (isMineResetting(event.getBlock().getLocation())) {
                 event.setCancelled(true);
-                player.sendMessage(ChatColor.RED + "You have to wait for the reset to finish!");
-            } else {
-                new AutoPickUp(player, event);
-                event.setDropItems(false);
+                player.sendMessage(Presets.SecondaryColor + "You have to wait for the reset to finish!");
             }
+            new AutoEXP(player,event);
+        }
+    }
+
+    @EventHandler()
+    public void mineEvent(BlockDropItemEvent event) {
+        Player player = event.getPlayer();
+        if (isBlockInMines(event.getBlock().getLocation())) {
+            if(Utility.SpaceInInventory(event.getPlayer())) {
+                new AutoPickUp(player, event);
+            }
+            else {
+                player.sendMessage(Presets.SecondaryColor + "Your Inventory is Full");
+            }
+            event.setCancelled(true);
         }
     }
 
@@ -46,7 +60,7 @@ public class MineEvents extends EventManager {
     @EventHandler
     public void preventPlayerBuild(BlockPlaceEvent event) {
         if (isBlockInMines(event.getBlockPlaced().getLocation())) {
-            if(event.getPlayer().hasPermission("PF.Admin")) {
+            if (event.getPlayer().hasPermission("PF.Admin")) {
                 event.setCancelled(true);
             }
         }
@@ -56,11 +70,11 @@ public class MineEvents extends EventManager {
     public void hologramRemover(PlayerInteractEvent event) {
         if (event.getPlayer().hasPermission("PF.Admin")) {
             if (event.getAction().equals(Action.RIGHT_CLICK_AIR)) {
-                if (event.getPlayer().getInventory().getItemInMainHand().isSimilar(JDItem.CustomItemStack(Material.BLAZE_ROD, Presets.DefaultColor + "Hologram Remover", null))) {
+                if (event.getPlayer().getInventory().getItemInMainHand().isSimilar(JDItem.CustomItemStack(Material.BLAZE_ROD, Presets.MainColor + "Hologram Remover", null))) {
                     for (Entity entity : event.getPlayer().getWorld().getNearbyEntities(event.getPlayer().getLocation(), 1, 2, 1)) {
                         if (entity instanceof ArmorStand) {
                             if (entity.getCustomName() != null) {
-                                if(Mine.RemoveMineHologramFromLocation(entity.getLocation()))return;
+                                if (Mine.RemoveMineHologramFromLocation(entity.getLocation())) return;
                                 else entity.remove();
                             }
                         }
@@ -74,7 +88,7 @@ public class MineEvents extends EventManager {
     private boolean isBlockInMines(Location location) {
         if (!Catch.RunningMines.isEmpty()) {
             for (Mine mine : Catch.RunningMines) {
-                if (mine.getBlockLocation().contains(location)) return true;
+                if (mine.getBlockLocations().contains(location)) return true;
             }
         }
         return false;
@@ -83,7 +97,7 @@ public class MineEvents extends EventManager {
     private boolean isMineResetting(Location location) {
         if (!Catch.RunningMines.isEmpty()) {
             for (Mine mine : Catch.RunningMines) {
-                if (mine.getBlockLocation().contains(location)) {
+                if (mine.getBlockLocations().contains(location)) {
                     return mine.isMineResetting();
                 }
             }

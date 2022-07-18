@@ -17,11 +17,11 @@ public class MineManageResetMenu extends PFGUI {
     public MineManageResetMenu(PFGUI lastMenu, Mine mine){
         this.lastMenu = lastMenu;
         this.mine = mine;
-        addItems(Material.DIAMOND_PICKAXE, Presets.DefaultColor +"Percentage Reset",null,22,this);
-        addItems(Material.CLOCK, Presets.DefaultColor +"Time Reset",null,31,this);
-        addItems(Material.REDSTONE_BLOCK, Presets.DefaultColor +"Back",null,45,this);
+        addItems(Material.DIAMOND_PICKAXE, Presets.MainColor +"Percentage Reset",null,22,this);
+        addItems(Material.CLOCK, Presets.MainColor +"Time Reset",null,31,this);
+        addItems(Material.REDSTONE_BLOCK, Presets.MainColor +"Back",null,45,this);
 
-        setMenuAndInterface(Presets.StandOutColor + mine.getName() + " Manage Reset Menu", 54, InventoryType.CHEST, true, fillItem(), PF.getInstance());
+        setMenuAndInterface(Presets.SecondaryColor + mine.getName() + " Manage Reset Menu", 54, InventoryType.CHEST, true, fillItem(), PF.getInstance());
     }
 
 

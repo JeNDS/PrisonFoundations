@@ -24,7 +24,7 @@ public class UtilityCommands extends CommandManager {
     private static boolean AutoSmelter() {
         if (args[1].equalsIgnoreCase("autoSmelter")) {
             if (sender instanceof Player player) {
-                player.getInventory().addItem(JDItem.CustomItemStack(Material.FURNACE, Presets.DefaultColor + "Auto Smelter", null));
+                player.getInventory().addItem(JDItem.CustomItemStack(Material.FURNACE, Presets.MainColor + "Auto Smelter", null));
                 player.sendMessage(defaultColor + "you received an auto smelter");
             } else {
                 sender.sendMessage(defaultColor + "You must be a player to do this!");
@@ -39,7 +39,7 @@ public class UtilityCommands extends CommandManager {
     private static boolean AutoBlocker() {
         if (args[1].equalsIgnoreCase("autoBlocker")) {
             if (sender instanceof Player player) {
-                player.getInventory().addItem(JDItem.CustomItemStack(Material.CRAFTING_TABLE, Presets.DefaultColor + "Auto Blocker", null));
+                player.getInventory().addItem(JDItem.CustomItemStack(Material.CRAFTING_TABLE, Presets.MainColor + "Auto Blocker", null));
                 player.sendMessage(defaultColor + "you received an auto blocker");
             } else {
                 sender.sendMessage(defaultColor + "You must be a player to do this!");

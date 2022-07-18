@@ -110,6 +110,12 @@ public class CommandsTabComplete implements TabCompleter {
                         if ("shops".startsWith(args[1].toLowerCase())) {
                             result.add("shops");
                         }
+                        if ("utility".startsWith(args[1].toLowerCase())) {
+                            result.add("utility");
+                        }
+                        if ("config".startsWith(args[1].toLowerCase())) {
+                            result.add("config");
+                        }
                     }
                 }
                 //set spawn
@@ -134,25 +140,6 @@ public class CommandsTabComplete implements TabCompleter {
 
             }
         }
-        //AutoSell
-        if (command.getName().equalsIgnoreCase("autosell")) {
-            if ((sender.hasPermission("PF.Admin") || (sender.hasPermission("PF.AutoSell.Others")) && sender instanceof Player) || !(sender instanceof Player)) {
-                //AutoSell
-                if (args.length == 1) {
-                    result.addAll(Bukkit.getOnlinePlayers().stream().map(Player::getName).filter(name -> name.toLowerCase().startsWith(args[0].toLowerCase())).toList());
-                }
-                if (args.length == 2) {
-                    if (Bukkit.getPlayer(args[0]) != null) {
-                        if ("on".startsWith(args[1].toLowerCase())) {
-                            result.add("on");
-                        }
-                        if ("off".startsWith(args[1].toLowerCase())) {
-                            result.add("off");
-                        }
-                    }
-                }
-            }
-        }
         //Sell
         if (command.getName().equalsIgnoreCase("sell")) {
             if ((sender.hasPermission("PF.Admin") || sender.hasPermission("PF.Sell.Others")) || !(sender instanceof Player)) {
@@ -174,7 +161,9 @@ public class CommandsTabComplete implements TabCompleter {
                 if (args.length == 1) {
                     for (Enchantment enchantment : CustomEnchant.EnchantmentList){
                         String name = enchantment.getName().replaceAll(" ", "");
-                        name.toLowerCase();
+                        if (name.startsWith(args[0].toLowerCase())) {
+                            result.add(name);
+                        }
                         result.add(name);
                     }
                 }

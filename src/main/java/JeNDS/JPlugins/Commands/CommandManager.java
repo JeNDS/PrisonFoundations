@@ -1,10 +1,7 @@
 package JeNDS.JPlugins.Commands;
 
-import JeNDS.JPlugins.Files.UtilitiesFile;
+import JeNDS.JPlugins.Files.*;
 import JeNDS.JPlugins.Main.PF;
-import JeNDS.JPlugins.Files.MineFile;
-import JeNDS.JPlugins.Files.RankFile;
-import JeNDS.JPlugins.Files.ShopsFile;
 import JeNDS.JPlugins.Static.Presets;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -17,8 +14,8 @@ public class CommandManager implements CommandExecutor {
     protected static Command cmd;
     protected static String commandLabel;
     protected static String[] args;
-    protected static ChatColor defaultColor = Presets.DefaultColor;
-    protected static ChatColor standOutColor = Presets.StandOutColor;
+    protected static String defaultColor = Presets.MainColor;
+    protected static String standOutColor = Presets.SecondaryColor;
     private PF plugin = PF.getPlugin(PF.class);
 
 
@@ -92,6 +89,7 @@ public class CommandManager implements CommandExecutor {
                     ShopsFile.ReloadShops();
                     RankFile.ReloadRanks();
                     UtilitiesFile.ReloadUtilities();
+                    Config.LoadConfig();
                     sender.sendMessage(defaultColor + "You have reloaded all files");
                     return true;
                 } else {
@@ -113,6 +111,11 @@ public class CommandManager implements CommandExecutor {
                     if (args[1].equalsIgnoreCase("utilities")) {
                         UtilitiesFile.ReloadUtilities();
                         sender.sendMessage(defaultColor + "You have reloaded all utilities");
+                        return true;
+                    }
+                    if (args[1].equalsIgnoreCase("config")) {
+                        Config.LoadConfig();
+                        sender.sendMessage(defaultColor + "You have reloaded the config");
                         return true;
                     }
                 }

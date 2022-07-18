@@ -15,6 +15,7 @@ public class EnchantManager {
         new AutoBlock();
         new AutoSmelt();
         new AutoSell();
+        new Explosion();
         LoadPotionEnchants();
     }
 

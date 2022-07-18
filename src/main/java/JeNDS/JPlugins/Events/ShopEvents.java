@@ -26,10 +26,10 @@ public class ShopEvents extends EventManager {
                             for (Mine mine1 : Catch.RunningMines) {
                                 if (split[0].contains(mine1.getName())) {
                                     if (split[1].contains("Percentage")) {
-                                        sign.setLine(0, Presets.StandOutColor + mine1.getName());
+                                        sign.setLine(0, Presets.SecondaryColor + mine1.getName());
                                         sign.setLine(1, "");
-                                        sign.setLine(2, Presets.StandOutColor + "Percentage");
-                                        sign.setLine(3, Presets.StandOutColor + mine1.getMinePercentage().toString());
+                                        sign.setLine(2, Presets.SecondaryColor + "Percentage");
+                                        sign.setLine(3, Presets.SecondaryColor + mine1.getMinePercentage().toString());
                                         //player.getWorld().getBlockAt(event.getBlockPlaced().getLocation()).se
 
                                     }
@@ -53,21 +53,21 @@ public class ShopEvents extends EventManager {
                     "" +
                     "");
             String mine = getMine(event.getLine(2));
-            event.setLine(0, Presets.StandOutColor + mine);
+            event.setLine(0, Presets.SecondaryColor + mine);
             event.setLine(1, "");
-            event.setLine(2, Presets.DefaultColor + "Percent");
-            event.setLine(3, Presets.StandOutColor + "" + getPercentage(mine));
+            event.setLine(2, Presets.MainColor + "Percent");
+            event.setLine(3, Presets.SecondaryColor + "" + getPercentage(mine));
         }
         if (isMineTime(event.getLines())) {
             Bukkit.broadcastMessage("test3");
             String mine = getMine(event.getLine(2));
-            event.setLine(0, Presets.StandOutColor + mine);
+            event.setLine(0, Presets.SecondaryColor + mine);
             event.setLine(1, "");
-            event.setLine(2, Presets.DefaultColor + "Time Left");
+            event.setLine(2, Presets.MainColor + "Time Left");
             String[] s = Double.toString(getPercentage(mine)).split(".");
             Integer Hours = Integer.parseInt(s[0]);
             Integer Minutes = Integer.parseInt(s[1]);
-            event.setLine(3, Presets.StandOutColor + "H:" + Hours + "   M:" + Minutes);
+            event.setLine(3, Presets.SecondaryColor + "H:" + Hours + "   M:" + Minutes);
         }
         event.setCancelled(true);
     }

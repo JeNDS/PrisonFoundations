@@ -6,7 +6,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 
 import java.util.UUID;
@@ -44,10 +43,10 @@ public class PFSign {
                 if (mine != null) {
                     if (location.getBlock().getState() instanceof Sign sign) {
                         if (singType.equals(UpdateType.MINE_PERCENTAGE)) {
-                            sign.setLine(3, Presets.StandOutColor2 + "" + mine.getMinePercentage() + "%");
+                            sign.setLine(3, Presets.ThirdColor + "" + mine.getMinePercentage() + "%");
                         }
                         if (singType.equals(UpdateType.MINE_TIME_RESET)) {
-                            sign.setLine(3, Presets.StandOutColor2 + "" + mine.getTimeBeforeReset() + "M");
+                            sign.setLine(3, Presets.ThirdColor + "" + mine.getTimeBeforeReset() + "M");
                         }
                         sign.update(true);
                     }

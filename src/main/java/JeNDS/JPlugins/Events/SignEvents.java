@@ -78,15 +78,15 @@ public class SignEvents extends EventManager {
                 Bukkit.getScheduler().scheduleSyncDelayedTask(PF.getInstance(), new Runnable() {
                     @Override
                     public void run() {
-                        sign.setLine(0, Presets.DefaultColor + "" + mine.getName());
-                        sign.setLine(1, Presets.StandOutColor + "" + name);
+                        sign.setLine(0, Presets.MainColor + "" + mine.getName());
+                        sign.setLine(1, Presets.SecondaryColor + "" + name);
                         sign.setLine(2, "");
                         UpdateType singType = null;
                         if (percentage) {
-                            sign.setLine(3, Presets.StandOutColor2 + "" + mine.getMinePercentage() + "%");
+                            sign.setLine(3, Presets.ThirdColor + "" + mine.getMinePercentage() + "%");
                             singType = UpdateType.MINE_PERCENTAGE;
                         } else {
-                            sign.setLine(3, Presets.StandOutColor2 + "" + mine.getTimeBeforeReset() + "M");
+                            sign.setLine(3, Presets.ThirdColor + "" + mine.getTimeBeforeReset() + "M");
                             singType = UpdateType.MINE_TIME_RESET;
                         }
                         sign.setEditable(false);

@@ -22,7 +22,7 @@ public class MGUI_1 extends PFGUI {
 
     public MGUI_1() {
         addMinesRunning();
-        setMenuAndInterface(StandOutColor + "Mines Menu", 54, InventoryType.CHEST, true, fillItem(), PF.getInstance());
+        setMenuAndInterface(SecondaryColor + "Mines Menu", 54, InventoryType.CHEST, true, fillItem(), PF.getInstance());
     }
 
     private void addMinesRunning() {
@@ -42,11 +42,11 @@ public class MGUI_1 extends PFGUI {
                     assert material != null;
                     ItemStack itemStack = new ItemStack(material);
                     ItemMeta meta = itemStack.getItemMeta();
-                    meta.setDisplayName(DefaultColor + mine.getName());
+                    meta.setDisplayName(MainColor + mine.getName());
                     ArrayList<String> lore = new ArrayList<>();
                     lore.add("");
-                    lore.add(StandOutColor2 + "Click here to");
-                    lore.add(StandOutColor2 + "Open Menu");
+                    lore.add(ThirdColor + "Click here to");
+                    lore.add(ThirdColor + "Open Menu");
                     meta.setLore(lore);
                     itemStack.setItemMeta(meta);
                     addItem(itemStack, i);

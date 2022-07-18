@@ -24,18 +24,18 @@ public class MineResetTypeOptionsMenu extends PFGUI {
         this.mine = mine;
         this.blockType = blockType;
 
-        addItems(Material.EMERALD_BLOCK, Presets.DefaultColor + "Add 5%", null, 12, this);
-        addItems(Material.EMERALD_BLOCK, Presets.DefaultColor + "Add 10%", null, 21, this);
-        addItems(Material.EMERALD_BLOCK, Presets.DefaultColor + "Add 25%", null, 30, this);
-        addItems(Material.EMERALD_BLOCK, Presets.DefaultColor + "Add 50%", null, 39, this);
-        addItems(Material.REDSTONE_BLOCK, Presets.DefaultColor + "Remove 5%", null, 14, this);
-        addItems(Material.REDSTONE_BLOCK, Presets.DefaultColor + "Remove 10%", null, 23, this);
-        addItems(Material.REDSTONE_BLOCK, Presets.DefaultColor + "Remove 25%", null, 32, this);
-        addItems(Material.REDSTONE_BLOCK, Presets.DefaultColor + "Remove 50%", null, 41, this);
+        addItems(Material.EMERALD_BLOCK, Presets.MainColor + "Add 5%", null, 12, this);
+        addItems(Material.EMERALD_BLOCK, Presets.MainColor + "Add 10%", null, 21, this);
+        addItems(Material.EMERALD_BLOCK, Presets.MainColor + "Add 25%", null, 30, this);
+        addItems(Material.EMERALD_BLOCK, Presets.MainColor + "Add 50%", null, 39, this);
+        addItems(Material.REDSTONE_BLOCK, Presets.MainColor + "Remove 5%", null, 14, this);
+        addItems(Material.REDSTONE_BLOCK, Presets.MainColor + "Remove 10%", null, 23, this);
+        addItems(Material.REDSTONE_BLOCK, Presets.MainColor + "Remove 25%", null, 32, this);
+        addItems(Material.REDSTONE_BLOCK, Presets.MainColor + "Remove 50%", null, 41, this);
 
-        addItems(Material.REDSTONE_BLOCK, Presets.DefaultColor +"Delete",null,49,this);
-        addItems(Material.REDSTONE_BLOCK, Presets.DefaultColor +"Back",null,45,this);
-        setMenuAndInterface(Presets.StandOutColor + mine.getName() + " Reset Type Menu "+blockType.getMaterial().name()+" "+blockType.getPercentage()+ "%", 54, InventoryType.CHEST, true, fillItem(), PF.getInstance());
+        addItems(Material.REDSTONE_BLOCK, Presets.MainColor +"Delete",null,49,this);
+        addItems(Material.REDSTONE_BLOCK, Presets.MainColor +"Back",null,45,this);
+        setMenuAndInterface(Presets.SecondaryColor + mine.getName() + " Reset Type Menu "+blockType.getMaterial().name()+" "+blockType.getPercentage()+ "%", 54, InventoryType.CHEST, true, fillItem(), PF.getInstance());
     }
 
 

@@ -1,16 +1,17 @@
 package JeNDS.JPlugins.Static;
 
 import JeNDS.JPlugins.Main.PF;
+import JeNDS.Plugins.PluginAPI.Other.JTools;
 import org.bukkit.ChatColor;
 
 public class Presets {
 
-    public static ChatColor DefaultColor = ChatColor.AQUA;
-    public static ChatColor StandOutColor = ChatColor.GREEN;
-    public static ChatColor StandOutColor2 = ChatColor.WHITE;
+    public static String MainColor = ChatColor.AQUA + "";
+    public static String SecondaryColor = ChatColor.GREEN+ "";
+    public static String ThirdColor = ChatColor.WHITE+ "";
 
     public static String ColorReplacer(String string) {
-        return string.replace("&", "§");
+        return JTools.FormatString(string);
     }
 
 

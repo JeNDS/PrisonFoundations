@@ -16,7 +16,7 @@ public class AutoSell extends Utility {
                     wait = Catch.inventoryFullTimeWait.get(player);
                 }
                 if (wait == 5) {
-                    player.sendMessage(Presets.DefaultColor + "Your Inventory is Full, time to sell your Items!");
+                    player.sendMessage(Presets.MainColor + "Your Inventory is Full, time to sell your Items!");
                 }
                 wait--;
                 if (wait == 0) {

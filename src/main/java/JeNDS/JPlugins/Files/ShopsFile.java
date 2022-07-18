@@ -7,7 +7,6 @@ import JeNDS.Plugins.PluginAPI.Files.YMLFile;
 import JeNDS.Plugins.PluginAPI.JDAPI;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,9 +22,10 @@ public class ShopsFile {
         if (!section.getKeys(false).isEmpty()) {
             for (String shop : section.getKeys(false)) {
                 String inheritance = null;
-                if (shopFile.getFileConfiguration().get(shop + ".Inherit") != null) inheritance = shopFile.getFileConfiguration().getString(shop + ".Inherit");
-                Shop shop1 = new Shop(shop,inheritance,combineShopItems(shop));
-                if(!Catch.Shops.contains(shop1)){
+                if (shopFile.getFileConfiguration().get(shop + ".Inherit") != null)
+                    inheritance = shopFile.getFileConfiguration().getString(shop + ".Inherit");
+                Shop shop1 = new Shop(shop, inheritance, combineShopItems(shop));
+                if (!Catch.Shops.contains(shop1)) {
                     Catch.Shops.add(shop1);
                 }
             }
@@ -34,7 +34,7 @@ public class ShopsFile {
 
     }
 
-    public static void ReloadShops(){
+    public static void ReloadShops() {
         Catch.Shops = new ArrayList<>();
         LoadShopFile();
     }
@@ -45,17 +45,16 @@ public class ShopsFile {
         String nextShop = shop;
         while (Inheritance) {
             if (shopFile.getFileConfiguration().get(nextShop + ".Inherit") != null) {
-                if (shopFile.getFileConfiguration().get(shopFile.getFileConfiguration().getString(nextShop + ".Inherit")+".Items") != null) {
+                if (shopFile.getFileConfiguration().get(shopFile.getFileConfiguration().getString(nextShop + ".Inherit") + ".Items") != null) {
                     HashMap<Material, Double> tempItems = getShopItems(shopFile.getFileConfiguration().getString(nextShop + ".Inherit"));
-                    for(Material material : tempItems.keySet()){
-                        if(!combinedItems.containsKey(material)){
+                    for (Material material : tempItems.keySet()) {
+                        if (!combinedItems.containsKey(material)) {
                             combinedItems.put(material, tempItems.get(material));
                         }
                     }
                     nextShop = shopFile.getFileConfiguration().getString(nextShop + ".Inherit");
                 }
-            }
-            else {
+            } else {
                 Inheritance = false;
             }
         }

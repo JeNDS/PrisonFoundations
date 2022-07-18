@@ -32,7 +32,7 @@ public class UtilityEvents implements Listener {
 
     private boolean isUtility(BlockPlaceEvent event, Material material, String name) {
         if (event.getPlayer().hasPermission("PF.Admin")) {
-            if (event.getItemInHand().isSimilar(JDItem.CustomItemStack(material, Presets.DefaultColor + name, null))) {
+            if (event.getItemInHand().isSimilar(JDItem.CustomItemStack(material, Presets.MainColor + name, null))) {
                 BlockUtility utility = new BlockUtility(event.getBlockPlaced().getLocation(), BlockUtilityType.GetBlockUtilityTypeFromString(name));
                 if (name.equalsIgnoreCase("Auto Blocker")) {
                     utility.setType(BlockUtilityType.AUTOBLOCK);
@@ -41,7 +41,7 @@ public class UtilityEvents implements Listener {
                     Catch.blockUtilities.add(utility);
                 }
                 UtilitiesFile.saveUtility(utility);
-                event.getPlayer().sendMessage(Presets.DefaultColor + "You have placed an " + name);
+                event.getPlayer().sendMessage(Presets.MainColor + "You have placed an " + name);
                 return true;
             }
         }

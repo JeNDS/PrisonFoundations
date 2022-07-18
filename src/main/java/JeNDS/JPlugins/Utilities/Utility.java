@@ -7,9 +7,8 @@ import org.bukkit.inventory.ItemStack;
 public class Utility {
     public static boolean nullCheck(ItemStack itemStack) {
         if (itemStack != null) {
-            if (itemStack.getType() != null) {
-                return false;
-            }
+            itemStack.getType();
+            return false;
         }
         return true;
     }

@@ -13,7 +13,7 @@ public class BlockUtility {
     private final Location blockLocation;
     private UUID ID = UUID.randomUUID();
     private BlockUtilityType type;
-    private String name = Presets.DefaultColor + "";
+    private String name = Presets.MainColor + "";
     private JDHologram hologram;
 
     public BlockUtility(Location blockLocation, BlockUtilityType type) {

@@ -1,17 +1,15 @@
 package JeNDS.JPlugins.Files;
 
 import JeNDS.JPlugins.Main.PF;
+import JeNDS.JPlugins.Static.Catch;
 import JeNDS.JPlugins.Utilities.BlockUtility.BlockUtility;
+import JeNDS.JPlugins.Utilities.BlockUtility.BlockUtilityType;
 import JeNDS.Plugins.PluginAPI.Files.YMLFile;
 import JeNDS.Plugins.PluginAPI.JDAPI;
-import JeNDS.JPlugins.Static.Catch;
-import JeNDS.JPlugins.Utilities.BlockUtility.BlockUtilityType;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.entity.Cat;
-import org.checkerframework.checker.units.qual.C;
 
 import java.util.*;
 
@@ -27,6 +25,7 @@ public class UtilitiesFile {
             LoadUtility(utility);
         }
     }
+
     public static void ReloadUtilities() {
         Catch.blockUtilities = new ArrayList<>();
         LoadUtilities();
@@ -47,7 +46,6 @@ public class UtilitiesFile {
             }
         }
     }
-
 
 
     public static void saveUtility(BlockUtility blockUtility) {

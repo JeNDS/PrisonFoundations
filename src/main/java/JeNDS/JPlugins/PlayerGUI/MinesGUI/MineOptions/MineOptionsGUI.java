@@ -19,13 +19,13 @@ public class MineOptionsGUI extends PFGUI {
     public MineOptionsGUI(PFGUI lastMenu,Mine mine){
         this.lastMenu = lastMenu;
         this.mine = mine;
-        addItems(Material.BARRIER, Presets.DefaultColor +"Reset",null,11,this);
-        addItems(Material.REDSTONE_BLOCK, Presets.DefaultColor +"Delete",null,15,this);
-        addItems(Material.OAK_SIGN, Presets.DefaultColor +"Signs&Holograms",null,22,this);
-        addItems(Material.DIAMOND_ORE, Presets.DefaultColor +"Block Types",null,38,this);
-        addItems(Material.CLOCK, Presets.DefaultColor +"Manage Reset",null,42,this);
-        addItems(Material.REDSTONE_BLOCK, Presets.DefaultColor +"Back",null,45,this);
-        setMenuAndInterface(Presets.StandOutColor + mine.getName() + " Menu", 54, InventoryType.CHEST, true, fillItem(), PF.getInstance());
+        addItems(Material.BARRIER, Presets.MainColor +"Reset",null,11,this);
+        addItems(Material.REDSTONE_BLOCK, Presets.MainColor +"Delete",null,15,this);
+        addItems(Material.OAK_SIGN, Presets.MainColor +"Signs&Holograms",null,22,this);
+        addItems(Material.DIAMOND_ORE, Presets.MainColor +"Block Types",null,38,this);
+        addItems(Material.CLOCK, Presets.MainColor +"Manage Reset",null,42,this);
+        addItems(Material.REDSTONE_BLOCK, Presets.MainColor +"Back",null,45,this);
+        setMenuAndInterface(Presets.SecondaryColor + mine.getName() + " Menu", 54, InventoryType.CHEST, true, fillItem(), PF.getInstance());
     }
 
 
@@ -63,7 +63,7 @@ public class MineOptionsGUI extends PFGUI {
         if(itemAndSlot.get(15).isSimilar(itemStack)){
             mine.deleteMine();
             player.closeInventory();
-            player.sendMessage(Presets.DefaultColor + "You have Deleted Mine " + Presets.StandOutColor + mine.getName());
+            player.sendMessage(Presets.MainColor + "You have Deleted Mine " + Presets.SecondaryColor + mine.getName());
             return true;
         }
         return false;

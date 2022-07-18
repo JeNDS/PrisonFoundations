@@ -1,8 +1,10 @@
 package JeNDS.JPlugins.Utilities;
 
 import org.bukkit.Sound;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockDropItemEvent;
 
 public class AutoEXP {
 

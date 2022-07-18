@@ -17,5 +17,6 @@ public class EventManager implements Listener {
         Bukkit.getPluginManager().registerEvents(new RegionCreator(), PF.getInstance());
         Bukkit.getPluginManager().registerEvents(new UtilityEvents(), PF.getInstance());
         Bukkit.getPluginManager().registerEvents(new EnchantEvents(), PF.getInstance());
+        Bukkit.getPluginManager().registerEvents(new OtherEvents(), PF.getInstance());
     }
 }

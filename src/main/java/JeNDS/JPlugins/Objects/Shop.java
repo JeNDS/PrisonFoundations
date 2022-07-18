@@ -52,9 +52,9 @@ public class Shop {
                 }
                 if (foundToSell) {
                     if (self) {
-                        player.sendMessage(Presets.DefaultColor + "You Sold " + Presets.StandOutColor + itemsSold + Presets.DefaultColor + " items to shop " + Presets.StandOutColor + shop.getShopName() + Presets.DefaultColor + " for " + Presets.StandOutColor + sold);
+                        player.sendMessage(Presets.MainColor + "You Sold " + Presets.SecondaryColor + itemsSold + Presets.MainColor + " items to shop " + Presets.SecondaryColor + shop.getShopName() + Presets.MainColor + " for " + Presets.SecondaryColor + sold);
                     } else {
-                        player.sendMessage(Presets.DefaultColor + "Someone Sold " + Presets.StandOutColor + itemsSold + Presets.DefaultColor + " items to shop on your behalf " + Presets.StandOutColor + shop.getShopName() + Presets.DefaultColor + " for " + Presets.StandOutColor + sold);
+                        player.sendMessage(Presets.MainColor + "Someone Sold " + Presets.SecondaryColor + itemsSold + Presets.MainColor + " items to shop on your behalf " + Presets.SecondaryColor + shop.getShopName() + Presets.MainColor + " for " + Presets.SecondaryColor + sold);
 
                     }
                 }

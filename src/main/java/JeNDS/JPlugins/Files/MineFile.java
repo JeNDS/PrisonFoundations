@@ -11,9 +11,6 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.entity.Cat;
-import org.checkerframework.checker.units.qual.A;
-import org.checkerframework.checker.units.qual.C;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -208,11 +205,11 @@ public class MineFile {
     }
 
     public void updateBlockTypes(ArrayList<BlockType> newBlockTypes) {
+        mineFile.getFileConfiguration().set("Block Types",null);
         for (BlockType blockType : newBlockTypes) {
-            mineFile.getFileConfiguration().set("Block Types",null);
             mineFile.getFileConfiguration().set("Block Types." + blockType.getMaterial().toString() + ".Percentage", blockType.getPercentage());
-            mineFile.save();
         }
+        mineFile.save();
     }
 
     public void createSignFile(UUID ID, UpdateType updateType, Location location) {

@@ -19,17 +19,17 @@ public class MineManageResetTimeMenu extends PFGUI {
         this.lastMenu = lastMenu;
         this.mine = mine;
 
-        addItems(Material.EMERALD_BLOCK, Presets.DefaultColor + "Add 5 Minutes", null, 12, this);
-        addItems(Material.EMERALD_BLOCK, Presets.DefaultColor + "Add 10 Minutes", null, 21, this);
-        addItems(Material.EMERALD_BLOCK, Presets.DefaultColor + "Add 25 Minutes", null, 30, this);
-        addItems(Material.EMERALD_BLOCK, Presets.DefaultColor + "Add 50 Minutes", null, 39, this);
-        addItems(Material.REDSTONE_BLOCK, Presets.DefaultColor + "Remove 5 Minutes", null, 14, this);
-        addItems(Material.REDSTONE_BLOCK, Presets.DefaultColor + "Remove 10 Minutes", null, 23, this);
-        addItems(Material.REDSTONE_BLOCK, Presets.DefaultColor + "Remove 25 Minutes", null, 32, this);
-        addItems(Material.REDSTONE_BLOCK, Presets.DefaultColor + "Remove 50 Minutes", null, 41, this);
-        addItems(Material.REDSTONE_BLOCK, Presets.DefaultColor + "Back", null, 45, this);
+        addItems(Material.EMERALD_BLOCK, Presets.MainColor + "Add 5 Minutes", null, 12, this);
+        addItems(Material.EMERALD_BLOCK, Presets.MainColor + "Add 10 Minutes", null, 21, this);
+        addItems(Material.EMERALD_BLOCK, Presets.MainColor + "Add 25 Minutes", null, 30, this);
+        addItems(Material.EMERALD_BLOCK, Presets.MainColor + "Add 50 Minutes", null, 39, this);
+        addItems(Material.REDSTONE_BLOCK, Presets.MainColor + "Remove 5 Minutes", null, 14, this);
+        addItems(Material.REDSTONE_BLOCK, Presets.MainColor + "Remove 10 Minutes", null, 23, this);
+        addItems(Material.REDSTONE_BLOCK, Presets.MainColor + "Remove 25 Minutes", null, 32, this);
+        addItems(Material.REDSTONE_BLOCK, Presets.MainColor + "Remove 50 Minutes", null, 41, this);
+        addItems(Material.REDSTONE_BLOCK, Presets.MainColor + "Back", null, 45, this);
 
-        setMenuAndInterface(Presets.StandOutColor + mine.getName() + " Manage Time Reset Menu " + mine.getMineResetTime()+"M", 54, InventoryType.CHEST, true, fillItem(), PF.getInstance());
+        setMenuAndInterface(Presets.SecondaryColor + mine.getName() + " Manage Time Reset Menu " + mine.getMineResetTime()+"M", 54, InventoryType.CHEST, true, fillItem(), PF.getInstance());
     }
 
 

@@ -26,7 +26,7 @@ public class EnchantmentCommands extends CommandManager {
                             }
                         }
                     } else {
-                        sender.sendMessage(Presets.DefaultColor + "You don't have Permissions " + Presets.StandOutColor + "PFEnchants");
+                        sender.sendMessage(Presets.MainColor + "You don't have Permissions " + Presets.SecondaryColor + "PFEnchants");
                     }
                 }
             }
@@ -37,7 +37,7 @@ public class EnchantmentCommands extends CommandManager {
 
 
     private static void enchantedBook(Enchantment enchantment,Player player){
-        ItemStack book = JDItem.CustomItemStack(Material.ENCHANTED_BOOK,null, Arrays.asList(Presets.StandOutColor2+"Drag to your Pickaxe to use!"));
+        ItemStack book = JDItem.CustomItemStack(Material.ENCHANTED_BOOK,null, Arrays.asList(Presets.ThirdColor +"Drag to your Pickaxe to use!"));
         EnchantManager.AddCustomEnchantment(enchantment, book);
         player.getInventory().addItem(book);
     }
