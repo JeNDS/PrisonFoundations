@@ -1,6 +1,6 @@
 package JeNDS.JPlugins.Commands;
 
-import JeNDS.JPlugins.Objects.MineObjects.Mine;
+import JeNDS.JPlugins.Mines.MineObjects.Mine;
 import JeNDS.JPlugins.Static.Catch;
 import JeNDS.Plugins.PluginAPI.Enchants.CustomEnchant;
 import org.bukkit.Bukkit;
@@ -32,7 +32,11 @@ public class CommandsTabComplete implements TabCompleter {
                     if ("utility".startsWith(args[0].toLowerCase())) {
                         result.add("utility");
                     }
+                    if ("multiplier".startsWith(args[0].toLowerCase())) {
+                        result.add("multiplier");
+                    }
                 }
+
                 if (args.length == 2) {
                     if (args[0].equalsIgnoreCase("mines")) {
                         if ("regiontool".startsWith(args[1].toLowerCase())) {
@@ -50,6 +54,54 @@ public class CommandsTabComplete implements TabCompleter {
                         if ("help".startsWith(args[1].toLowerCase())) {
                             result.add("help");
                         }
+                    }
+                }
+                if (args.length >= 2) {
+                    if (args[0].equalsIgnoreCase("multiplier")) {
+                        if ("give".startsWith(args[1].toLowerCase())) {
+                            result.add("give");
+                        }
+                        if ("clear".startsWith(args[1].toLowerCase())) {
+                            result.add("clear");
+                        }
+                        if (args[1].equalsIgnoreCase("give")) {
+                            if (args.length == 3) {
+                                result.clear();
+                                for (Player player : Bukkit.getOnlinePlayers()) {
+                                    if (player.getName().startsWith(args[2].toLowerCase())) {
+                                        result.add(player.getName());
+                                    }
+                                }
+                            }
+                            if (args.length == 4) {
+                                result.clear();
+                                for (double i = 1; i != 100; i++) {
+                                    if (Double.toString(i).startsWith(args[3].toLowerCase())) {
+                                        result.add(Double.toString(i));
+                                    }
+                                }
+                            }
+                            if (args.length == 5) {
+                                result.clear();
+                                if ("permanent".startsWith(args[4].toLowerCase())) {
+                                    result.add("permanent");
+                                }
+                                if ("0:0:0:0".startsWith(args[4].toLowerCase())) {
+                                    result.add("0:0:0:0");
+                                }
+                            }
+                        }
+                        if (args[1].equalsIgnoreCase("clear")) {
+                            if (args.length == 3) {
+                                result.clear();
+                                for (Player player : Bukkit.getOnlinePlayers()) {
+                                    if (player.getName().startsWith(args[2].toLowerCase())) {
+                                        result.add(player.getName());
+                                    }
+                                }
+                            }
+                        }
+
                     }
                 }
                 if (args.length == 2) {
@@ -159,7 +211,7 @@ public class CommandsTabComplete implements TabCompleter {
         if (command.getName().equalsIgnoreCase("pfenchant")) {
             if ((sender.hasPermission("PF.Admin") || sender.hasPermission("PF.Rankup.Others")) || !(sender instanceof Player)) {
                 if (args.length == 1) {
-                    for (Enchantment enchantment : CustomEnchant.EnchantmentList){
+                    for (Enchantment enchantment : CustomEnchant.EnchantmentList) {
                         String name = enchantment.getName().replaceAll(" ", "");
                         if (name.startsWith(args[0].toLowerCase())) {
                             result.add(name);

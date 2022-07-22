@@ -1,6 +1,6 @@
 package JeNDS.JPlugins.Static;
 
-import JeNDS.JPlugins.Main.PF;
+import JeNDS.JPlugins.PF;
 import JeNDS.Plugins.PluginAPI.Other.JTools;
 import org.bukkit.ChatColor;
 

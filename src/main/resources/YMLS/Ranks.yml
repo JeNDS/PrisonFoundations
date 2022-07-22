@@ -17,6 +17,8 @@ A:
   RankUp Rewards:
     - "[Broadcast] &A%player% rankUp to %nextRank%"
     - "[Command] lp user %player% permission set PF.Ranks.%nextRank% true"
+    - "[Command] lp user %player% permission set PF.Ranks.ShopB true"
+    - "[FireWork] [power:1] "
 B:
   Prefix: "&7B"
   Priority: 2
@@ -24,6 +26,8 @@ B:
   RankUp Rewards:
     - "[Broadcast] &A%player% rankUp to %nextRank%"
     - "[Command] lp user %player% permission set PF.Ranks.%nextRank% true"
+    - "[Command] lp user %player% permission set PF.Ranks.ShopC true"
+    - "[FireWork] [power:1] "
 C:
   Prefix: "&8C"
   Priority: 1

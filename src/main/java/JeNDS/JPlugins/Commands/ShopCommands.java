@@ -1,6 +1,7 @@
 package JeNDS.JPlugins.Commands;
 
-import JeNDS.JPlugins.Objects.Shop;
+import JeNDS.JPlugins.Managers.CommandManager;
+import JeNDS.JPlugins.Shops.Shop;
 import JeNDS.JPlugins.Static.Catch;
 import JeNDS.JPlugins.Static.Presets;
 import org.bukkit.Bukkit;
@@ -9,8 +10,7 @@ import org.bukkit.entity.Player;
 public class ShopCommands extends CommandManager {
     public static boolean Sell() {
         if (cmd.getName().equalsIgnoreCase("Sell")) {
-            if (sender instanceof Player) {
-                Player player = (Player) sender;
+            if (sender instanceof Player player) {
                 if (args.length == 0) {
                     if (player.hasPermission("PF.Sell") || sender.hasPermission("PF.Admin") || sender.hasPermission("PF.SellOthers")) {
                         if (Shop.GetPlayerShop(player) != null) {

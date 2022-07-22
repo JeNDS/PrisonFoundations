@@ -1,11 +1,12 @@
 package JeNDS.JPlugins.Commands;
 
-import JeNDS.JPlugins.Objects.Rank;
+import JeNDS.JPlugins.Managers.CommandManager;
+import JeNDS.JPlugins.Ranks.Rank;
 import JeNDS.JPlugins.Static.Presets;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import static JeNDS.JPlugins.Implementations.EconomyImport.Economy;
+import static JeNDS.JPlugins.Other.Implementations.EconomyImport.Economy;
 
 public class RankCommands extends CommandManager {
     public static boolean Rankup() {

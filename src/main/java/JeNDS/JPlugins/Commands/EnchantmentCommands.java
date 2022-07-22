@@ -1,15 +1,14 @@
 package JeNDS.JPlugins.Commands;
 
-import JeNDS.JPlugins.CustomEnchants.EnchantManager;
-import JeNDS.JPlugins.Static.Presets;
+import JeNDS.JPlugins.Managers.EnchantManager;
+import JeNDS.JPlugins.Lenguage.LNG;
+import JeNDS.JPlugins.Managers.CommandManager;
 import JeNDS.Plugins.PluginAPI.Enchants.CustomEnchant;
 import JeNDS.Plugins.PluginAPI.Other.JDItem;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.Arrays;
 
 public class EnchantmentCommands extends CommandManager {
     public static boolean PFEnchant() {
@@ -26,7 +25,7 @@ public class EnchantmentCommands extends CommandManager {
                             }
                         }
                     } else {
-                        sender.sendMessage(Presets.MainColor + "You don't have Permissions " + Presets.SecondaryColor + "PFEnchants");
+                        sender.sendMessage(LNG.NoPermissionCommandMessage);
                     }
                 }
             }
@@ -37,7 +36,7 @@ public class EnchantmentCommands extends CommandManager {
 
 
     private static void enchantedBook(Enchantment enchantment,Player player){
-        ItemStack book = JDItem.CustomItemStack(Material.ENCHANTED_BOOK,null, Arrays.asList(Presets.ThirdColor +"Drag to your Pickaxe to use!"));
+        ItemStack book = JDItem.CustomItemStack(Material.ENCHANTED_BOOK,null, LNG.CustomEnchantedItemLore);
         EnchantManager.AddCustomEnchantment(enchantment, book);
         player.getInventory().addItem(book);
     }

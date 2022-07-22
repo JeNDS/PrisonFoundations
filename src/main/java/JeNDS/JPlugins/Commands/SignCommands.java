@@ -1,6 +1,7 @@
 package JeNDS.JPlugins.Commands;
 
-import JeNDS.JPlugins.Objects.MineObjects.Mine;
+import JeNDS.JPlugins.Managers.CommandManager;
+import JeNDS.JPlugins.Mines.MineObjects.Mine;
 import JeNDS.JPlugins.Static.Catch;
 import JeNDS.JPlugins.Static.Presets;
 import org.bukkit.Bukkit;
@@ -9,7 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-class SignCommands extends CommandManager {
+public class SignCommands extends CommandManager {
     public static boolean SignsCommands() {
         if (args.length >= 1) {
             if (args[0].equalsIgnoreCase("signs")) {

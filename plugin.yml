@@ -1,9 +1,10 @@
 name: PrisonFoundations
-main: JeNDS.JPlugins.Main.PF
+main: JeNDS.JPlugins.PF
 api-version: 1.16
-version: 1.2
+version: 1.3
 author: JeNDS
 description: -no desc-
+softdepend: [PlaceholderAPI]
 depend: [Vault]
 permissions:
   PF.Admin:

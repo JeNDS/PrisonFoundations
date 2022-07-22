@@ -1,11 +1,12 @@
 package JeNDS.JPlugins.Static;
 
-import JeNDS.JPlugins.Objects.MineObjects.Mine;
-import JeNDS.JPlugins.Objects.Rank;
-import JeNDS.JPlugins.Objects.Shop;
-import JeNDS.JPlugins.PlayerGUI.PFGUI;
-import JeNDS.JPlugins.Utilities.BlockUtility.BlockUtility;
-import JeNDS.JPlugins.Objects.MineObjects.DropParty;
+import JeNDS.JPlugins.Mines.MineObjects.Mine;
+import JeNDS.JPlugins.PlayerData.PFPlayer;
+import JeNDS.JPlugins.Ranks.Rank;
+import JeNDS.JPlugins.Shops.Shop;
+import JeNDS.JPlugins.Managers.PFGUI;
+import JeNDS.JPlugins.Mines.Utilities.BlockUtility.BlockUtility;
+import JeNDS.JPlugins.Mines.MineObjects.DropParty;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 
@@ -21,6 +22,7 @@ public class Catch {
     public static HashMap<Player, Integer> inventoryFullTimeWait = new HashMap<>();
     public static ArrayList<Mine> RunningMines = new ArrayList<>();
     public static ArrayList<Rank> Ranks = new ArrayList<>();
+    public static ArrayList<PFPlayer> PFPlayers = new ArrayList<>();
     public static ArrayList<Shop> Shops = new ArrayList<>();
     public static ArrayList<DropParty> DropParties = new ArrayList<>();
 

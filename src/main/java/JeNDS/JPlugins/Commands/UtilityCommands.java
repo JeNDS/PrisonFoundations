@@ -1,5 +1,6 @@
 package JeNDS.JPlugins.Commands;
 
+import JeNDS.JPlugins.Managers.CommandManager;
 import JeNDS.JPlugins.Static.Presets;
 import JeNDS.Plugins.PluginAPI.Other.JDItem;
 import org.bukkit.Material;

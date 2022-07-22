@@ -1,8 +1,9 @@
 package JeNDS.JPlugins.Commands;
 
-import JeNDS.JPlugins.Objects.MineObjects.Mine;
-import JeNDS.JPlugins.PlayerGUI.MinesGUI.MGUI_1;
-import JeNDS.JPlugins.Reagions.RegionCreator;
+import JeNDS.JPlugins.Managers.CommandManager;
+import JeNDS.JPlugins.Mines.MineObjects.Mine;
+import JeNDS.JPlugins.Mines.MinesGUI.MGUI_1;
+import JeNDS.JPlugins.Mines.Reagions.RegionCreator;
 import JeNDS.JPlugins.Static.Catch;
 import JeNDS.JPlugins.Static.Presets;
 import JeNDS.Plugins.PluginAPI.Other.JDItem;
