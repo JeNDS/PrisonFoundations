@@ -1,0 +1,28 @@
+SmallBomb:
+  Material: "GHAST_TEAR"
+  Name: "&8 Small Bomb"
+  Lore:
+    - "&7 Right click to use"
+  Size: 2
+  Speed: 5
+MediumBomb:
+  Material: "GOLD_NUGGET"
+  Name: "&8 Medium Bomb"
+  Lore:
+    - "&7 Right click to use"
+  Size: 5
+  Speed: 4
+LargeBomb:
+  Material: "MAGMA_CREAM"
+  Name: "&8 Large Bomb"
+  Lore:
+    - "&7 Right click to use"
+  Size: 8
+  Speed: 3
+Nuke:
+  Material: "NETHER_STAR"
+  Name: "&8 Mother of all bombs"
+  Lore:
+    - "&7 Right click to use"
+  Size: 15
+  Speed: 1

@@ -35,6 +35,7 @@ public class PFHologram extends JDHologram {
             @Override
             public void run() {
                 updateHologram();
+                return ;
             }
         },80L,80L);
     }

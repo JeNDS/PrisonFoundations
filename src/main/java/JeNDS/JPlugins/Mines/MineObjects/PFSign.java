@@ -51,6 +51,7 @@ public class PFSign {
                         sign.update(true);
                     }
                 }
+                return ;
             }
         }, 80L, 80L);
     }

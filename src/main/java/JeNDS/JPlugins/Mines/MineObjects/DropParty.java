@@ -29,12 +29,13 @@ public class DropParty {
                     } else {
                         repeat = redropTime;
                         time = dropTime;
-                        return;
+                        return ;
                     }
                     time--;
                 }
                 repeat--;
 
+                return ;
             }
         }, 0L, 20L);
     }

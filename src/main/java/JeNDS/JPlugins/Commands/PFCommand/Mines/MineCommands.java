@@ -1,6 +1,6 @@
-package JeNDS.JPlugins.Commands;
+package JeNDS.JPlugins.Commands.PFCommand.Mines;
 
-import JeNDS.JPlugins.Managers.CommandManager;
+import JeNDS.JPlugins.Commands.CommandManager;
 import JeNDS.JPlugins.Mines.MineObjects.Mine;
 import JeNDS.JPlugins.Mines.MinesGUI.MGUI_1;
 import JeNDS.JPlugins.Mines.Reagions.RegionCreator;
@@ -17,8 +17,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class MineCommands extends CommandManager {
 
     public static boolean LoadMines() {
-        if (args.length >= 1 && args[0].equalsIgnoreCase("Mines")) {
-            if (args.length > 1) {
+        if (cmArgs.length >= 1 && cmArgs[0].equalsIgnoreCase("Mines")) {
+            if (cmArgs.length > 1) {
                 if (CreateMine()) {
                     return true;
                 }
@@ -49,22 +49,22 @@ public class MineCommands extends CommandManager {
     }
 
     private static boolean CreateMine() {
-        if (args[1].equalsIgnoreCase("CreateMine")) {
+        if (cmArgs[1].equalsIgnoreCase("CreateMine")) {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
-                if (args.length == 3 && args[2] != null) {
+                if (cmArgs.length == 3 && cmArgs[2] != null) {
                     if (RegionCreator.PlayerMinePositionOne.containsKey(player) && RegionCreator.PlayerMinePositionTwo.containsKey(player)) {
                         if (!Catch.RunningMines.isEmpty()) {
                             for (Mine mine : Catch.RunningMines) {
-                                if (mine.getName().equals(args[2])) {
-                                    sender.sendMessage(standOutColor + args[2] + defaultColor + " is already Running!");
+                                if (mine.getName().equals(cmArgs[2])) {
+                                    sender.sendMessage(standOutColor + cmArgs[2] + defaultColor + " is already Running!");
                                     return true;
                                 }
                             }
                         }
-                        Mine mine = new Mine(RegionCreator.PlayerMinePositionOne.get(player), RegionCreator.PlayerMinePositionTwo.get(player), args[2]);
+                        Mine mine = new Mine(RegionCreator.PlayerMinePositionOne.get(player), RegionCreator.PlayerMinePositionTwo.get(player), cmArgs[2]);
                         mine.createMine();
-                        sender.sendMessage(defaultColor + "you have created Mine " + standOutColor + args[2]);
+                        sender.sendMessage(defaultColor + "you have created Mine " + standOutColor + cmArgs[2]);
                         return true;
                     } else {
                         sender.sendMessage(defaultColor + "You must select two points first do" + standOutColor + " /region tool" + defaultColor + " for a region selector");
@@ -84,7 +84,7 @@ public class MineCommands extends CommandManager {
     }
 
     private static boolean RegionTool() {
-        if (args[1].equalsIgnoreCase("regionTool")) {
+        if (cmArgs[1].equalsIgnoreCase("regionTool")) {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
                 ItemStack prisonregiontool = new ItemStack(Material.GOLDEN_SHOVEL, 1);
@@ -104,7 +104,7 @@ public class MineCommands extends CommandManager {
 
     }
     private static boolean HologramTool() {
-        if (args[1].equalsIgnoreCase("hologramRemover")) {
+        if (cmArgs[1].equalsIgnoreCase("hologramRemover")) {
             if (sender instanceof Player player) {
                 ItemStack itemStack = JDItem.CustomItemStack(Material.BLAZE_ROD,defaultColor+ "Hologram Remover",null);
                 player.getInventory().addItem(itemStack);
@@ -120,17 +120,17 @@ public class MineCommands extends CommandManager {
     }
 
     private static boolean SetMineSpawn() {
-        if (args[1].equalsIgnoreCase("setSpawn")) {
+        if (cmArgs[1].equalsIgnoreCase("setSpawn")) {
             if (sender instanceof Player player) {
-                if(args.length >= 3){
-                    if(Mine.GetMineFromName(args[2])!=null){
-                        Mine mine = Mine.GetMineFromName(args[2]);
+                if(cmArgs.length >= 3){
+                    if(Mine.GetMineFromName(cmArgs[2])!=null){
+                        Mine mine = Mine.GetMineFromName(cmArgs[2]);
                         assert mine != null;
                         mine.setSpawn(player.getLocation());
                         player.sendMessage(Presets.MainColor + "You have set " + Presets.SecondaryColor + mine.getName() + Presets.MainColor + " spawn!");
                     }
                     else {
-                        sender.sendMessage(Presets.MainColor + args[2]+" is not a valid mine");
+                        sender.sendMessage(Presets.MainColor + cmArgs[2]+" is not a valid mine");
                     }
                 }
 
@@ -144,44 +144,44 @@ public class MineCommands extends CommandManager {
     }
 
     private static boolean TeleportMine() {
-        if (args.length >= 2 && args[1].equalsIgnoreCase("tp")) {
+        if (cmArgs.length >= 2 && cmArgs[1].equalsIgnoreCase("tp")) {
             if (sender instanceof Player) {
                 Player player = ((Player) sender).getPlayer();
-                if (args.length == 4) {
-                    if (Bukkit.getPlayer(args[2]) != null) {
+                if (cmArgs.length == 4) {
+                    if (Bukkit.getPlayer(cmArgs[2]) != null) {
                         for (Mine mine : Catch.RunningMines) {
-                            if (mine.getName().equals(args[3])) {
+                            if (mine.getName().equals(cmArgs[3])) {
                                 if (mine.getSpawn() != null) {
-                                    Bukkit.getPlayer(args[2]).teleport(mine.getSpawn());
-                                    Bukkit.getPlayer(args[2]).sendMessage(defaultColor + "You been teleported  to mine " + standOutColor + args[2]);
-                                    sender.sendMessage(defaultColor + "You have teleported " + standOutColor + args[2] + defaultColor + " to mine " + standOutColor + args[3]);
+                                    Bukkit.getPlayer(cmArgs[2]).teleport(mine.getSpawn());
+                                    Bukkit.getPlayer(cmArgs[2]).sendMessage(defaultColor + "You been teleported  to mine " + standOutColor + cmArgs[2]);
+                                    sender.sendMessage(defaultColor + "You have teleported " + standOutColor + cmArgs[2] + defaultColor + " to mine " + standOutColor + cmArgs[3]);
                                     return true;
                                 } else {
-                                    sender.sendMessage(standOutColor + args[3] + defaultColor + " does not have a spawn!");
+                                    sender.sendMessage(standOutColor + cmArgs[3] + defaultColor + " does not have a spawn!");
                                     return true;
                                 }
                             }
                         }
-                        sender.sendMessage(standOutColor + args[3] + defaultColor + " is not a valid Mine!");
+                        sender.sendMessage(standOutColor + cmArgs[3] + defaultColor + " is not a valid Mine!");
                         return true;
                     } else {
-                        sender.sendMessage(ChatColor.GREEN + args[2] + defaultColor + " is not a valid player");
+                        sender.sendMessage(ChatColor.GREEN + cmArgs[2] + defaultColor + " is not a valid player");
                         return true;
                     }
                 } else {
-                    if (args.length == 3) {
+                    if (cmArgs.length == 3) {
                         for (Mine mine : Catch.RunningMines) {
-                            if (mine.getName().equals(args[2])) {
+                            if (mine.getName().equals(cmArgs[2])) {
                                 if (mine.getSpawn() != null) {
                                     player.teleport(mine.getSpawn());
-                                    sender.sendMessage(defaultColor + "You been teleported  to mine " + standOutColor + args[2]);
+                                    sender.sendMessage(defaultColor + "You been teleported  to mine " + standOutColor + cmArgs[2]);
                                 } else {
-                                    sender.sendMessage(standOutColor + args[2] + defaultColor + " does not have a spawn!");
+                                    sender.sendMessage(standOutColor + cmArgs[2] + defaultColor + " does not have a spawn!");
                                 }
                                 return true;
                             }
                         }
-                        sender.sendMessage(standOutColor + args[2] + defaultColor + " is not a valid Mine!");
+                        sender.sendMessage(standOutColor + cmArgs[2] + defaultColor + " is not a valid Mine!");
                     } else {
                         sender.sendMessage(defaultColor + "/PF Mines TP " + standOutColor + "<MineName>");
                         sender.sendMessage(defaultColor + "/PF Mines TP " + standOutColor + "<Player> <MineName>");
@@ -192,25 +192,25 @@ public class MineCommands extends CommandManager {
                 }
 
             } else {
-                if (args.length == 4) {
-                    if (Bukkit.getPlayer(args[2]) != null) {
+                if (cmArgs.length == 4) {
+                    if (Bukkit.getPlayer(cmArgs[2]) != null) {
                         for (Mine mine : Catch.RunningMines) {
-                            if (mine.getName().equals(args[3])) {
+                            if (mine.getName().equals(cmArgs[3])) {
                                 if (mine.getSpawn() != null) {
-                                    Bukkit.getPlayer(args[2]).teleport(mine.getSpawn());
-                                    sender.sendMessage(defaultColor + "You have teleported " + standOutColor + args[2] + defaultColor + " to mine " + standOutColor + args[3]);
-                                    Bukkit.getPlayer(args[2]).sendMessage(defaultColor + "You been teleported  to mine " + standOutColor + args[2]);
+                                    Bukkit.getPlayer(cmArgs[2]).teleport(mine.getSpawn());
+                                    sender.sendMessage(defaultColor + "You have teleported " + standOutColor + cmArgs[2] + defaultColor + " to mine " + standOutColor + cmArgs[3]);
+                                    Bukkit.getPlayer(cmArgs[2]).sendMessage(defaultColor + "You been teleported  to mine " + standOutColor + cmArgs[2]);
                                     return true;
                                 } else {
-                                    sender.sendMessage(standOutColor + args[3] + defaultColor + " does not have a spawn!");
+                                    sender.sendMessage(standOutColor + cmArgs[3] + defaultColor + " does not have a spawn!");
                                     return true;
                                 }
                             }
                         }
-                        sender.sendMessage(standOutColor + args[3] + defaultColor + " is not a valid Mine!");
+                        sender.sendMessage(standOutColor + cmArgs[3] + defaultColor + " is not a valid Mine!");
                         return true;
                     } else {
-                        sender.sendMessage(ChatColor.GREEN + args[2] + defaultColor + " is not a valid player");
+                        sender.sendMessage(ChatColor.GREEN + cmArgs[2] + defaultColor + " is not a valid player");
                         return true;
                     }
                 } else {
@@ -223,7 +223,7 @@ public class MineCommands extends CommandManager {
     }
 
     private static boolean MineMenu() {
-        if (args[1].equalsIgnoreCase("Menu")) {
+        if (cmArgs[1].equalsIgnoreCase("Menu")) {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
                 MGUI_1 mgui_1 = new MGUI_1();
@@ -249,8 +249,8 @@ public class MineCommands extends CommandManager {
     }
 
     private static boolean MinesHelp() {
-        if (args.length == 2) {
-            if (args[1].equalsIgnoreCase("help")) {
+        if (cmArgs.length == 2) {
+            if (cmArgs[1].equalsIgnoreCase("help")) {
                 sender.sendMessage(defaultColor + "/PF mines createmine <minename>");
                 sender.sendMessage(defaultColor + "/PF mines menu");
                 sender.sendMessage(defaultColor + "/PF mines regiontool");

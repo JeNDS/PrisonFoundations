@@ -1,8 +1,8 @@
-package JeNDS.JPlugins.Commands;
+package JeNDS.JPlugins.Commands.PFCommand;
 
+import JeNDS.JPlugins.Commands.CommandManager;
 import JeNDS.JPlugins.Managers.EnchantManager;
 import JeNDS.JPlugins.Lenguage.LNG;
-import JeNDS.JPlugins.Managers.CommandManager;
 import JeNDS.Plugins.PluginAPI.Enchants.CustomEnchant;
 import JeNDS.Plugins.PluginAPI.Other.JDItem;
 import org.bukkit.Material;
@@ -14,12 +14,12 @@ public class EnchantmentCommands extends CommandManager {
     public static boolean PFEnchant() {
         if (cmd.getName().equalsIgnoreCase("PFEnchant")) {
             if (sender instanceof Player player) {
-                if (args.length == 1) {
+                if (cmArgs.length == 1) {
                     if (sender.hasPermission("PF.Enchants") || sender.hasPermission("PF.Admin")) {
                         for(Enchantment enchantment : CustomEnchant.EnchantmentList){
                             String name = enchantment.getName().replaceAll(" ", "");
                             name = name.toLowerCase();
-                            if (args[0].equalsIgnoreCase(name)) {
+                            if (cmArgs[0].equalsIgnoreCase(name)) {
                                 enchantedBook(enchantment,player);
                                 return true;
                             }

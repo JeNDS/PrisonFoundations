@@ -1,8 +1,9 @@
 package JeNDS.JPlugins;
 
+import JeNDS.JPlugins.HandBombs.Files.HandGrenadeConfig;
 import JeNDS.JPlugins.Managers.EnchantManager;
 import JeNDS.JPlugins.Managers.EventManager;
-import JeNDS.JPlugins.Managers.CommandManager;
+import JeNDS.JPlugins.Commands.CommandManager;
 import JeNDS.JPlugins.Mines.Files.MineFile;
 import JeNDS.JPlugins.Mines.Utilities.Files.UtilitiesFile;
 import JeNDS.JPlugins.Other.Files.Config;
@@ -29,7 +30,7 @@ public class PF extends JavaPlugin {
         Config.LoadConfig();
         EconomyImport.LoadEconomy();
         BStatsImport.LoadBStats();
-        CommandManager.LoadCommands();
+        new CommandManager().loadCommands();
         EnchantManager.LoadEnchantments();
         EventManager.LoadEvents();
         RankFile.LoadRanks();
@@ -38,6 +39,7 @@ public class PF extends JavaPlugin {
         UtilitiesFile.LoadUtilities();
         PlaceHolders.LoadPlaceHolders();
         PlayerDataFile.LoadDataFile();
+        HandGrenadeConfig.LoadHandGrenades();
 
     }
 
@@ -47,7 +49,6 @@ public class PF extends JavaPlugin {
     }
 
     //Ideas that need to be implemented to the plugin later on
-    //todo shop multipliers
     //todo Language File
     //todo lucky crate
     //todo hand grandes

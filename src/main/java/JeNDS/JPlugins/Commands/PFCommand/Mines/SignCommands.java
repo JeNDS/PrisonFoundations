@@ -1,6 +1,6 @@
-package JeNDS.JPlugins.Commands;
+package JeNDS.JPlugins.Commands.PFCommand.Mines;
 
-import JeNDS.JPlugins.Managers.CommandManager;
+import JeNDS.JPlugins.Commands.CommandManager;
 import JeNDS.JPlugins.Mines.MineObjects.Mine;
 import JeNDS.JPlugins.Static.Catch;
 import JeNDS.JPlugins.Static.Presets;
@@ -12,8 +12,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class SignCommands extends CommandManager {
     public static boolean SignsCommands() {
-        if (args.length >= 1) {
-            if (args[0].equalsIgnoreCase("signs")) {
+        if (cmArgs.length >= 1) {
+            if (cmArgs[0].equalsIgnoreCase("signs")) {
                 if (MinesSigns()) {
                     return true;
                 }
@@ -25,14 +25,14 @@ public class SignCommands extends CommandManager {
     }
 
     public static boolean MinesSigns() {
-        if (args.length >= 2) {
-            if (args[1].equalsIgnoreCase("mines")) {
-                if (args.length >= 3) {
-                    if (args[2].equalsIgnoreCase("percentage")) {
-                        if (args.length >= 4) {
+        if (cmArgs.length >= 2) {
+            if (cmArgs[1].equalsIgnoreCase("mines")) {
+                if (cmArgs.length >= 3) {
+                    if (cmArgs[2].equalsIgnoreCase("percentage")) {
+                        if (cmArgs.length >= 4) {
                             if (!Catch.RunningMines.isEmpty()) {
                                 for (Mine mine : Catch.RunningMines) {
-                                    if (args[3].equals(mine.getName())) {
+                                    if (cmArgs[3].equals(mine.getName())) {
                                         Player player = (Player) sender;
                                         if (!player.getInventory().contains(giveSign(mine.getName(), "Percentage"))) {
                                             player.getInventory().addItem(giveSign(mine.getName(), "Percentage"));
@@ -42,11 +42,11 @@ public class SignCommands extends CommandManager {
                             }
                         }
                     }
-                    if (args[2].equalsIgnoreCase("time")) {
-                        if (args.length >= 4) {
+                    if (cmArgs[2].equalsIgnoreCase("time")) {
+                        if (cmArgs.length >= 4) {
                             if (!Catch.RunningMines.isEmpty()) {
                                 for (Mine mine : Catch.RunningMines) {
-                                    if (args[3].equals(mine.getName())) {
+                                    if (cmArgs[3].equals(mine.getName())) {
                                         Player player = (Player) sender;
                                         if (!player.getInventory().contains(giveSign(mine.getName(), "Time"))) {
                                             player.getInventory().addItem(giveSign(mine.getName(), "Time"));

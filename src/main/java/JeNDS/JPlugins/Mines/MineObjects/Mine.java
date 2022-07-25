@@ -71,22 +71,19 @@ public class Mine {
     }
 
     public static boolean LocationInMine(Location location){
+        return GetMineFromLocation(location) != null;
+    }
+    public static Mine GetMineFromLocation(Location location){
         for(JeNDS.JPlugins.Mines.MineObjects.Mine mine : RunningMines){
             if(mine.getBlockLocations().contains(location)){
-                return true;
+                return mine;
             }
             for(Location location1 : mine.getBlockLocations()){
                 int distance = (int) location.distance(location1);
                 if(distance == 0){
-                    return true;
+                    return mine;
                 }
             }
-        }
-        return false;
-    }
-    public static Mine GetMineFromLocation(Location location){
-        for(JeNDS.JPlugins.Mines.MineObjects.Mine mine : RunningMines){
-            if(mine.getBlockLocations().contains(location)) return mine;
         }
         return null;
     }
@@ -291,6 +288,7 @@ public class Mine {
                                         size++;
                                     }
                                 }
+                                return ;
                             }
                         }.runTaskTimer(PF.getPlugin(PF.class), 0L, 1L);
                     } else {
@@ -347,6 +345,7 @@ public class Mine {
                 } else {
                     TimeBeforeReset--;
                 }
+                return ;
             }
         }, 0L, 1200L);
 

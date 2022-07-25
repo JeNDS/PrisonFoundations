@@ -1,6 +1,7 @@
 package JeNDS.JPlugins.Managers;
 
 import JeNDS.JPlugins.CustomEnchants.Events.EnchantEvents;
+import JeNDS.JPlugins.HandBombs.Events.HandGrandesEvents;
 import JeNDS.JPlugins.Other.Events.OtherEvents;
 import JeNDS.JPlugins.PF;
 import JeNDS.JPlugins.Mines.Events.MenuEvents;
@@ -24,5 +25,6 @@ public class EventManager implements Listener {
         Bukkit.getPluginManager().registerEvents(new UtilityEvents(), PF.getInstance());
         Bukkit.getPluginManager().registerEvents(new EnchantEvents(), PF.getInstance());
         Bukkit.getPluginManager().registerEvents(new OtherEvents(), PF.getInstance());
+        Bukkit.getPluginManager().registerEvents(new HandGrandesEvents(), PF.getInstance());
     }
 }

@@ -62,6 +62,7 @@ public class Multiplier {
                 }else {
                     time.setTime(time.getTime()-1000);
                 }
+                return;
             }
         }, 0L, 20L);
     }
