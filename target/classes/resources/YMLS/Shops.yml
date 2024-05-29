@@ -1,0 +1,18 @@
+ShopA:
+  Items:
+    COBBLESTONE: 10
+    STONE: 15
+ShopB:
+  Inherit: "ShopA"
+  Items:
+    COAL: 5
+    COAL_BLOCK: 50
+    COAL_ORE: 20
+ShopC:
+  Inherit: "ShopB"
+  Items:
+    COBBLESTONE: 20
+    STONE: 25
+    IRON_INGOT: 30
+    IRON_BLOCK: 200
+    IRON_ORE: 40

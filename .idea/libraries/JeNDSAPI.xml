@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="JeNDSAPI">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../LibaryJars/JeNDSAPI.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
