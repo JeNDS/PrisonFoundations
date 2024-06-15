@@ -12,9 +12,4 @@ public class LNG {
     private static final String c2 = Presets.SecondaryColor;
     private static final String c3 = Presets.ThirdColor;
     public static String NoPermissionCommandMessage = c1 + "You don't have Permission";
-
-
-
-    //Items
-    public static ArrayList<String> CustomEnchantedItemLore = new ArrayList<>(List.of(Presets.ThirdColor + "Drag to your Pickaxe to use!"));
 }

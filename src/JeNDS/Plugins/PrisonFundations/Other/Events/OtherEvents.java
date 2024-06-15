@@ -18,6 +18,7 @@ public class OtherEvents implements Listener {
             event.setCancelled(true);
         }
     }
+
     @EventHandler
     public void clearCatchOnLeave(PlayerQuitEvent event) {
         Catch.inventoryFullTimeWait.remove(event.getPlayer());
@@ -26,13 +27,13 @@ public class OtherEvents implements Listener {
     }
 
     @EventHandler
-    public void loadTextures(PlayerJoinEvent event){
+    public void loadTextures(PlayerJoinEvent event) {
         //event.getPlayer().setTexturePack("https://www.dropbox.com/s/kl94hxrtcpxrzk2/Custom%20Models.zip?dl=1");
         //event.getPlayer().setTexturePack(null);
     }
 
     @EventHandler
-    public void checkTexture(PlayerResourcePackStatusEvent event){
+    public void checkTexture(PlayerResourcePackStatusEvent event) {
     }
 
 }

@@ -3,7 +3,7 @@ package JeNDS.Plugins.PrisonFundations.Shops.File;
 
 import JeNDS.Plugins.JeNDSAPI.Files.YMLFile;
 import JeNDS.Plugins.JeNDSAPI.JDAPI;
-import JeNDS.Plugins.PrisonFundations.PF;
+import JeNDS.Plugins.PrisonFundations.Main;
 import JeNDS.Plugins.PrisonFundations.Shops.Shop;
 import JeNDS.Plugins.PrisonFundations.Static.Catch;
 import org.bukkit.Material;
@@ -17,7 +17,7 @@ public class ShopsFile {
 
 
     public static void LoadShopFile() {
-        shopFile = JDAPI.getFileManipulation.copyFile("Shops.yml", PF.getPlugin(PF.class));
+        shopFile = JDAPI.getFileManipulation.copyFile("Shops.yml", Main.getPlugin(Main.class));
         ConfigurationSection section = shopFile.getFileConfiguration().getConfigurationSection("");
         assert section != null;
         if (!section.getKeys(false).isEmpty()) {

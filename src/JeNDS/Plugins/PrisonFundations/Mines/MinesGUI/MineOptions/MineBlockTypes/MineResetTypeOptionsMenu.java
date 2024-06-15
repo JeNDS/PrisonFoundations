@@ -1,9 +1,9 @@
 package JeNDS.Plugins.PrisonFundations.Mines.MinesGUI.MineOptions.MineBlockTypes;
 
+import JeNDS.Plugins.PrisonFundations.Main;
 import JeNDS.Plugins.PrisonFundations.Managers.PFGUI;
 import JeNDS.Plugins.PrisonFundations.Mines.MineObjects.BlockType;
 import JeNDS.Plugins.PrisonFundations.Mines.MineObjects.Mine;
-import JeNDS.Plugins.PrisonFundations.PF;
 import JeNDS.Plugins.PrisonFundations.Static.Catch;
 import JeNDS.Plugins.PrisonFundations.Static.Presets;
 import org.bukkit.Material;
@@ -17,9 +17,9 @@ public class MineResetTypeOptionsMenu extends PFGUI {
 
     private final MineResetTypeMenu lastMenu;
     private final Mine mine;
-    private  final BlockType blockType;
+    private final BlockType blockType;
 
-    public MineResetTypeOptionsMenu(MineResetTypeMenu lastMenu, Mine mine, BlockType blockType){
+    public MineResetTypeOptionsMenu(MineResetTypeMenu lastMenu, Mine mine, BlockType blockType) {
         this.lastMenu = lastMenu;
         this.mine = mine;
         this.blockType = blockType;
@@ -33,9 +33,9 @@ public class MineResetTypeOptionsMenu extends PFGUI {
         addItems(Material.REDSTONE_BLOCK, Presets.MainColor + "Remove 25%", null, 32, this);
         addItems(Material.REDSTONE_BLOCK, Presets.MainColor + "Remove 50%", null, 41, this);
 
-        addItems(Material.REDSTONE_BLOCK, Presets.MainColor +"Delete",null,49,this);
-        addItems(Material.REDSTONE_BLOCK, Presets.MainColor +"Back",null,45,this);
-        setMenuAndInterface(Presets.SecondaryColor + mine.getName() + " Reset Type Menu "+blockType.getMaterial().name()+" "+blockType.getPercentage()+ "%", 54, InventoryType.CHEST, true, fillItem(), PF.getInstance());
+        addItems(Material.REDSTONE_BLOCK, Presets.MainColor + "Delete", null, 49, this);
+        addItems(Material.REDSTONE_BLOCK, Presets.MainColor + "Back", null, 45, this);
+        setMenuAndInterface(Presets.SecondaryColor + mine.getName() + " Reset Type Menu " + blockType.getMaterial().name() + " " + blockType.getPercentage() + "%", 54, InventoryType.CHEST, true, fillItem(), Main.getInstance());
     }
 
 
@@ -46,16 +46,16 @@ public class MineResetTypeOptionsMenu extends PFGUI {
 
     @Override
     protected boolean leftClickEvents(ItemStack itemStack, Player player) {
-        if(itemAndSlot.get(45).isSimilar(itemStack)){
-            MineResetTypeMenu mineResetTypeMenu = new MineResetTypeMenu(lastMenu.getLastMenu(),mine);
+        if (itemAndSlot.get(45).isSimilar(itemStack)) {
+            MineResetTypeMenu mineResetTypeMenu = new MineResetTypeMenu(lastMenu.getLastMenu(), mine);
             player.openInventory(mineResetTypeMenu.getMenu());
             return true;
         }
-        if(itemAndSlot.get(49).isSimilar(itemStack)){
+        if (itemAndSlot.get(49).isSimilar(itemStack)) {
             ArrayList<BlockType> blockTypes = new ArrayList<>(mine.getBlockTypes());
             blockTypes.remove(blockType);
             mine.updateBlockTypes(blockTypes);
-            MineResetTypeMenu mineResetTypeMenu1 = new MineResetTypeMenu(lastMenu.getLastMenu(),mine);
+            MineResetTypeMenu mineResetTypeMenu1 = new MineResetTypeMenu(lastMenu.getLastMenu(), mine);
             player.openInventory(mineResetTypeMenu1.getMenu());
             return true;
         }
@@ -93,14 +93,15 @@ public class MineResetTypeOptionsMenu extends PFGUI {
         }
         return false;
     }
+
     private void modifyMenuPercentage(Player player, int percentage) {
         if (!Catch.RunningMines.isEmpty()) {
             for (Mine m : Catch.RunningMines) {
                 if (m.getName().contains(mine.getName())) {
-                    if (blockType.getPercentage() + percentage <= 100 &&blockType.getPercentage() + percentage >= 5) {
+                    if (blockType.getPercentage() + percentage <= 100 && blockType.getPercentage() + percentage >= 5) {
                         resetPercentage(blockType.getPercentage() + percentage, mine, player);
                     } else {
-                        if (blockType.getPercentage()+ percentage > 100) {
+                        if (blockType.getPercentage() + percentage > 100) {
                             resetPercentage(100, mine, player);
                         }
                         if (blockType.getPercentage() + percentage < 5) {
@@ -111,13 +112,14 @@ public class MineResetTypeOptionsMenu extends PFGUI {
             }
         }
     }
+
     private void resetPercentage(int percentage, Mine mine, Player player) {
         ArrayList<BlockType> blockTypes = mine.getBlockTypes();
         blockTypes.remove(blockType);
         blockType.setPercentage(percentage);
         blockTypes.add(blockType);
         mine.updateBlockTypes(blockTypes);
-        MineResetTypeOptionsMenu mineResetTypeOptionsMenu = new MineResetTypeOptionsMenu(lastMenu,mine,blockType);
+        MineResetTypeOptionsMenu mineResetTypeOptionsMenu = new MineResetTypeOptionsMenu(lastMenu, mine, blockType);
         player.openInventory(mineResetTypeOptionsMenu.getMenu());
     }
 

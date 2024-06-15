@@ -1,9 +1,9 @@
 package JeNDS.Plugins.PrisonFundations.Mines.MineObjects;
 
 
+import JeNDS.Plugins.PrisonFundations.Main;
 import JeNDS.Plugins.PrisonFundations.Mines.Files.MineFile;
 import JeNDS.Plugins.PrisonFundations.Mines.Reagions.RegionCreator;
-import JeNDS.Plugins.PrisonFundations.PF;
 import JeNDS.Plugins.PrisonFundations.Static.Catch;
 import JeNDS.Plugins.PrisonFundations.Static.Presets;
 import org.bukkit.Bukkit;
@@ -35,8 +35,8 @@ public class Mine {
     private Integer MinePercentageReset = 0;
     private Integer MineResetTime = 10;
     private Integer TimeBeforeReset = 10;
-    private boolean PvP;
-    private boolean MineResetting;
+    private boolean PvP = false;
+    private boolean MineResetting = false;
     private Integer TimeResetTaskID = null;
     private Integer PercentageResetTaskID = null;
 
@@ -63,25 +63,29 @@ public class Mine {
         }
         return false;
     }
+
     public static Mine ClosesMineToPlayer(Player player) {
-        for(Mine mine : Catch.RunningMines) {
-            if(PlayerCloseToMine(player,mine)) return mine;
+        for (Mine mine : Catch.RunningMines) {
+            if (PlayerCloseToMine(player, mine)) return mine;
         }
         return null;
     }
 
-    public static boolean LocationInMine(Location location){
+    public static boolean LocationInMine(Location location) {
         return GetMineFromLocation(location) != null;
     }
-    public static Mine GetMineFromLocation(Location location){
-        for(Mine mine : Catch.RunningMines){
-            if(mine.getBlockLocations().contains(location)){
-                return mine;
-            }
-            for(Location location1 : mine.getBlockLocations()){
-                int distance = (int) location.distance(location1);
-                if(distance == 0){
+
+    public static Mine GetMineFromLocation(Location location) {
+        for (Mine mine : Catch.RunningMines) {
+            if (mine.getWorld() == location.getWorld()) {
+                if (mine.getBlockLocations().contains(location)) {
                     return mine;
+                }
+                for (Location location1 : mine.getBlockLocations()) {
+                    int distance = (int) location.distance(location1);
+                    if (distance == 0) {
+                        return mine;
+                    }
                 }
             }
         }
@@ -289,11 +293,13 @@ public class Mine {
                                     }
                                 }
                             }
-                        }.runTaskTimer(PF.getPlugin(PF.class), 0L, 1L);
+                        }.runTaskTimer(Main.getPlugin(Main.class), 0L, 1L);
                     } else {
+                        MineResetting = true;
                         for (Location location : locationMaterial.keySet()) {
                             location.getBlock().setType(locationMaterial.get(location));
                         }
+                        MineResetting = false;
                     }
                 }
 
@@ -334,7 +340,7 @@ public class Mine {
     }
 
     private void timeCounter() {
-        TimeResetTaskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(PF.getPlugin(PF.class), new Runnable() {
+        TimeResetTaskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(Main.class), new Runnable() {
 
             @Override
             public void run() {
@@ -350,14 +356,15 @@ public class Mine {
     }
 
     private void percentageCheck() {
-        PercentageResetTaskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(PF.getProvidingPlugin(PF.class), () -> {
+        PercentageResetTaskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getProvidingPlugin(Main.class), () -> {
             int totalAmount = BlockLocations.size();
             int amountNotAir = 0;
             if (!BlockLocations.isEmpty()) {
                 for (Location location : BlockLocations) {
-                    if (Material.AIR != location.getBlock().getType()) {
-                        amountNotAir++;
-                    }
+                    if (location != null)
+                        if (Material.AIR != location.getBlock().getType()) {
+                            amountNotAir++;
+                        }
                 }
                 MinePercentage = amountNotAir * 100 / totalAmount;
                 if (MinePercentage < MinePercentageReset) {

@@ -1,0 +1,57 @@
+If using anything other than Multiverse-Core, Mines might not load
+
+
+PF.Admin has access to all commands
+Ranks:
+PF.Rankup
+/Rankup -
+/Rankup <Player> | PF.Rankup.Others or PF.Admin
+
+Shop:
+pf.Sell
+/Sell
+pf.Sell.Others
+/Sell <others> [mineName]
+
+Prices:
+pf.prices
+/prices [mineName] if player has pf.shop.<shopName>
+console only
+/prices <mineName> <playerName>
+
+ PF:
+    Enchants:
+    pf.Enchants
+    /pf enchant <enchantName> [player]
+
+    Hand Grenade:
+    pf.HandGrenades
+    /pf HandGrenades give <player> <GrenadeName> [ammount]
+
+    Mine: only pf.Admin have access to this
+    pf.Mines
+    /pf Mine Regiontool
+    /pf Mine CreateMine <mineName>
+    /pf Mine SetSpawn <mineName>
+    /pf Mine HologramRemover
+    /pf Mine tp <mine> [player]
+
+    Multipliers:
+    pf.Multipliers
+    /pf multiplier give <player> <amount> <Days:Hour:Minutes:Seconds | Permanent>
+    /pf multiplier set <player> <amount> <Days:Hour:Minutes:Seconds | Permanent>
+    /pf multiplier clear
+
+    Utilities:
+    pf.Utilities
+    /pf Utility AutoBlocker
+    /pf Utility AutoSmelter
+
+    Sings:
+    pf.Sings
+    /PF Signs <MineName> <Percentage | Time>
+
+    Utilities:
+    pf.Utilities
+    /PF Utility <AutoBlocker | AutoSmelter>
+

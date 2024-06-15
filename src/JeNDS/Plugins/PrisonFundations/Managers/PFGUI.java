@@ -11,25 +11,27 @@ import java.util.List;
 
 public abstract class PFGUI extends GUInterface {
 
-    protected boolean hasSameName(ItemStack itemStack, String name){
-        if(itemStack!=null)
-            if(itemStack.hasItemMeta())
-                if(itemStack.getItemMeta().hasDisplayName()){
+    protected boolean hasSameName(ItemStack itemStack, String name) {
+        if (itemStack != null)
+            if (itemStack.hasItemMeta())
+                if (itemStack.getItemMeta().hasDisplayName()) {
                     return itemStack.getItemMeta().getDisplayName().contains(name);
                 }
         return false;
     }
-    protected ItemStack fillItem(){
+
+    protected ItemStack fillItem() {
         ItemStack itemStack = new ItemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE);
         ItemMeta meta = itemStack.getItemMeta();
         meta.setDisplayName(" ");
-        meta.addEnchant(Enchantment.CHANNELING,1,false);
+        meta.addEnchant(Enchantment.CHANNELING, 1, false);
         meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         itemStack.setItemMeta(meta);
         return itemStack;
     }
-    protected void addItems(Material material, String name, List<String> lore, Integer slot, PFGUI pfgui) {
+
+    protected ItemStack addItems(Material material, String name, List<String> lore, Integer slot, PFGUI pfgui) {
         ItemStack itemStack = new ItemStack(material);
         ItemMeta backMeta = itemStack.getItemMeta();
         backMeta.setDisplayName(name);
@@ -40,6 +42,7 @@ public abstract class PFGUI extends GUInterface {
             backMeta.setLore(lore);
         }
         itemStack.setItemMeta(backMeta);
-        pfgui.addItem(itemStack, slot);
+        return pfgui.addItem(itemStack, slot);
+
     }
 }

@@ -1,11 +1,14 @@
 name: PrisonFoundations
-main: JeNDS.Plugins.PrisonFundations.PF
+main: JeNDS.Plugins.PrisonFundations.Main
 api-version: 1.16
 version: 1.4
 author: JeNDS
 description: -no desc-
-softdepend: [PlaceholderAPI]
-depend: [Vault]
+softdepend: [ PlaceholderAPI,Multiverse-Core ]
+load: POSTWORLD
+depend:
+  - Vault
+  - JeNDSAPI
 permissions:
   PF.Admin:
     children:
@@ -42,11 +45,11 @@ permissions:
 commands:
   rankup:
     description: 'Command to Rankup'
+  prices:
+    description: 'Command for shop prices'
   sell:
     description: 'Command to sell'
   autosell:
     description: 'Command to autosell'
-  pfenchant:
-    description: 'custom enchants'
   pf:
     description: 'Main game command'

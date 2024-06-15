@@ -3,18 +3,18 @@ package JeNDS.Plugins.PrisonFundations.Ranks.File;
 
 import JeNDS.Plugins.JeNDSAPI.Files.YMLFile;
 import JeNDS.Plugins.JeNDSAPI.JDAPI;
-import JeNDS.Plugins.PrisonFundations.PF;
+import JeNDS.Plugins.JeNDSAPI.Other.JTools;
+import JeNDS.Plugins.PrisonFundations.Main;
 import JeNDS.Plugins.PrisonFundations.Ranks.Rank;
 import JeNDS.Plugins.PrisonFundations.Static.Catch;
 import org.bukkit.configuration.ConfigurationSection;
-import JeNDS.Plugins.JeNDSAPI.Other.JTools;
 
 import java.util.ArrayList;
 
 public class RankFile {
 
     public static void LoadRanks() {
-        YMLFile ranksFile = JDAPI.getFileManipulation.copyFile("Ranks.yml", PF.getInstance());
+        YMLFile ranksFile = JDAPI.getFileManipulation.copyFile("Ranks.yml", Main.getInstance());
         ConfigurationSection section = ranksFile.getFileConfiguration().getConfigurationSection("");
         assert section != null;
         for (String rankName : section.getKeys(false)) {

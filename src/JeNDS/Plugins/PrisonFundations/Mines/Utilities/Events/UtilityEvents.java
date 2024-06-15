@@ -2,8 +2,8 @@ package JeNDS.Plugins.PrisonFundations.Mines.Utilities.Events;
 
 
 import JeNDS.Plugins.JeNDSAPI.Other.JDItem;
-import JeNDS.Plugins.PrisonFundations.Mines.Utilities.AutoBlock;
-import JeNDS.Plugins.PrisonFundations.Mines.Utilities.AutoSmelt;
+import JeNDS.Plugins.JeNDSAPI.Tools.BlockInventory;
+import JeNDS.Plugins.JeNDSAPI.Tools.SmeltInventory;
 import JeNDS.Plugins.PrisonFundations.Mines.Utilities.BlockUtility.BlockUtility;
 import JeNDS.Plugins.PrisonFundations.Mines.Utilities.BlockUtility.BlockUtilityType;
 import JeNDS.Plugins.PrisonFundations.Mines.Utilities.Files.UtilitiesFile;
@@ -11,6 +11,7 @@ import JeNDS.Plugins.PrisonFundations.Static.Catch;
 import JeNDS.Plugins.PrisonFundations.Static.Presets;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -31,7 +32,7 @@ public class UtilityEvents implements Listener {
     }
 
     private boolean isUtility(BlockPlaceEvent event, Material material, String name) {
-        if (event.getPlayer().hasPermission("PF.Admin")) {
+        if (event.getPlayer().hasPermission("pf.admin")) {
             if (event.getItemInHand().isSimilar(JDItem.CustomItemStack(material, Presets.MainColor + name, null))) {
                 BlockUtility utility = new BlockUtility(event.getBlockPlaced().getLocation(), BlockUtilityType.GetBlockUtilityTypeFromString(name));
                 if (name.equalsIgnoreCase("Auto Blocker")) {
@@ -50,29 +51,28 @@ public class UtilityEvents implements Listener {
 
     @EventHandler
     private void brakeEvent(BlockBreakEvent event) {
-        if (event.getPlayer().hasPermission("PF.Admin")) {
-            BlockUtility utility = BlockUtility.BlockUtilityFromLocation(event.getBlock().getLocation());
-            if (utility != null) {
+        BlockUtility utility = BlockUtility.BlockUtilityFromLocation(event.getBlock().getLocation());
+        if (utility != null) {
+            if (event.getPlayer().hasPermission("pf.admin")) {
                 utility.remove();
-            }
+            } else event.setCancelled(true);
         }
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     private void interactEvent(PlayerInteractEvent event) {
-        if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+        if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK) || event.getAction().equals(Action.LEFT_CLICK_BLOCK)) {
             BlockUtility utility = BlockUtility.BlockUtilityFromLocation(Objects.requireNonNull(event.getClickedBlock()).getLocation());
             if (utility != null) {
+                event.setCancelled(true);
                 if (utility.getType().equals(BlockUtilityType.AUTOBLOCK)) {
-                    if (event.getPlayer().hasPermission("PF.AutoBlocking")) {
-                        new AutoBlock(event.getPlayer());
-                        event.setCancelled(true);
+                    if (event.getPlayer().hasPermission("pf.utility.autoblocking")) {
+                        new BlockInventory(event.getPlayer());
                     }
                 }
                 if (utility.getType().equals(BlockUtilityType.AUTOSMELT)) {
-                    if (event.getPlayer().hasPermission("PF.AutoSmelter")) {
-                        new AutoSmelt(event.getPlayer());
-                        event.setCancelled(true);
+                    if (event.getPlayer().hasPermission("pf.utility.autosmelter")) {
+                        new SmeltInventory(event.getPlayer());
                     }
                 }
             }

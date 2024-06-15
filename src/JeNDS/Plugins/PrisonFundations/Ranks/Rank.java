@@ -2,7 +2,9 @@ package JeNDS.Plugins.PrisonFundations.Ranks;
 
 import JeNDS.Plugins.PrisonFundations.Static.Catch;
 import JeNDS.Plugins.PrisonFundations.Static.Presets;
+import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
 import org.bukkit.entity.EntityType;
@@ -18,8 +20,8 @@ public class Rank {
     private final Integer priority;
     private final String prefix;
     private final double rankUpCost;
-    private ArrayList<String> rankRewards = new ArrayList<>();
     private final boolean isLastRank;
+    private ArrayList<String> rankRewards = new ArrayList<>();
 
     public Rank(String rankName, Integer priority, String prefix, boolean isLastRank, double rankUpCost, ArrayList<String> rankRewards) {
         this.rankRewards = rankRewards;
@@ -30,14 +32,12 @@ public class Rank {
         this.rankUpCost = rankUpCost;
     }
 
-    //todo fireworks amount
-    //todo prefix nextshop
-    //todo prefix nextshopName
+    //todo ranks gui
 
     public static Rank GetPlayerRank(Player player) {
         Rank highestRank = null;
         for (Rank rank1 : Catch.Ranks) {
-            if (player.hasPermission("PF.Ranks." + rank1.getRankName())) {
+            if (player.hasPermission("pf.rank." + rank1.getRankName())) {
                 if (rank1.isLastRank()) return rank1;
                 else {
                     if (highestRank != null) {
@@ -54,26 +54,17 @@ public class Rank {
     }
 
     public static Rank GetPlayerNextRank(Player player) {
-        Rank highestRank = GetPlayerRank(player);
-        Rank tempRank = null;
-        for (Rank rank1 : Catch.Ranks) {
-            if (!player.hasPermission("PF.Ranks." + rank1.getRankName())) {
-                if (highestRank.getPriority() > rank1.getPriority()) {
-                    if (tempRank == null) {
-                        tempRank = rank1;
-                    } else {
-                        if (tempRank.getPriority() < rank1.getPriority()) {
-                            tempRank = rank1;
-                        }
-                    }
+        Rank playerRank = GetPlayerRank(player);
+        if (playerRank.isLastRank) return playerRank;
+        for (Rank rank : Catch.Ranks) {
+            if (!player.hasPermission("pf.rank." + rank.getRankName())) {
+                if (playerRank.getPriority() > rank.getPriority()) {
+                    return rank;
                 }
+
             }
         }
-        if (tempRank != null) {
-            return tempRank;
-        } else {
-            return highestRank;
-        }
+        return playerRank;
     }
 
     private static void runPlayerCommands(Player player) {
@@ -81,23 +72,26 @@ public class Rank {
         if (!rank.getRankRewards().isEmpty()) {
             ArrayList<String> rewardList = new ArrayList<>(rank.getRankRewards());
             for (String reward : rewardList) {
-                for(RankRewardType rankRewardType : RankRewardType.values()){
-                    String newString = reward.replace(rankRewardType.getName(), "");
-                    if(reward.contains(rankRewardType.getName())){
-                            if(rankRewardType.equals(RankRewardType.BROADCAST)) Bukkit.broadcastMessage(replacer(newString, player, rank));
-                            if(rankRewardType.equals(RankRewardType.MESSAGE)) player.sendMessage(replacer(newString, player, rank));
-                            if(rankRewardType.equals(RankRewardType.COMMAND)) Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), replacer(newString, player, rank));
-                            if(rankRewardType.equals(RankRewardType.FIREWORKS)){
-                                Firework firework  = (Firework) Objects.requireNonNull(player.getLocation().getWorld()).spawnEntity(player.getLocation(), EntityType.FIREWORK );
-                                FireworkMeta fireworkMeta = firework.getFireworkMeta();
-                                FireworkEffect.Builder builder = FireworkEffect.builder();
-                                builder.flicker(true);
-                                builder.withColor(Color.GREEN,Color.BLUE);
-                                builder.withFade(Color.LIME,Color.AQUA);
-                                FireworkEffect fireworkEffect = builder.build();
-                                fireworkMeta.addEffects(fireworkEffect);
-                                firework.setFireworkMeta(fireworkMeta);
-                            }
+                for (RankRewardType rankRewardType : RankRewardType.values()) {
+                    String newString = reward.replace(rankRewardType.getName() + " ", "");
+                    if (reward.contains(rankRewardType.getName())) {
+                        if (rankRewardType.equals(RankRewardType.BROADCAST))
+                            Bukkit.broadcastMessage(replacer(newString, player));
+                        if (rankRewardType.equals(RankRewardType.MESSAGE))
+                            player.sendMessage(replacer(newString, player));
+                        if (rankRewardType.equals(RankRewardType.COMMAND))
+                            Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), replacer(newString, player));
+                        if (rankRewardType.equals(RankRewardType.FIREWORKS)) {
+                            Firework firework = (Firework) Objects.requireNonNull(player.getLocation().getWorld()).spawnEntity(player.getLocation(), EntityType.FIREWORK);
+                            FireworkMeta fireworkMeta = firework.getFireworkMeta();
+                            FireworkEffect.Builder builder = FireworkEffect.builder();
+                            builder.flicker(true);
+                            builder.withColor(Color.GREEN, Color.BLUE);
+                            builder.withFade(Color.LIME, Color.AQUA);
+                            FireworkEffect fireworkEffect = builder.build();
+                            fireworkMeta.addEffects(fireworkEffect);
+                            firework.setFireworkMeta(fireworkMeta);
+                        }
                     }
                 }
             }
@@ -109,7 +103,11 @@ public class Rank {
         runPlayerCommands(player);
     }
 
-    private static String replacer(String replacer, Player player, Rank rank) {
+    private static String replacer(String replacer, Player player) {
+        return ChatColor.translateAlternateColorCodes('&', PlaceholderAPI.setPlaceholders(player, replacer));
+    }
+
+    private static String oldreplacer(String replacer, Player player, Rank rank) {
 
         String temp = "";
         String[] split = replacer.split("\\s");

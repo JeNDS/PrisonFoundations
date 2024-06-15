@@ -1,10 +1,10 @@
 package JeNDS.Plugins.PrisonFundations.HandBombs;
 
 
+import JeNDS.Plugins.JeNDSAPI.Tools.BlockBreakPickup;
+import JeNDS.Plugins.PrisonFundations.Main;
 import JeNDS.Plugins.PrisonFundations.Mines.MineObjects.Mine;
-import JeNDS.Plugins.PrisonFundations.Mines.Utilities.AutoPickUp;
 import JeNDS.Plugins.PrisonFundations.Mines.Utilities.AutoSell;
-import JeNDS.Plugins.PrisonFundations.PF;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Item;
@@ -32,7 +32,7 @@ public class HandBomb {
 
 
     public void launchGrande() {
-         setDirection();
+        setDirection();
     }
 
     public boolean createExplosion(Location location) {
@@ -46,7 +46,7 @@ public class HandBomb {
                 }
             }
             for (ItemStack itemStack : itemStacks) {
-                new AutoPickUp(player, itemStack);
+                new BlockBreakPickup(player, itemStack);
                 new AutoSell(player);
             }
             Objects.requireNonNull(location.getWorld()).playSound(location, Sound.ENTITY_DRAGON_FIREBALL_EXPLODE, 2, 0);
@@ -78,7 +78,6 @@ public class HandBomb {
                                 } else {
                                     if (Mine.LocationInMine(l)) locations.add(l);
                                 }
-
                             } else return new ArrayList<>();
                     }
 
@@ -89,36 +88,40 @@ public class HandBomb {
     }
 
     private void setDirection() {
-        if (bomb != null) {
-            try {
-                Location location = player.getEyeLocation();
-                World world = player.getWorld();
-                Item item = world.dropItem(location, bomb);
-                item.setVelocity(player.getLocation().getDirection().multiply(speed));
-                item.setPickupDelay(Integer.MAX_VALUE);
-                taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(PF.getInstance(), new Runnable() {
-                    @Override
-                    public void run() {
-                        double x = item.getLocation().getX();
-                        double y = item.getLocation().getY();
-                        double z = item.getLocation().getZ();
-                        if (nullCheck(world.getBlockAt(item.getLocation()))
-                                || nullCheck(world.getBlockAt(item.getLocation().add(.5, 0, 0)))
-                                || nullCheck(world.getBlockAt(item.getLocation().subtract(.5, 0, 0)))
-                                || nullCheck(world.getBlockAt(item.getLocation().add(0, .5, 0)))
-                                || nullCheck(world.getBlockAt(item.getLocation().add(0, 0, .5)))
-                                || nullCheck(world.getBlockAt(item.getLocation().subtract(0, 0, .5)))
-                                || nullCheck(world.getBlockAt(item.getLocation().subtract(0, .5, 0)))) {
-                            Location location1 = item.getLocation();
-                            item.remove();
-                            if (createExplosion(location1) && player.getGameMode().equals(GameMode.SURVIVAL)) {
-                                player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount()-1);
+        if (player.getGameMode().equals(GameMode.SURVIVAL)) {
+            if (bomb != null) {
+                try {
+                    Location location = player.getEyeLocation();
+                    World world = player.getWorld();
+                    Item item = world.dropItem(location, bomb);
+                    item.setVelocity(player.getLocation().getDirection().multiply(speed));
+                    item.setPickupDelay(Integer.MAX_VALUE);
+                    player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
+                    taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), new Runnable() {
+                        @Override
+                        public void run() {
+                            double x = item.getLocation().getX();
+                            double y = item.getLocation().getY();
+                            double z = item.getLocation().getZ();
+                            if (nullCheck(world.getBlockAt(item.getLocation()))
+                                    || nullCheck(world.getBlockAt(item.getLocation().add(.5, 0, 0)))
+                                    || nullCheck(world.getBlockAt(item.getLocation().subtract(.5, 0, 0)))
+                                    || nullCheck(world.getBlockAt(item.getLocation().add(0, .5, 0)))
+                                    || nullCheck(world.getBlockAt(item.getLocation().add(0, 0, .5)))
+                                    || nullCheck(world.getBlockAt(item.getLocation().subtract(0, 0, .5)))
+                                    || nullCheck(world.getBlockAt(item.getLocation().subtract(0, .5, 0)))) {
+                                Location location1 = item.getLocation();
+                                item.remove();
+                                if (!createExplosion(location1)) {
+                                    item.getItemStack().setAmount(1);
+                                    player.getInventory().addItem(item.getItemStack());
+                                }
+                                Bukkit.getScheduler().cancelTask(taskID);
                             }
-                            Bukkit.getScheduler().cancelTask(taskID);
                         }
-                    }
-                }, 10L, 5L);
-            } catch (NullPointerException ignored) {
+                    }, 10L, 5L);
+                } catch (NullPointerException ignored) {
+                }
             }
         }
     }

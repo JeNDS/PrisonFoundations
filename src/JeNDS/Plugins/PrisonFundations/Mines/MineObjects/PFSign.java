@@ -1,7 +1,7 @@
 package JeNDS.Plugins.PrisonFundations.Mines.MineObjects;
 
 
-import JeNDS.Plugins.PrisonFundations.PF;
+import JeNDS.Plugins.PrisonFundations.Main;
 import JeNDS.Plugins.PrisonFundations.Static.Presets;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -13,15 +13,15 @@ import java.util.UUID;
 
 
 public class PFSign {
+    private final UpdateType singType;
+    private final String mineName;
     private Sign Sign;
     private UUID ID = UUID.randomUUID();
-    private final UpdateType singType;
     private Integer updateTask;
-    private final String mineName;
     private Location location;
 
     public PFSign(String mineName, Location location, UpdateType singType, UUID ID) {
-        if(ID!=null) this.ID = ID;
+        if (ID != null) this.ID = ID;
         this.mineName = mineName;
         this.location = location;
         this.singType = singType;
@@ -29,15 +29,14 @@ public class PFSign {
     }
 
 
-
-    public void delete(){
+    public void delete() {
         stopUpdate();
         Block block = location.getBlock();
         block.setType(Material.AIR);
     }
 
     private void startUpdate() {
-        updateTask = Bukkit.getScheduler().scheduleSyncRepeatingTask(PF.getInstance(), new Runnable() {
+        updateTask = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getInstance(), new Runnable() {
             @Override
             public void run() {
                 Mine mine = Mine.GetMineFromName(mineName);

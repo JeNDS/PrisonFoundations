@@ -3,9 +3,9 @@ package JeNDS.Plugins.PrisonFundations.Mines.Files;
 
 import JeNDS.Plugins.JeNDSAPI.Files.YMLFile;
 import JeNDS.Plugins.JeNDSAPI.JDAPI;
+import JeNDS.Plugins.PrisonFundations.Main;
 import JeNDS.Plugins.PrisonFundations.Mines.MineObjects.*;
 import JeNDS.Plugins.PrisonFundations.Mines.Reagions.RegionCreator;
-import JeNDS.Plugins.PrisonFundations.PF;
 import JeNDS.Plugins.PrisonFundations.Static.Catch;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -20,7 +20,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class MineFile {
-    private static final PF plugin = PF.getPlugin(PF.class);
+    private static final Main plugin = Main.getPlugin(Main.class);
     private final YMLFile mineFile;
     private final HashMap<Material, Integer> BlockTypes = new HashMap();
     private String Name;
@@ -37,7 +37,7 @@ public class MineFile {
 
     public MineFile(String mineName) {
         Name = mineName;
-        mineFile = JDAPI.getFileManipulation.createFile("Mine Data", mineName + ".yml", PF.getInstance());
+        mineFile = JDAPI.getFileManipulation.createFile("Mine Data", mineName + ".yml", Main.getInstance());
         loadConfig();
     }
 
@@ -116,6 +116,8 @@ public class MineFile {
         }
         if (mineFile.getFileConfiguration().get("World Name") != null) {
             world = mineFile.getFileConfiguration().getString("World Name");
+            assert world != null;
+            if (Bukkit.getWorld(world) == null) return;
         }
         if (mineFile.getFileConfiguration().get("PvP") != null) {
             pvpRule = mineFile.getFileConfiguration().getBoolean("PvP");

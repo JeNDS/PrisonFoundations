@@ -24,12 +24,21 @@ public class Shop {
     public static Shop GetPlayerShop(Player player) {
         Shop shop = null;
         for (Shop shop1 : Catch.Shops) {
-            if (player.hasPermission("PF.Shops." + shop1.shopName)) shop = shop1;
+            if (player.hasPermission("pf.shop." + shop1.shopName)) shop = shop1;
         }
         return shop;
     }
 
-    public static boolean SellPlayerItems(Player player, boolean self) {
+    public static Shop GetShopFrontString(String shopName) {
+        for (Shop shop : Catch.Shops) {
+            if (shop.shopName.equalsIgnoreCase(shopName)) {
+                return shop;
+            }
+        }
+        return null;
+    }
+
+    public static boolean SellPlayerItems(Player player) {
         boolean foundToSell = false;
         if (Shop.GetPlayerShop(player) != null) {
             Shop shop = Shop.GetPlayerShop(player);
@@ -42,9 +51,8 @@ public class Shop {
                             itemStack.getType();
                             if (itemStack.getType().equals(material)) {
                                 double money = itemStack.getAmount() * shop.getShopItems().get(material);
-                                if(PFPlayer.GetPFPlayer(player.getUniqueId())!=null) {
-                                    money = PFPlayer.GetPFPlayer(player.getUniqueId()).getFinalMultiplier() * money;
-                                }
+                                PFPlayer.GetPFPlayer(player.getUniqueId());
+                                money = PFPlayer.GetPFPlayer(player.getUniqueId()).getFinalMultiplier() * money;
                                 foundToSell = true;
                                 sold = sold + money;
                                 itemsSold = itemsSold + itemStack.getAmount();
@@ -55,17 +63,41 @@ public class Shop {
                     }
                 }
                 if (foundToSell) {
-                    if (self) {
-                        player.sendMessage(Presets.MainColor + "You Sold " + Presets.SecondaryColor + itemsSold + Presets.MainColor + " items to shop " + Presets.SecondaryColor + shop.getShopName() + Presets.MainColor + " for " + Presets.SecondaryColor + sold);
-                    } else {
-                        player.sendMessage(Presets.MainColor + "Someone Sold " + Presets.SecondaryColor + itemsSold + Presets.MainColor + " items to shop on your behalf " + Presets.SecondaryColor + shop.getShopName() + Presets.MainColor + " for " + Presets.SecondaryColor + sold);
-
-                    }
+                    player.sendMessage(Presets.SecondaryColor + itemsSold + Presets.MainColor + " items sold to shop " + Presets.SecondaryColor + shop.getShopName() + Presets.MainColor + " for $" + Presets.SecondaryColor + sold);
                 }
                 return true;
             }
         }
         return false;
+    }
+
+    public static void SellPlayerItems(Player player, Shop shop) {
+        boolean foundToSell = false;
+        if (!shop.getShopItems().isEmpty()) {
+            double sold = 0.0;
+            int itemsSold = 0;
+            for (Material material : shop.getShopItems().keySet()) {
+                for (ItemStack itemStack : player.getInventory().getContents()) {
+                    if (itemStack != null) {
+                        itemStack.getType();
+                        if (itemStack.getType().equals(material)) {
+                            double money = itemStack.getAmount() * shop.getShopItems().get(material);
+                            PFPlayer.GetPFPlayer(player.getUniqueId());
+                            money = PFPlayer.GetPFPlayer(player.getUniqueId()).getFinalMultiplier() * money;
+                            foundToSell = true;
+                            sold = sold + money;
+                            itemsSold = itemsSold + itemStack.getAmount();
+                            EconomyImport.Economy.depositPlayer(player, money);
+                            player.getInventory().remove(itemStack);
+                        }
+                    }
+                }
+            }
+            if (foundToSell) {
+                player.sendMessage(Presets.SecondaryColor + itemsSold + Presets.MainColor + " Sold " + Presets.MainColor + " to shop " + Presets.SecondaryColor + shop.getShopName() + Presets.MainColor + " for $" + Presets.SecondaryColor + sold);
+            }
+        }
+
     }
 
     public String getShopName() {

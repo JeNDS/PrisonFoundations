@@ -1,7 +1,9 @@
 package JeNDS.Plugins.PrisonFundations.Commands;
 
-import JeNDS.Plugins.PrisonFundations.Commands.PFCommand.EnchantmentCommands;
-import JeNDS.Plugins.PrisonFundations.Commands.PFCommand.PFCommand;
+import JeNDS.Plugins.PrisonFundations.Commands.OtherCommands.PricesCommand;
+import JeNDS.Plugins.PrisonFundations.Commands.OtherCommands.RankCommands;
+import JeNDS.Plugins.PrisonFundations.Commands.OtherCommands.ShopCommands;
+import JeNDS.Plugins.PrisonFundations.Commands.PFCommands.PFCommand;
 import JeNDS.Plugins.PrisonFundations.Static.Presets;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -15,57 +17,61 @@ import java.util.List;
 import java.util.Objects;
 
 public class CommandManager implements TabExecutor {
-    protected static CommandSender sender;
-    protected static Command cmd;
-    protected static Command tabCMD;
+    protected static CommandSender commandSender;
+    protected static Command command;
     protected static String commandLabel;
-    protected static String[] cmArgs;
-    protected static String[] tbArgs;
+    protected static String[] commandArgs;
+    protected static CommandSender tabSender;
+    protected static Command tabCommand;
+    protected static String[] tabArgs;
     protected static List<String> tabResult = new ArrayList<>();
+    protected static boolean IsCommand = false;
     protected static String defaultColor = Presets.MainColor;
     protected static String standOutColor = Presets.SecondaryColor;
 
-
-    public void loadCommands() {
-        loadCommand("pf");
-        loadOldCommand("rankup");
-        loadOldCommand("pfenchant");
-        loadOldCommand("sell");
+    protected static boolean hasPermission(CommandSender sender, String permission) {
+        if (sender.hasPermission("pf.admin")) return true;
+        return sender.hasPermission(permission);
     }
 
+    //todo permission groups
+    public void loadCommands() {
+        loadCommand("pf");
+        loadCommand("sell");
+        loadCommand("rankup");
+        loadCommand("prices");
+    }
 
-    private  void loadCommand(String command){
+    private void loadCommand(String command) {
         Objects.requireNonNull(Bukkit.getPluginCommand(command)).setTabCompleter(this);
         Objects.requireNonNull(Bukkit.getPluginCommand(command)).setExecutor(this);
     }
-    private  void loadOldCommand(String command){
-        Objects.requireNonNull(Bukkit.getPluginCommand(command)).setTabCompleter(new CommandsTabComplete());
-        Objects.requireNonNull(Bukkit.getPluginCommand(command)).setExecutor(this);
-    }
-
-
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String commandLabel, String[] args) {
-        CommandManager.sender = sender;
-        CommandManager.cmd = cmd;
+        CommandManager.commandSender = sender;
+        CommandManager.command = cmd;
         CommandManager.commandLabel = commandLabel;
-        CommandManager.cmArgs = args;
-        if (RankCommands.Rankup())return true;
-        if (ShopCommands.Sell())return true;
-        if (EnchantmentCommands.PFEnchant())return true;
-        PFCommand.loadCommand();
-        return false;
+        CommandManager.commandArgs = args;
+        PFCommand.LoadCommand();
+        RankCommands.LoadCommand();
+        ShopCommands.LoadCommand();
+        PricesCommand.LoadCommand();
+        return IsCommand;
     }
 
 
     @Nullable
     @Override
-    public List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    public List<String> onTabComplete(@NotNull CommandSender tabSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+        CommandManager.tabSender = tabSender;
         tabResult.clear();
-        tbArgs = strings;
-        tabCMD = command;
-        PFCommand.loadResults();
+        tabArgs = strings;
+        tabCommand = command;
+        PFCommand.LoadResults();
+        ShopCommands.LoadResults();
+        RankCommands.LoadResults();
+        PricesCommand.LoadResults();
         return tabResult;
     }
 }

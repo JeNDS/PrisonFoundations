@@ -1,8 +1,8 @@
 package JeNDS.Plugins.PrisonFundations.Mines.MinesGUI.MineOptions.MineManageReset;
 
+import JeNDS.Plugins.PrisonFundations.Main;
 import JeNDS.Plugins.PrisonFundations.Managers.PFGUI;
 import JeNDS.Plugins.PrisonFundations.Mines.MineObjects.Mine;
-import JeNDS.Plugins.PrisonFundations.PF;
 import JeNDS.Plugins.PrisonFundations.Static.Catch;
 import JeNDS.Plugins.PrisonFundations.Static.Presets;
 import org.bukkit.Material;
@@ -29,7 +29,7 @@ public class MineManageResetTimeMenu extends PFGUI {
         addItems(Material.REDSTONE_BLOCK, Presets.MainColor + "Remove 50 Minutes", null, 41, this);
         addItems(Material.REDSTONE_BLOCK, Presets.MainColor + "Back", null, 45, this);
 
-        setMenuAndInterface(Presets.SecondaryColor + mine.getName() + " Manage Time Reset Menu " + mine.getMineResetTime()+"M", 54, InventoryType.CHEST, true, fillItem(), PF.getInstance());
+        setMenuAndInterface(Presets.SecondaryColor + mine.getName() + " Manage Time Reset Menu " + mine.getMineResetTime() + "M", 54, InventoryType.CHEST, true, fillItem(), Main.getInstance());
     }
 
 
@@ -45,35 +45,35 @@ public class MineManageResetTimeMenu extends PFGUI {
             return true;
         }
         if (itemAndSlot.get(12).isSimilar(itemStack)) {
-            modifyMenuTime(player,+5);
+            modifyMenuTime(player, +5);
             return true;
         }
         if (itemAndSlot.get(21).isSimilar(itemStack)) {
-            modifyMenuTime(player,+10);
+            modifyMenuTime(player, +10);
             return true;
         }
         if (itemAndSlot.get(30).isSimilar(itemStack)) {
-            modifyMenuTime(player,+25);
+            modifyMenuTime(player, +25);
             return true;
         }
         if (itemAndSlot.get(39).isSimilar(itemStack)) {
-            modifyMenuTime(player,+50);
+            modifyMenuTime(player, +50);
             return true;
         }
         if (itemAndSlot.get(14).isSimilar(itemStack)) {
-            modifyMenuTime(player,-5);
+            modifyMenuTime(player, -5);
             return true;
         }
         if (itemAndSlot.get(23).isSimilar(itemStack)) {
-            modifyMenuTime(player,-10);
+            modifyMenuTime(player, -10);
             return true;
         }
         if (itemAndSlot.get(32).isSimilar(itemStack)) {
-            modifyMenuTime(player,-25);
+            modifyMenuTime(player, -25);
             return true;
         }
         if (itemAndSlot.get(41).isSimilar(itemStack)) {
-            modifyMenuTime(player,-50);
+            modifyMenuTime(player, -50);
             return true;
         }
         return false;
@@ -83,14 +83,13 @@ public class MineManageResetTimeMenu extends PFGUI {
         if (!Catch.RunningMines.isEmpty()) {
             for (Mine m : Catch.RunningMines) {
                 if (m.getName().contains(mine.getName())) {
-                    if(m.getMineResetTime()+ time >= 5){
-                        m.setMineResetTime(m.getMineResetTime()+time);
-                        MineManageResetTimeMenu mineManageResetTimeMenu = new MineManageResetTimeMenu(lastMenu,mine);
+                    if (m.getMineResetTime() + time >= 5) {
+                        m.setMineResetTime(m.getMineResetTime() + time);
+                        MineManageResetTimeMenu mineManageResetTimeMenu = new MineManageResetTimeMenu(lastMenu, mine);
                         player.openInventory(mineManageResetTimeMenu.getMenu());
-                    }
-                    else {
+                    } else {
                         m.setMineResetTime(5);
-                        MineManageResetTimeMenu mineManageResetTimeMenu = new MineManageResetTimeMenu(lastMenu,mine);
+                        MineManageResetTimeMenu mineManageResetTimeMenu = new MineManageResetTimeMenu(lastMenu, mine);
                         player.openInventory(mineManageResetTimeMenu.getMenu());
                     }
                 }

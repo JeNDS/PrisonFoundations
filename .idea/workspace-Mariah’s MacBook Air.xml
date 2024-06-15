@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="PrisonFoundationsV1:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="a03ad04e-1082-43db-9ae5-50d481a9739c" name="Default Changelist" comment="Title: Hand Grenades&#10;Version: v1.4&#10;&#10;Added:&#10;N/A&#10;&#10;Improved:&#10;Repackage Project&#10;&#10;&#10;BugFix:&#10;N/A" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="testRunner" value="GRADLE" />
+    <option name="delegatedBuild" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;JeNDS&quot;
+  }
+}</component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/JeNDS/PrisonFoundations.git&quot;,
+    &quot;accountId&quot;: &quot;ba89c010-465d-4f01-b46f-611686a0adea&quot;
+  }
+}</component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="1OXtcTS2TYLTfbHIKPO0KdhWjIC" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jends/OneDrive/Java Development/Intellij projects/LibaryJars/JeNDSAPI.jar&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.tools&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\jends\OneDrive\Intellij projects\PrisonFoundations\src\Me\JeNDS\Files\YMLS\RanksData" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\jends\OneDrive\Java Development\Intellij projects\Personal\PrisonFoundations\src\resources" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/Plugins" />
+      <recent name="C:\Users\jends\OneDrive\Java Development\Intellij projects\Spigot\Personal\PrisonFoundations\src\main\resources\YMLS" />
+      <recent name="C:\Users\jends\OneDrive\Java Development\Intellij projects\Spigot\Personal\PrisonFoundations\src\main\resources" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="JeNDS.JPlugins.Commands" />
+      <recent name="JeNDS.JPlugins.HandBombs.Events" />
+      <recent name="Me.JeNDS.CustomEnchants" />
+      <recent name="Me.JeNDS.Utilities" />
+      <recent name="Me.JeNDS.Files" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="a03ad04e-1082-43db-9ae5-50d481a9739c" name="Default Changelist" comment="" />
+      <created>1562907198645</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1562907198645</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Update to 1.16.5">
+      <created>1616360163356</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1616360163356</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Update to 1.19">
+      <created>1656954436557</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1656954436557</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added:&#10;BStatsImport&#10;CustomEnchantments&#10; - AutoBlock&#10; - AutoSmelt&#10;Utility blocks&#10; Furnace = AutoSmelt&#10; CraftingTable = AutoBlock&#10;&#10;Improved:&#10;Commands and Tab complete&#10;&#10;BugFix:&#10;Mines Gui bugs">
+      <created>1657508521224</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1657508521224</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Title: Initial Release Build&#10;&#10;Added:&#10;BStatsImport&#10;CustomEnchantments&#10; - Auto Sell&#10; - Super Jump&#10; - Flight&#10; - Haste&#10; - Night Vision&#10; - Speed&#10;Mine Sings and Holograms updating&#10;&#10;Improved:&#10;Files &#10;&#10;BugFix:&#10;Many">
+      <created>1658001809419</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1658001809419</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Title: Bug fixes v1.1&#10;&#10;Added:&#10;N/A&#10;&#10;Improved:&#10;Mine Spawn&#10;&#10;BugFix:&#10;Auto smelter and auto blocker version control&#10;Mine Type percentage to 100&#10;Mine Types not deleting&#10;Ranks not working&#10;Reload Files not working">
+      <created>1658013833122</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1658013833122</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Title: Bug fixes v1.2&#10;&#10;Added:&#10;Config&#10;  - Unbreakable Items toggle&#10;  - Change Colors until we get Language file&#10;Explosion Enchantment&#10;Fortune Support&#10;Hex Color Support&#10;&#10;Improved:&#10;Enchantment listeners&#10;&#10;BugFix:&#10;Block Types not updating correctly">
+      <created>1658110946910</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1658110946910</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Title: Multipliers and PlaceHolders&#10;Version: v1.3&#10;&#10;Added:&#10;Player Data File&#10;Multipliers with commands&#10;&#10;Support for PlaceHolderAPI&#10;9 new PlaceHolders&#10;      currentRankName&#10;      nextRankName&#10;      currentRankPrefix&#10;      nextRankPrefix&#10;      currentMultiplier&#10;      currentShopName&#10;      closestMineName&#10;      closestMineTimeUntilReset&#10;      closestMinePercentage&#10;&#10;Improved:&#10;Code Organization">
+      <created>1658530943848</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1658530943848</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Title: Hand Grenades&#10;Version: v1.4&#10;&#10;Added:&#10;Hand Grenades to the games &#10;&#10;Improved:&#10;Commands&#10;Auto sell on all explosions when inventory is full&#10;&#10;BugFix:&#10;Explosions occurring while reset&#10;Items Not selling with explosion">
+      <created>1658721992850</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1658721992850</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Title: Hand Grenades&#10;Version: v1.4&#10;&#10;Added:&#10;N/A&#10;&#10;Improved:&#10;Repackage Project&#10;&#10;&#10;BugFix:&#10;N/A">
+      <option name="closed" value="true" />
+      <created>1717001432066</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1717001432066</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Title: Hand Grenades&#10;Version: v1.4&#10;&#10;Added:&#10;N/A&#10;&#10;Improved:&#10;Repackage Project&#10;&#10;&#10;BugFix:&#10;N/A">
+      <option name="closed" value="true" />
+      <created>1717006676589</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1717006676589</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update to 1.16.5" />
+    <MESSAGE value="Update to 1.19" />
+    <MESSAGE value="Added:&#10;BStatsImport&#10;CustomEnchantments&#10; - AutoBlock&#10; - AutoSmelt&#10;Utility blocks&#10; Furnace = AutoSmelt&#10; CraftingTable = AutoBlock&#10;&#10;Improved:&#10;Commands and Tab complete&#10;&#10;BugFix:&#10;Mines Gui bugs" />
+    <MESSAGE value="Title: Initial Release Build&#10;&#10;Added:&#10;BStatsImport&#10;CustomEnchantments&#10; - Auto Sell&#10; - Super Jump&#10; - Flight&#10; - Haste&#10; - Night Vision&#10; - Speed&#10;Mine Sings and Holograms updating&#10;&#10;Improved:&#10;Files &#10;&#10;BugFix:&#10;Many" />
+    <MESSAGE value="Title: Bug fixes v1.1&#10;&#10;Added:&#10;N/A&#10;&#10;Improved:&#10;Mine Spawn&#10;&#10;BugFix:&#10;Auto smelter and auto blocker version control&#10;Mine Type percentage to 100&#10;Mine Types not deleting&#10;Ranks not working&#10;Reload Files not working" />
+    <MESSAGE value="Title: Bug fixes v1.2&#10;&#10;Added:&#10;Config&#10;  - Unbreakable Items toggle&#10;  - Change Colors until we get Language file&#10;Explosion Enchantment&#10;Fortune Support&#10;Hex Color Support&#10;&#10;Improved:&#10;Enchantment listeners&#10;&#10;BugFix:&#10;Block Types not updating correctly" />
+    <MESSAGE value="Title: Multipliers and PlaceHolders&#10;Version: v1.3&#10;&#10;Added:&#10;Player Data File&#10;Multipliers with commands&#10;&#10;Support for PlaceHolderAPI&#10;9 new PlaceHolders&#10;      currentRankName&#10;      nextRankName&#10;      currentRankPrefix&#10;      nextRankPrefix&#10;      currentMultiplier&#10;      currentShopName&#10;      closestMineName&#10;      closestMineTimeUntilReset&#10;      closestMinePercentage&#10;&#10;Improved:&#10;Code Organization&#10;&#10;BugFix:&#10;Block Types not updating correctly" />
+    <MESSAGE value="Title: Multipliers and PlaceHolders&#10;Version: v1.3&#10;&#10;Added:&#10;Player Data File&#10;Multipliers with commands&#10;&#10;Support for PlaceHolderAPI&#10;9 new PlaceHolders&#10;      currentRankName&#10;      nextRankName&#10;      currentRankPrefix&#10;      nextRankPrefix&#10;      currentMultiplier&#10;      currentShopName&#10;      closestMineName&#10;      closestMineTimeUntilReset&#10;      closestMinePercentage&#10;&#10;Improved:&#10;Code Organization" />
+    <MESSAGE value="Title: Hand Grenades&#10;Version: v1.4&#10;&#10;Added:&#10;Hand Grenades to the games &#10;&#10;Improved:&#10;Commands&#10;Auto sell on all explosions when inventory is full&#10;&#10;BugFix:&#10;Explosions occurring while reset&#10;Items Not selling with explosion" />
+    <MESSAGE value="Title: Hand Grenades&#10;Version: v1.4&#10;&#10;Added:&#10;N/A&#10;&#10;Improved:&#10;Repackage Project&#10;&#10;&#10;BugFix:&#10;N/A" />
+    <option name="LAST_COMMIT_MESSAGE" value="Title: Hand Grenades&#10;Version: v1.4&#10;&#10;Added:&#10;N/A&#10;&#10;Improved:&#10;Repackage Project&#10;&#10;&#10;BugFix:&#10;N/A" />
+  </component>
+</project>

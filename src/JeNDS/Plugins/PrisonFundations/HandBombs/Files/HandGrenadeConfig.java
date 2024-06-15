@@ -5,7 +5,7 @@ import JeNDS.Plugins.JeNDSAPI.Files.YMLFile;
 import JeNDS.Plugins.JeNDSAPI.JDAPI;
 import JeNDS.Plugins.JeNDSAPI.Other.JDItem;
 import JeNDS.Plugins.PrisonFundations.HandBombs.HandBomb;
-import JeNDS.Plugins.PrisonFundations.PF;
+import JeNDS.Plugins.PrisonFundations.Main;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
@@ -20,7 +20,7 @@ public class HandGrenadeConfig {
 
 
     public static void LoadHandGrenades() {
-        file = JDAPI.getFileManipulation.copyFile("HandGrenade.yml", PF.getInstance());
+        file = JDAPI.getFileManipulation.copyFile("HandGrenade.yml", Main.getInstance());
     }
 
 
@@ -44,7 +44,6 @@ public class HandGrenadeConfig {
     }
 
     public static ItemStack GetBombItemFromFile(String bombName) {
-
         ConfigurationSection section = file.getFileConfiguration().getConfigurationSection("");
         for (String bomb : section.getKeys(false)) {
             if (bomb.equalsIgnoreCase(bombName)) {

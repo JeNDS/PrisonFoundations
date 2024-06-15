@@ -1,6 +1,6 @@
 package JeNDS.Plugins.PrisonFundations.Mines.MineObjects;
 
-import JeNDS.Plugins.PrisonFundations.PF;
+import JeNDS.Plugins.PrisonFundations.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;
@@ -17,7 +17,7 @@ public class DropParty {
 
 
     public void startCounter() {
-        taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(PF.getPlugin(PF.class), new Runnable() {
+        taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(Main.getPlugin(Main.class), new Runnable() {
             int time = dropTime;
             int repeat = redropTime;
 
@@ -29,7 +29,7 @@ public class DropParty {
                     } else {
                         repeat = redropTime;
                         time = dropTime;
-                        return ;
+                        return;
                     }
                     time--;
                 }

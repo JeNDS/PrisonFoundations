@@ -1,4 +1,16 @@
+#Whether Tool Items Should Break or not
 Unbreakable Items: true
+# Disable Experience Pickup
+Disable Experience: true
+# List of world where the following things won't work
+# Auto Sell, Auto Pick, Explosions, Auto Block, Auto Smelt
+# The following things could be normal game breaking if enable on regular game modes or plots
+
+World Black List:
+  - World1
+  - World2
+
+#These are the colors used on all commands,messages,guis, and objects
 Main Color: "&b"
 Secondary Color: "&a"
 Third Color: "&f"

@@ -6,7 +6,8 @@ public class BlockType {
 
     private Material material;
     private int percentage;
-    public BlockType(Material material,int percentage){
+
+    public BlockType(Material material, int percentage) {
         this.material = material;
         this.percentage = percentage;
     }

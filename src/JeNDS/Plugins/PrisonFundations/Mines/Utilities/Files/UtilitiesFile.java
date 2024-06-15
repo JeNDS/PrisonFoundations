@@ -3,10 +3,9 @@ package JeNDS.Plugins.PrisonFundations.Mines.Utilities.Files;
 
 import JeNDS.Plugins.JeNDSAPI.Files.YMLFile;
 import JeNDS.Plugins.JeNDSAPI.JDAPI;
-
+import JeNDS.Plugins.PrisonFundations.Main;
 import JeNDS.Plugins.PrisonFundations.Mines.Utilities.BlockUtility.BlockUtility;
 import JeNDS.Plugins.PrisonFundations.Mines.Utilities.BlockUtility.BlockUtilityType;
-import JeNDS.Plugins.PrisonFundations.PF;
 import JeNDS.Plugins.PrisonFundations.Static.Catch;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -20,7 +19,7 @@ public class UtilitiesFile {
     private static YMLFile utilityFile;
 
     public static void LoadUtilities() {
-        utilityFile = JDAPI.getFileManipulation.createFile("Utilities.yml", PF.getInstance());
+        utilityFile = JDAPI.getFileManipulation.createFile("Utilities.yml", Main.getInstance());
         ConfigurationSection section = utilityFile.getFileConfiguration().getConfigurationSection("");
         assert section != null;
         for (String utility : section.getKeys(false)) {

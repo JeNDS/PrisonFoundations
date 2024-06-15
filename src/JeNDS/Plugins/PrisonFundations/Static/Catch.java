@@ -8,7 +8,6 @@ import JeNDS.Plugins.PrisonFundations.Mines.Utilities.BlockUtility.BlockUtility;
 import JeNDS.Plugins.PrisonFundations.PlayerData.PFPlayer;
 import JeNDS.Plugins.PrisonFundations.Ranks.Rank;
 import JeNDS.Plugins.PrisonFundations.Shops.Shop;
-
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 

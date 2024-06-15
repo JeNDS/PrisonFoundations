@@ -23,11 +23,17 @@ public class PFPlayer {
                 return pfPlayer;
             }
         }
-        return null;
+        return new PFPlayer(uuid);
     }
 
     public void addMultiplier(Multiplier multiplier) {
         multipliers.add(multiplier);
+        PlayerDataFile.AddMultiplierToFile(multiplier);
+
+    }
+
+    public void setMultiplier(Multiplier multiplier) {
+        multipliers.clear();
         PlayerDataFile.AddMultiplierToFile(multiplier);
 
     }
@@ -52,9 +58,9 @@ public class PFPlayer {
     }
 
     public double getFinalMultiplier() {
-        double multiplier = 1.0;
+        double multiplier = 0.0;
         for (Multiplier multiplier1 : multipliers) {
-            multiplier = multiplier * multiplier1.getAmount();
+            multiplier = multiplier + multiplier1.getAmount();
         }
         return multiplier;
     }

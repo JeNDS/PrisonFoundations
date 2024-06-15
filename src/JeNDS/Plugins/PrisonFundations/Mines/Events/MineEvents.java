@@ -1,13 +1,14 @@
 package JeNDS.Plugins.PrisonFundations.Mines.Events;
 
 import JeNDS.Plugins.JeNDSAPI.Other.JDItem;
+import JeNDS.Plugins.JeNDSAPI.Tools.BlockBreakEXP;
+import JeNDS.Plugins.JeNDSAPI.Tools.BlockBreakPickup;
+import JeNDS.Plugins.JeNDSAPI.Tools.Utility;
 import JeNDS.Plugins.PrisonFundations.Managers.EventManager;
 import JeNDS.Plugins.PrisonFundations.Mines.MineObjects.Mine;
-import JeNDS.Plugins.PrisonFundations.Mines.Utilities.AutoEXP;
-import JeNDS.Plugins.PrisonFundations.Mines.Utilities.AutoPickUp;
-import JeNDS.Plugins.PrisonFundations.Mines.Utilities.Utility;
 import JeNDS.Plugins.PrisonFundations.Static.Catch;
 import JeNDS.Plugins.PrisonFundations.Static.Presets;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -17,10 +18,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerLevelChangeEvent;
+
+import static JeNDS.Plugins.PrisonFundations.Other.Files.Config.DisableExperience;
 
 public class MineEvents extends EventManager {
 
@@ -28,28 +30,30 @@ public class MineEvents extends EventManager {
     @EventHandler()
     public void mineEvent(BlockBreakEvent event) {
         Player player = event.getPlayer();
-        if (isBlockInMines(event.getBlock().getLocation())) {
-            if (isMineResetting(event.getBlock().getLocation())) {
-                event.setCancelled(true);
-                player.sendMessage(Presets.SecondaryColor + "You have to wait for the reset to finish!");
+        if (Mine.LocationInMine(event.getBlock().getLocation())) {
+            if (event.getPlayer().getGameMode().equals(GameMode.SURVIVAL)) {
+                if (isMineResetting(event.getBlock().getLocation())) {
+                    event.setCancelled(true);
+                    player.sendMessage(Presets.SecondaryColor + "You have to wait for the reset to finish!");
+                }
+                event.setDropItems(false);
+                if (Utility.SpaceInInventory(event.getPlayer())) {
+                    new BlockBreakPickup(player, event);
+                    if (!DisableExperience) {
+                        new BlockBreakEXP(player, event);
+                    }
+                    else {
+                        event.setExpToDrop(0);
+                    }
+                } else {
+                    event.setDropItems(true);
+                    player.sendMessage(Presets.SecondaryColor + "Your Inventory is Full");
+                }
             }
-            new AutoEXP(player,event);
         }
+
     }
 
-    @EventHandler()
-    public void mineEvent(BlockDropItemEvent event) {
-        Player player = event.getPlayer();
-        if (isBlockInMines(event.getBlock().getLocation())) {
-            if(Utility.SpaceInInventory(event.getPlayer())) {
-                new AutoPickUp(player, event);
-            }
-            else {
-                player.sendMessage(Presets.SecondaryColor + "Your Inventory is Full");
-            }
-            event.setCancelled(true);
-        }
-    }
 
     @EventHandler
     public void playSoundOnLevelUp(PlayerLevelChangeEvent event) {
@@ -61,7 +65,7 @@ public class MineEvents extends EventManager {
     @EventHandler
     public void preventPlayerBuild(BlockPlaceEvent event) {
         if (isBlockInMines(event.getBlockPlaced().getLocation())) {
-            if (event.getPlayer().hasPermission("PF.Admin")) {
+            if (event.getPlayer().hasPermission("pf.admin")) {
                 event.setCancelled(true);
             }
         }
@@ -69,7 +73,7 @@ public class MineEvents extends EventManager {
 
     @EventHandler
     public void hologramRemover(PlayerInteractEvent event) {
-        if (event.getPlayer().hasPermission("PF.Admin")) {
+        if (event.getPlayer().hasPermission("pf.admin")) {
             if (event.getAction().equals(Action.RIGHT_CLICK_AIR)) {
                 if (event.getPlayer().getInventory().getItemInMainHand().isSimilar(JDItem.CustomItemStack(Material.BLAZE_ROD, Presets.MainColor + "Hologram Remover", null))) {
                     for (Entity entity : event.getPlayer().getWorld().getNearbyEntities(event.getPlayer().getLocation(), 1, 2, 1)) {

@@ -68,6 +68,9 @@ public class RegionCreator implements Listener {
         }
     }
 
+    //todo gui option, breakBlocks While resetting
+    //todo gui option, getInside Mine while resetting
+
     @EventHandler
     public void regionSelectorListener(PlayerInteractEvent event) {
         if (event.getPlayer().getInventory().getItemInMainHand() != null) {

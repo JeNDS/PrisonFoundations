@@ -1,17 +1,18 @@
 package JeNDS.Plugins.PrisonFundations.Ranks;
 
 public enum RankRewardType {
-    BROADCAST("[Broadcast]"),COMMAND("[Command]"),MESSAGE("[Message]"),FIREWORKS("[FireWorks]"),
+    BROADCAST("[Broadcast]"), COMMAND("[Command]"), MESSAGE("[Message]"), FIREWORKS("[FireWorks]"),
     ;
 
     private final String name;
+
     RankRewardType(String s) {
         this.name = s;
     }
 
-    public static RankRewardType GetFromString(String s){
-        for(RankRewardType rankRewardsType : RankRewardType.values()){
-            if(rankRewardsType.name.contains(s)){
+    public static RankRewardType GetFromString(String s) {
+        for (RankRewardType rankRewardsType : RankRewardType.values()) {
+            if (rankRewardsType.name.contains(s)) {
                 return rankRewardsType;
             }
         }

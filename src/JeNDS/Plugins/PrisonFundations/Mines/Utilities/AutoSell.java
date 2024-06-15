@@ -1,5 +1,6 @@
 package JeNDS.Plugins.PrisonFundations.Mines.Utilities;
 
+import JeNDS.Plugins.JeNDSAPI.Tools.Utility;
 import JeNDS.Plugins.PrisonFundations.Shops.Shop;
 import JeNDS.Plugins.PrisonFundations.Static.Catch;
 import JeNDS.Plugins.PrisonFundations.Static.Presets;
@@ -10,8 +11,7 @@ public class AutoSell extends Utility {
     public AutoSell(Player player) {
         Integer wait = 5;
         if (!Utility.SpaceInInventory(player)) {
-            if (!Shop.SellPlayerItems(player, true)) {
-
+            if (!Shop.SellPlayerItems(player)) {
                 if (Catch.inventoryFullTimeWait.containsKey(player)) {
                     wait = Catch.inventoryFullTimeWait.get(player);
                 }

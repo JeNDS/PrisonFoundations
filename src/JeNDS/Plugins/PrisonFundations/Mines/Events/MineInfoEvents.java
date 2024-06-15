@@ -1,9 +1,9 @@
 package JeNDS.Plugins.PrisonFundations.Mines.Events;
 
+import JeNDS.Plugins.PrisonFundations.Main;
 import JeNDS.Plugins.PrisonFundations.Managers.EventManager;
 import JeNDS.Plugins.PrisonFundations.Mines.MineObjects.Mine;
 import JeNDS.Plugins.PrisonFundations.Mines.MineObjects.UpdateType;
-import JeNDS.Plugins.PrisonFundations.PF;
 import JeNDS.Plugins.PrisonFundations.Static.Catch;
 import JeNDS.Plugins.PrisonFundations.Static.Presets;
 import org.bukkit.Bukkit;
@@ -76,7 +76,7 @@ public class MineInfoEvents extends EventManager {
         for (Mine mine : Catch.RunningMines) {
             if (itemStack.getItemMeta().getDisplayName().contains(name) && itemStack.getItemMeta().getDisplayName().contains(mine.getName())) {
                 Sign sign = (Sign) event.getBlockPlaced().getState();
-                Bukkit.getScheduler().scheduleSyncDelayedTask(PF.getInstance(), new Runnable() {
+                Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
                     @Override
                     public void run() {
                         sign.setLine(0, Presets.MainColor + mine.getName());
@@ -104,7 +104,7 @@ public class MineInfoEvents extends EventManager {
     private boolean placeHologram(Player player, Location location, String name, UpdateType updateType) {
         for (Mine mine : Catch.RunningMines) {
             if (Objects.requireNonNull(player.getInventory().getItemInMainHand().getItemMeta()).getDisplayName().contains(name) && player.getInventory().getItemInMainHand().getItemMeta().getDisplayName().contains(mine.getName())) {
-                return mine.createHologram(location,updateType);
+                return mine.createHologram(location, updateType);
             }
         }
         return false;

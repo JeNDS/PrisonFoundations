@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="PrisonFoundations:jar">
+    <output-path>$USER_HOME$/Downloads</output-path>
+    <root id="archive" name="PrisonFoundations.jar">
+      <element id="module-output" name="PrisonFoundations" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/resources/plugin.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/resources/YMLS/Shops.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/resources/YMLS/Ranks.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/resources/YMLS/Config.yml" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/resources/YMLS/HandGrenade.yml" />
+    </root>
+  </artifact>
+</component>

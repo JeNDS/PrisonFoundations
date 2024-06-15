@@ -1,10 +1,10 @@
 package JeNDS.Plugins.PrisonFundations.Mines.MinesGUI;
 
+import JeNDS.Plugins.PrisonFundations.Main;
 import JeNDS.Plugins.PrisonFundations.Managers.PFGUI;
 import JeNDS.Plugins.PrisonFundations.Mines.Files.MineFile;
 import JeNDS.Plugins.PrisonFundations.Mines.MineObjects.Mine;
 import JeNDS.Plugins.PrisonFundations.Mines.MinesGUI.MineOptions.MineOptionsGUI;
-import JeNDS.Plugins.PrisonFundations.PF;
 import JeNDS.Plugins.PrisonFundations.Static.Catch;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -19,10 +19,12 @@ import static JeNDS.Plugins.PrisonFundations.Static.Presets.*;
 
 public class MGUI_1 extends PFGUI {
 
-
+    //todo add smaller percentages to mines
+    //todo add a /mines command with gui for players
+    //todo sort mines, sort items by percentage
     public MGUI_1() {
         addMinesRunning();
-        setMenuAndInterface(SecondaryColor + "Mines Menu", 54, InventoryType.CHEST, true, fillItem(), PF.getInstance());
+        setMenuAndInterface(SecondaryColor + "Mines Menu", 54, InventoryType.CHEST, true, fillItem(), Main.getInstance());
     }
 
     private void addMinesRunning() {
@@ -64,9 +66,9 @@ public class MGUI_1 extends PFGUI {
 
     @Override
     protected boolean leftClickEvents(ItemStack itemStack, Player player) {
-        for(Mine mine : Catch.RunningMines){
-            if(hasSameName(itemStack,mine.getName())){
-                MineOptionsGUI mineOptionsGUI = new MineOptionsGUI(this,mine);
+        for (Mine mine : Catch.RunningMines) {
+            if (hasSameName(itemStack, mine.getName())) {
+                MineOptionsGUI mineOptionsGUI = new MineOptionsGUI(this, mine);
                 player.openInventory(mineOptionsGUI.getMenu());
             }
         }
