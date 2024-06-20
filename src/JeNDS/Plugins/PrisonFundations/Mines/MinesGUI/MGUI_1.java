@@ -33,7 +33,7 @@ public class MGUI_1 extends PFGUI {
                 Mine mine = Catch.RunningMines.get(i);
                 if (!mine.getBlockTypes().isEmpty()) {
                     Material material = null;
-                    MineFile mineFile = new MineFile(mine.getName());
+                    MineFile mineFile = new MineFile(mine.getConfigName());
                     HashMap<Material, Integer> materialIntegerHashMap = mineFile.getBlockTypes();
                     Integer lastPercentage = 0;
                     for (Material material1 : materialIntegerHashMap.keySet()) {
@@ -44,7 +44,7 @@ public class MGUI_1 extends PFGUI {
                     assert material != null;
                     ItemStack itemStack = new ItemStack(material);
                     ItemMeta meta = itemStack.getItemMeta();
-                    meta.setDisplayName(MainColor + mine.getName());
+                    meta.setDisplayName(MainColor + mine.getConfigName());
                     ArrayList<String> lore = new ArrayList<>();
                     lore.add("");
                     lore.add(ThirdColor + "Click here to");
@@ -67,7 +67,7 @@ public class MGUI_1 extends PFGUI {
     @Override
     protected boolean leftClickEvents(ItemStack itemStack, Player player) {
         for (Mine mine : Catch.RunningMines) {
-            if (hasSameName(itemStack, mine.getName())) {
+            if (hasSameName(itemStack, mine.getConfigName())) {
                 MineOptionsGUI mineOptionsGUI = new MineOptionsGUI(this, mine);
                 player.openInventory(mineOptionsGUI.getMenu());
             }

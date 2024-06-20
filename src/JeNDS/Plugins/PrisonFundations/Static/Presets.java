@@ -1,10 +1,7 @@
 package JeNDS.Plugins.PrisonFundations.Static;
 
 import JeNDS.Plugins.JeNDSAPI.Other.JTools;
-import JeNDS.Plugins.PrisonFundations.Main;
 import org.bukkit.ChatColor;
-
-import java.util.IllegalFormatException;
 
 public class Presets {
 

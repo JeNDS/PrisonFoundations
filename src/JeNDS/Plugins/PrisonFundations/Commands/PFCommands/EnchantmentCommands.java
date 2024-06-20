@@ -32,7 +32,7 @@ public class EnchantmentCommands extends CommandManager {
                                 if (Bukkit.getPlayer(tabArgs[2]) != null) {
                                     enchantedBook(enchantment, Bukkit.getPlayer(tabArgs[2]));
                                 } else {
-                                    commandSender.sendMessage(standOutColor + tabArgs[2] + defaultColor + " is not a valid Player!");
+                                    commandSender.sendMessage(color2 + tabArgs[2] + color1 + " is not a valid Player!");
                                 }
                             }
                             if (commandArgs.length == 2) {

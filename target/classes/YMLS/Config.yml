@@ -1,11 +1,10 @@
-#Whether Tool Items Should Break or not
+# Whether Tool Items Should Break or not
 Unbreakable Items: true
 # Disable Experience Pickup
 Disable Experience: true
 # List of world where the following things won't work
-# Auto Sell, Auto Pick, Explosions, Auto Block, Auto Smelt
+# AutoSell, AutoPick, AutoExperience only permissions custom enchants and bombs only work in mines
 # The following things could be normal game breaking if enable on regular game modes or plots
-
 World Black List:
   - World1
   - World2
@@ -14,3 +13,4 @@ World Black List:
 Main Color: "&b"
 Secondary Color: "&a"
 Third Color: "&f"
+

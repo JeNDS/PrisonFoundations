@@ -39,9 +39,9 @@ public class UtilityCommands extends CommandManager {
         if (commandArgs[1].equalsIgnoreCase("autoSmelter")) {
             if (commandSender instanceof Player player) {
                 player.getInventory().addItem(JDItem.CustomItemStack(Material.FURNACE, Presets.MainColor + "Auto Smelter", null));
-                player.sendMessage(defaultColor + "you received an auto smelter");
+                player.sendMessage(color1 + "you received an auto smelter");
             } else {
-                commandSender.sendMessage(defaultColor + "You must be a player to do this!");
+                commandSender.sendMessage(color1 + "You must be a player to do this!");
             }
         }
 
@@ -51,9 +51,9 @@ public class UtilityCommands extends CommandManager {
         if (commandArgs[1].equalsIgnoreCase("autoBlocker")) {
             if (commandSender instanceof Player player) {
                 player.getInventory().addItem(JDItem.CustomItemStack(Material.CRAFTING_TABLE, Presets.MainColor + "Auto Blocker", null));
-                player.sendMessage(defaultColor + "you received an auto blocker");
+                player.sendMessage(color1 + "you received an auto blocker");
             } else {
-                commandSender.sendMessage(defaultColor + "You must be a player to do this!");
+                commandSender.sendMessage(color1 + "You must be a player to do this!");
             }
         }
 

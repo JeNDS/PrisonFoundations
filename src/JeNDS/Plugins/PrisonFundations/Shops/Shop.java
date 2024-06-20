@@ -12,11 +12,14 @@ import java.util.HashMap;
 
 public class Shop {
     private final String shopName;
+    private final String dispalyName;
     private final String inherits;
     private HashMap<Material, Double> shopItems = new HashMap<>();
 
-    public Shop(String shopName, String inherits, HashMap<Material, Double> shopItems) {
+
+    public Shop(String shopName, String dispalyName, String inherits, HashMap<Material, Double> shopItems) {
         this.shopName = shopName;
+        this.dispalyName = dispalyName;
         this.inherits = inherits;
         this.shopItems = shopItems;
     }
@@ -63,7 +66,7 @@ public class Shop {
                     }
                 }
                 if (foundToSell) {
-                    player.sendMessage(Presets.SecondaryColor + itemsSold + Presets.MainColor + " items sold to shop " + Presets.SecondaryColor + shop.getShopName() + Presets.MainColor + " for $" + Presets.SecondaryColor + sold);
+                    player.sendMessage(Presets.SecondaryColor + itemsSold + Presets.MainColor + " items sold to shop " + Presets.SecondaryColor + shop.getShopDisplayName() + Presets.MainColor + " for $" + Presets.SecondaryColor + sold);
                 }
                 return true;
             }
@@ -94,7 +97,7 @@ public class Shop {
                 }
             }
             if (foundToSell) {
-                player.sendMessage(Presets.SecondaryColor + itemsSold + Presets.MainColor + " Sold " + Presets.MainColor + " to shop " + Presets.SecondaryColor + shop.getShopName() + Presets.MainColor + " for $" + Presets.SecondaryColor + sold);
+                player.sendMessage(Presets.SecondaryColor + itemsSold + Presets.MainColor + " Sold " + Presets.MainColor + " to shop " + Presets.SecondaryColor + shop.getShopDisplayName() + Presets.MainColor + " for $" + Presets.SecondaryColor + sold);
             }
         }
 
@@ -102,6 +105,10 @@ public class Shop {
 
     public String getShopName() {
         return shopName;
+    }
+
+    public String getShopDisplayName() {
+        return dispalyName;
     }
 
     public String getInherits() {

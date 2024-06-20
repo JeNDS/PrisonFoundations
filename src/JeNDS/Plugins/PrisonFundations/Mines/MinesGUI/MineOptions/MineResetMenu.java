@@ -22,7 +22,7 @@ public class MineResetMenu extends PFGUI {
         addItems(Material.BARRIER, Presets.MainColor + "Instant Full Reset", null, 38, this);
         addItems(Material.BARRIER, Presets.MainColor + "Instant Partial Reset", null, 42, this);
         addItems(Material.REDSTONE_BLOCK, Presets.MainColor + "Back", null, 45, this);
-        setMenuAndInterface(Presets.SecondaryColor + mine.getName() + " Reset Menu", 54, InventoryType.CHEST, true, fillItem(), Main.getInstance());
+        setMenuAndInterface(Presets.SecondaryColor + mine.getConfigName() + " Reset Menu", 54, InventoryType.CHEST, true, fillItem(), Main.getInstance());
     }
 
 

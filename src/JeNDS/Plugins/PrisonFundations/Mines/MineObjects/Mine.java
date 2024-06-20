@@ -22,7 +22,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Mine {
     private final Mine Mine = this;
-    private String Name;
+    private String configName;
+    private String displayName;
     private World world;
     private ArrayList<Location> BlockLocations = new ArrayList<>();
     private ArrayList<PFSign> mineSigns = new ArrayList<>();
@@ -41,13 +42,12 @@ public class Mine {
     private Integer PercentageResetTaskID = null;
 
 
-    public Mine(String Name) {
-        this.Name = Name;
-
+    public Mine(String configName) {
+        this.configName = configName;
     }
 
-    public Mine(Location Point1, Location Point2, String Name) {
-        this.Name = Name;
+    public Mine(Location Point1, Location Point2, String configName) {
+        this.configName = configName;
         this.PointOne = Point1;
         this.PointTwo = Point2;
         BlockLocations = RegionCreator.regionCreator(Point1, Point2);
@@ -121,7 +121,7 @@ public class Mine {
 
     public static Mine GetMineFromName(String name) {
         for (Mine mine : Catch.RunningMines) {
-            if (mine.getName().contains(name)) return mine;
+            if (mine.getConfigName().contains(name)) return mine;
         }
         return null;
     }
@@ -151,7 +151,7 @@ public class Mine {
     }
 
     public void loadMine() {
-        MineFile mineFile = new MineFile(this.Name);
+        MineFile mineFile = new MineFile(this.configName);
         world = Bukkit.getWorld(mineFile.getWorld());
         BlockLocations = mineFile.getBlockLocation();
         Spawn = mineFile.getSpawn();
@@ -197,7 +197,7 @@ public class Mine {
         for (PFSign pfSign : mineSigns) {
             if (pfSign.getLocation().equals(location)) return;
         }
-        PFSign pfSign = new PFSign(Name, location, singType, null);
+        PFSign pfSign = new PFSign(displayName, location, singType, null);
         mineSigns.add(pfSign);
         mineFile().createSignFile(pfSign.getID(), pfSign.getSingType(), pfSign.getLocation());
 
@@ -207,7 +207,7 @@ public class Mine {
         for (PFHologram pfHologram : holograms) {
             if (pfHologram.isHologram(location)) return false;
         }
-        PFHologram pfHologram = new PFHologram(location, Name, updateType, null);
+        PFHologram pfHologram = new PFHologram(location, displayName, updateType, null);
         holograms.add(pfHologram);
         mineFile().createHologramFile(pfHologram.getId(), pfHologram.getUpdateType(), location);
         return true;
@@ -231,7 +231,7 @@ public class Mine {
     }
 
     private MineFile mineFile() {
-        return new MineFile(Name);
+        return new MineFile(configName);
     }
 
     public void resetMine(boolean fullReset, boolean slowReset) {
@@ -377,13 +377,16 @@ public class Mine {
         }, 0L, 40L);
     }
 
-
-    public String getName() {
-        return Name;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public String getConfigName() {
+        return configName;
+    }
+
+    public void setConfigName(String configName) {
+        this.configName = configName;
 
     }
 
@@ -414,7 +417,7 @@ public class Mine {
 
     public void setSpawn(Location spawn) {
         Spawn = spawn;
-        MineFile file = new MineFile(Name);
+        MineFile file = new MineFile(configName);
         file.setSpawn(spawn);
     }
 
@@ -444,7 +447,7 @@ public class Mine {
     }
 
     public void setMineResetTime(Integer mineResetTime) {
-        MineFile file = new MineFile(Name);
+        MineFile file = new MineFile(configName);
         MineResetTime = mineResetTime;
         TimeBeforeReset = MineResetTime;
         file.setResetTime(mineResetTime);
@@ -455,7 +458,7 @@ public class Mine {
     }
 
     public void setMinePercentageReset(Integer minePercentageReset) {
-        MineFile file = new MineFile(Name);
+        MineFile file = new MineFile(configName);
         file.setResetPercentage(minePercentageReset);
         MinePercentageReset = minePercentageReset;
     }

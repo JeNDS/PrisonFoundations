@@ -3,8 +3,10 @@ package JeNDS.Plugins.PrisonFundations.Commands.OtherCommands;
 
 import JeNDS.Plugins.PrisonFundations.Commands.CommandManager;
 import JeNDS.Plugins.PrisonFundations.Ranks.Rank;
+import JeNDS.Plugins.PrisonFundations.Static.Catch;
 import JeNDS.Plugins.PrisonFundations.Static.Presets;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import static JeNDS.Plugins.PrisonFundations.Other.Implementations.EconomyImport.Economy;
@@ -12,6 +14,12 @@ import static JeNDS.Plugins.PrisonFundations.Other.Implementations.EconomyImport
 
 public class RankCommands extends CommandManager {
     public static void LoadCommand() {
+        rankList();
+        rankInfo();
+        rankUP();
+    }
+
+    private static void rankUP() {
         if (command.getName().equalsIgnoreCase("Rankup")) {
             IsCommand = true;
             if (commandSender instanceof Player player) {
@@ -24,14 +32,14 @@ public class RankCommands extends CommandManager {
                                 Rank.RankUpPlayer(player);
                             } else {
                                 double temp = rank.getRankUpCost() - Economy.getBalance(player);
-                                player.sendMessage(defaultColor + "You still need " + standOutColor + temp + defaultColor + " to rankup!");
+                                player.sendMessage(color1 + "You still need " + color2 + temp + color1 + " to rankup!");
                             }
                         } else {
-                            player.sendMessage(defaultColor + "You are on the last Rank!");
+                            player.sendMessage(color1 + "You are on the last Rank!");
                         }
                     }
                 } else {
-                    player.sendMessage(defaultColor + "You don't have " + standOutColor + "PF.Rankup" + defaultColor + " permission");
+                    player.sendMessage(color1 + "You don't have " + color2 + "PF.Rankup" + color1 + " permission");
                 }
             }
             if (commandArgs.length == 1) {
@@ -48,10 +56,54 @@ public class RankCommands extends CommandManager {
                 } else {
                     commandSender.sendMessage(Presets.SecondaryColor + commandArgs[0] + Presets.MainColor + " is not a valid player!");
                 }
-
             }
         } else IsCommand = false;
+    }
 
+    private static void rankInfo() {
+        if (command.getName().equalsIgnoreCase("Rank")) {
+            IsCommand = true;
+            if (commandSender instanceof Player player) {
+                if (hasPermission(commandSender, "pf.rank")) {
+                    if (commandArgs.length == 0) {
+                        Rank rank = Rank.GetPlayerRank(player);
+                        player.sendMessage(color1 + " ");
+                        player.sendMessage(color1 + "Rank Info");
+                        player.sendMessage(color2 + ChatColor.STRIKETHROUGH + "               ");
+                        player.sendMessage(color3 + "Rank Name: " + rank.getPrefix());
+                        if (!rank.isLastRank()) {
+                            player.sendMessage(color3 + "Next Rank: " + Rank.GetPlayerNextRank(player).getPrefix());
+                            player.sendMessage(color3 + "Next Rank Cost: $" + color2 + rank.getRankUpCost());
+                        }
+                        if (rank.isLastRank()) {
+                            player.sendMessage(color3 + "You are on the last Rank");
+                        }
+                    }
+                }
+            } else IsCommand = false;
+        }
+    }
+
+    private static void rankList() {
+        if (command.getName().equalsIgnoreCase("Ranks")) {
+            IsCommand = true;
+            if (commandSender instanceof Player player) {
+                if (hasPermission(commandSender, "pf.ranks")) {
+                    if (commandArgs.length == 0) {
+                        Rank rank = Rank.GetPlayerRank(player);
+                        player.sendMessage(color1 + " ");
+                        player.sendMessage(color1 + "Rank List");
+                        player.sendMessage(color2 + ChatColor.STRIKETHROUGH + "               ");
+                        boolean claim = true;
+                        for (Rank rank1 : Catch.Ranks) {
+                            if (claim) player.sendMessage(rank1.getPrefix() + color2 + " Claim");
+                            else player.sendMessage(rank1.getPrefix() + color3 + " Un-Claimed");
+                            if (rank == rank1) claim = false;
+                        }
+                    }
+                }
+            }
+        } else IsCommand = false;
     }
 
     public static void LoadResults() {

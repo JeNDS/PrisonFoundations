@@ -25,9 +25,9 @@ public class ShopEvents extends EventManager {
                     if (split.length == 2) {
                         if (!Catch.RunningMines.isEmpty()) {
                             for (Mine mine1 : Catch.RunningMines) {
-                                if (split[0].contains(mine1.getName())) {
+                                if (split[0].contains(mine1.getConfigName())) {
                                     if (split[1].contains("Percentage")) {
-                                        sign.setLine(0, Presets.SecondaryColor + mine1.getName());
+                                        sign.setLine(0, Presets.SecondaryColor + mine1.getConfigName());
                                         sign.setLine(1, "");
                                         sign.setLine(2, Presets.SecondaryColor + "Percentage");
                                         sign.setLine(3, Presets.SecondaryColor + mine1.getMinePercentage().toString());
@@ -79,7 +79,7 @@ public class ShopEvents extends EventManager {
                         if (lines.length >= 3) {
                             if (!Catch.RunningMines.isEmpty()) {
                                 for (Mine mine : Catch.RunningMines) {
-                                    if (lines[2].contains("[" + mine.getName() + "]")) {
+                                    if (lines[2].contains("[" + mine.getConfigName() + "]")) {
                                         return true;
                                     }
                                 }
@@ -100,7 +100,7 @@ public class ShopEvents extends EventManager {
                         if (lines.length >= 3) {
                             if (!Catch.RunningMines.isEmpty()) {
                                 for (Mine mine : Catch.RunningMines) {
-                                    if (lines[2].equals("[" + mine.getName() + "]")) {
+                                    if (lines[2].equals("[" + mine.getConfigName() + "]")) {
                                         return true;
                                     }
                                 }
@@ -119,8 +119,8 @@ public class ShopEvents extends EventManager {
                 line = line.replace("[", "");
                 line = line.replace("]", "");
                 Bukkit.broadcastMessage(line);
-                if (mine.getName().equals(line)) {
-                    return mine.getName();
+                if (mine.getConfigName().equals(line)) {
+                    return mine.getConfigName();
                 }
             }
         }
@@ -130,7 +130,7 @@ public class ShopEvents extends EventManager {
     public Integer getPercentage(String mineName) {
         if (!Catch.RunningMines.isEmpty()) {
             for (Mine mine : Catch.RunningMines) {
-                if (mine.getName().equals(mineName)) {
+                if (mine.getConfigName().equals(mineName)) {
                     return mine.getMinePercentage();
                 }
             }

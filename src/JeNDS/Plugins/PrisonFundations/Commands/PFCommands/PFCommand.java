@@ -76,32 +76,32 @@ public class PFCommand extends CommandManager {
                     RankFile.ReloadRanks();
                     UtilitiesFile.ReloadUtilities();
                     Config.LoadConfig();
-                    commandSender.sendMessage(defaultColor + "You have reloaded all files");
+                    commandSender.sendMessage(color1 + "You have reloaded all files");
 
                 } else {
                     if (commandArgs[1].equalsIgnoreCase("mines")) {
                         MineFile.ReloadMines();
-                        commandSender.sendMessage(defaultColor + "You have reloaded all mines");
+                        commandSender.sendMessage(color1 + "You have reloaded all mines");
 
                     }
                     if (commandArgs[1].equalsIgnoreCase("shops")) {
                         ShopsFile.ReloadShops();
-                        commandSender.sendMessage(defaultColor + "You have reloaded all shops");
+                        commandSender.sendMessage(color1 + "You have reloaded all shops");
 
                     }
                     if (commandArgs[1].equalsIgnoreCase("ranks")) {
                         RankFile.ReloadRanks();
-                        commandSender.sendMessage(defaultColor + "You have reloaded all ranks");
+                        commandSender.sendMessage(color1 + "You have reloaded all ranks");
 
                     }
                     if (commandArgs[1].equalsIgnoreCase("utilities")) {
                         UtilitiesFile.ReloadUtilities();
-                        commandSender.sendMessage(defaultColor + "You have reloaded all utilities");
+                        commandSender.sendMessage(color1 + "You have reloaded all utilities");
 
                     }
                     if (commandArgs[1].equalsIgnoreCase("config")) {
                         Config.LoadConfig();
-                        commandSender.sendMessage(defaultColor + "You have reloaded the config");
+                        commandSender.sendMessage(color1 + "You have reloaded the config");
 
                     }
                 }
@@ -114,12 +114,12 @@ public class PFCommand extends CommandManager {
     private static void Help() {
         if (commandArgs.length >= 1) {
             if (commandArgs[0].equalsIgnoreCase("help")) {
-                commandSender.sendMessage(defaultColor + "/PF Mines");
-                commandSender.sendMessage(defaultColor + "/PF Utility");
-                commandSender.sendMessage(defaultColor + "/PF Reload");
-                commandSender.sendMessage(defaultColor + "/PF HandGrenades");
-                commandSender.sendMessage(defaultColor + "/PF Multiplier");
-                commandSender.sendMessage(defaultColor + "/PF Enchant");
+                commandSender.sendMessage(color1 + "/PF Mines");
+                commandSender.sendMessage(color1 + "/PF Utility");
+                commandSender.sendMessage(color1 + "/PF Reload");
+                commandSender.sendMessage(color1 + "/PF HandGrenades");
+                commandSender.sendMessage(color1 + "/PF Multiplier");
+                commandSender.sendMessage(color1 + "/PF Enchant");
             }
         }
     }

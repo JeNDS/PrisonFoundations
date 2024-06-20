@@ -22,7 +22,7 @@ public class ShopCommands extends CommandManager {
 
                         }
                     } else
-                        player.sendMessage(defaultColor + "You don't have " + standOutColor + "pf.sell" + defaultColor + " permission");
+                        player.sendMessage(color1 + "You don't have " + color2 + "pf.sell" + color1 + " permission");
                 }
             }
             if (commandArgs.length >= 1) {
@@ -33,7 +33,7 @@ public class ShopCommands extends CommandManager {
                             Shop shop = Shop.GetShopFrontString(commandArgs[1]);
                             if (shop != null) {
                                 Shop.SellPlayerItems(player, shop);
-                                commandSender.sendMessage(defaultColor + "You sold all " + standOutColor + commandArgs[0] + defaultColor + " items at " + standOutColor + shop.getShopName());
+                                commandSender.sendMessage(color1 + "You sold all " + color2 + commandArgs[0] + color1 + " items at " + color2 + shop.getShopDisplayName());
                                 return;
 
                             }
@@ -41,7 +41,7 @@ public class ShopCommands extends CommandManager {
                         if (commandArgs.length == 1) {
                             if (Shop.GetPlayerShop(player) != null) {
                                 if (Shop.SellPlayerItems(player)) {
-                                    commandSender.sendMessage(defaultColor + "You sold all " + standOutColor + commandArgs[0] + defaultColor + " items at " + standOutColor + Shop.GetPlayerShop(player).getShopName());
+                                    commandSender.sendMessage(color1 + "You sold all " + color2 + commandArgs[0] + color1 + " items at " + color2 + Shop.GetPlayerShop(player).getShopDisplayName());
 
                                 }
                             } else {
@@ -50,7 +50,7 @@ public class ShopCommands extends CommandManager {
                         }
                     }
                 } else {
-                    commandSender.sendMessage(standOutColor + commandArgs[0] + defaultColor + " is not a valid Player!");
+                    commandSender.sendMessage(color2 + commandArgs[0] + color1 + " is not a valid Player!");
 
                 }
             }

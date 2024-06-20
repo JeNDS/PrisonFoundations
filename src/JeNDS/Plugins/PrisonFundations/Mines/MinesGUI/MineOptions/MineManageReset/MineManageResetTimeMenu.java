@@ -29,7 +29,7 @@ public class MineManageResetTimeMenu extends PFGUI {
         addItems(Material.REDSTONE_BLOCK, Presets.MainColor + "Remove 50 Minutes", null, 41, this);
         addItems(Material.REDSTONE_BLOCK, Presets.MainColor + "Back", null, 45, this);
 
-        setMenuAndInterface(Presets.SecondaryColor + mine.getName() + " Manage Time Reset Menu " + mine.getMineResetTime() + "M", 54, InventoryType.CHEST, true, fillItem(), Main.getInstance());
+        setMenuAndInterface(Presets.SecondaryColor + mine.getConfigName() + " Manage Time Reset Menu " + mine.getMineResetTime() + "M", 54, InventoryType.CHEST, true, fillItem(), Main.getInstance());
     }
 
 
@@ -82,7 +82,7 @@ public class MineManageResetTimeMenu extends PFGUI {
     private void modifyMenuTime(Player player, int time) {
         if (!Catch.RunningMines.isEmpty()) {
             for (Mine m : Catch.RunningMines) {
-                if (m.getName().contains(mine.getName())) {
+                if (m.getConfigName().contains(mine.getConfigName())) {
                     if (m.getMineResetTime() + time >= 5) {
                         m.setMineResetTime(m.getMineResetTime() + time);
                         MineManageResetTimeMenu mineManageResetTimeMenu = new MineManageResetTimeMenu(lastMenu, mine);

@@ -26,7 +26,7 @@ public class MineSignsAndHologramsMenu extends PFGUI {
         addItems(Material.ARMOR_STAND, MainColor + "Mine Percentage", null, 29, this);
         addItems(Material.ARMOR_STAND, MainColor + "Time Until Reset", null, 33, this);
         addItems(Material.REDSTONE_BLOCK, MainColor + "Back", null, 45, this);
-        setMenuAndInterface(SecondaryColor + mine.getName() + " Signs&Holograms Menu", 54, InventoryType.CHEST, true, fillItem(), Main.getInstance());
+        setMenuAndInterface(SecondaryColor + mine.getConfigName() + " Signs&Holograms Menu", 54, InventoryType.CHEST, true, fillItem(), Main.getInstance());
     }
 
 
@@ -42,19 +42,19 @@ public class MineSignsAndHologramsMenu extends PFGUI {
             return true;
         }
         if (itemAndSlot.get(11).isSimilar(itemStack)) {
-            giveItem(player, MainColor + mine.getName() + " Mine Percentage", Material.OAK_SIGN);
+            giveItem(player, MainColor + mine.getConfigName() + " Mine Percentage", Material.OAK_SIGN);
             return true;
         }
         if (itemAndSlot.get(15).isSimilar(itemStack)) {
-            giveItem(player, MainColor + mine.getName() + " Time Until Reset", Material.OAK_SIGN);
+            giveItem(player, MainColor + mine.getConfigName() + " Time Until Reset", Material.OAK_SIGN);
             return true;
         }
         if (itemAndSlot.get(29).isSimilar(itemStack)) {
-            giveItem(player, MainColor + mine.getName() + " Mine Percentage", Material.ARMOR_STAND);
+            giveItem(player, MainColor + mine.getConfigName() + " Mine Percentage", Material.ARMOR_STAND);
             return true;
         }
         if (itemAndSlot.get(33).isSimilar(itemStack)) {
-            giveItem(player, MainColor + mine.getName() + " Time Until Reset", Material.ARMOR_STAND);
+            giveItem(player, MainColor + mine.getConfigName() + " Time Until Reset", Material.ARMOR_STAND);
             return true;
         }
         return false;

@@ -29,15 +29,15 @@ public class PricesCommand extends CommandManager {
                                 PricesGUI pricesGUI = new PricesGUI(Shop.GetShopFrontString(commandArgs[0]));
                                 player.openInventory(pricesGUI.getMenu());
                             } else {
-                                player.sendMessage(defaultColor + "You don't have " + standOutColor + commandArgs[0] + defaultColor + " unlock!");
+                                player.sendMessage(color1 + "You don't have " + color2 + commandArgs[0] + color1 + " unlock!");
                             }
                         }
                     } else {
-                        commandSender.sendMessage(standOutColor + commandArgs[0] + Presets.MainColor + " Is not a valid Shop!");
+                        commandSender.sendMessage(color2 + commandArgs[0] + Presets.MainColor + " Is not a valid Shop!");
                     }
 
                 } else
-                    player.sendMessage(defaultColor + "You don't have " + standOutColor + "pf.prices" + defaultColor + " permission");
+                    player.sendMessage(color1 + "You don't have " + color2 + "pf.prices" + color1 + " permission");
             } else {
                 if (commandArgs.length == 2) {
                     if (Bukkit.getPlayer(commandArgs[1]) != null) {

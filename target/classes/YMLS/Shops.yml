@@ -1,14 +1,23 @@
+# Setup is not complicated
+# Just make sure you use proper material ids
+
+# Shop Name for config, commands and display, change is coming soon...
 ShopA:
+  Display Name: "&8Shop A"
+  # Items inside the shop
   Items:
+    # simple item id and the price, not cap sensitive but must be proper id
     COBBLESTONE: 10
     STONE: 15
 ShopB:
+  Display Name: "&8Shop B"
   Inherit: "ShopA"
   Items:
     COAL: 5
     COAL_BLOCK: 50
     COAL_ORE: 20
 ShopC:
+  Display Name: "&8Shop C"
   Inherit: "ShopB"
   Items:
     COBBLESTONE: 20

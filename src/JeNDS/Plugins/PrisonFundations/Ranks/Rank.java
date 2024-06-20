@@ -32,8 +32,6 @@ public class Rank {
         this.rankUpCost = rankUpCost;
     }
 
-    //todo ranks gui
-
     public static Rank GetPlayerRank(Player player) {
         Rank highestRank = null;
         for (Rank rank1 : Catch.Ranks) {

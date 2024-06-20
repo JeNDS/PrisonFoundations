@@ -25,7 +25,7 @@ public class MineResetTypeMenu extends PFGUI {
         addBlockTypes();
         addItems(Material.EMERALD_BLOCK, Presets.MainColor + "Add", null, 49, this);
         addItems(Material.REDSTONE_BLOCK, Presets.MainColor + "Back", null, 45, this);
-        setMenuAndInterface(Presets.SecondaryColor + mine.getName() + " Reset Type Menu " + mine.getTotalPercentage() + "%", 54, InventoryType.CHEST, true, fillItem(), Main.getInstance());
+        setMenuAndInterface(Presets.SecondaryColor + mine.getConfigName() + " Reset Type Menu " + mine.getTotalPercentage() + "%", 54, InventoryType.CHEST, true, fillItem(), Main.getInstance());
     }
 
 

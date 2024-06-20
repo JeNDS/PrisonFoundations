@@ -26,26 +26,26 @@ public class HandGrandeCommands extends CommandManager {
                                                 if (integer != null) {
                                                     bomb.setAmount(integer);
                                                     player.getInventory().addItem(bomb);
-                                                    commandSender.sendMessage(defaultColor + "You have given " + player.getName() + " " + integer + " " + bombName + " grenades!");
+                                                    commandSender.sendMessage(color1 + "You have given " + player.getName() + " " + integer + " " + bombName + " grenades!");
                                                     return;
                                                 }
                                             }
                                             player.getInventory().addItem(bomb);
-                                            commandSender.sendMessage(defaultColor + "You have given " + player.getName() + " a " + bombName + " grenade!");
+                                            commandSender.sendMessage(color1 + "You have given " + player.getName() + " a " + bombName + " grenade!");
                                             return;
                                         }
-                                        commandSender.sendMessage(defaultColor + "Error occurred while getting bomb");
+                                        commandSender.sendMessage(color1 + "Error occurred while getting bomb");
                                         return;
                                     }
                                 }
                             }
 
                         } else {
-                            commandSender.sendMessage(standOutColor + commandArgs[2] + defaultColor + " is not a valid Player!");
+                            commandSender.sendMessage(color2 + commandArgs[2] + color1 + " is not a valid Player!");
                             return;
                         }
             }
-            commandSender.sendMessage(defaultColor + "/PF handGrenades give <player> <grandeName> [amount]");
+            commandSender.sendMessage(color1 + "/PF handGrenades give <player> <grandeName> [amount]");
         }
     }
 

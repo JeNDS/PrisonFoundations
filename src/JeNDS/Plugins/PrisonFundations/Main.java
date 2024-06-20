@@ -2,8 +2,8 @@ package JeNDS.Plugins.PrisonFundations;
 
 
 import JeNDS.Plugins.PrisonFundations.Commands.CommandManager;
-import JeNDS.Plugins.PrisonFundations.HandBombs.Files.HandGrenadeConfig;
 import JeNDS.Plugins.PrisonFundations.CustomEnchants.EnchantManager;
+import JeNDS.Plugins.PrisonFundations.HandBombs.Files.HandGrenadeConfig;
 import JeNDS.Plugins.PrisonFundations.Managers.EventManager;
 import JeNDS.Plugins.PrisonFundations.Mines.Files.MineFile;
 import JeNDS.Plugins.PrisonFundations.Mines.Utilities.Files.UtilitiesFile;
@@ -51,8 +51,5 @@ public class Main extends JavaPlugin {
     }
     //todo Language File
     //todo lucky crate
-    //todo enchantments for mines and gear
-    //todo commands and permission
-    //todo npc integration
-
+    //todo enchantments for mines
 }

@@ -23,7 +23,8 @@ public class MineFile {
     private static final Main plugin = Main.getPlugin(Main.class);
     private final YMLFile mineFile;
     private final HashMap<Material, Integer> BlockTypes = new HashMap();
-    private String Name;
+    private String configName;
+    private String displayName;
     private String world;
     private ArrayList<Location> BlockLocation = new ArrayList<>();
     private Location Spawn;
@@ -36,7 +37,7 @@ public class MineFile {
 
 
     public MineFile(String mineName) {
-        Name = mineName;
+        configName = mineName;
         mineFile = JDAPI.getFileManipulation.createFile("Mine Data", mineName + ".yml", Main.getInstance());
         loadConfig();
     }
@@ -93,7 +94,7 @@ public class MineFile {
             mineFile.getFileConfiguration().set("Block Types." + material.toString() + ".Percentage", blocktypes.get(material));
             mineFile.save();
         }
-        mineFile.getFileConfiguration().set("Mine Name", Name);
+        mineFile.getFileConfiguration().set("Mine Name", configName);
         mineFile.getFileConfiguration().set("World Name", worldName);
         mineFile.getFileConfiguration().set("PvP", false);
         mineFile.getFileConfiguration().set("Reset Percentage", resetPercentage);
@@ -112,7 +113,7 @@ public class MineFile {
     public void loadConfig() {
 
         if (mineFile.getFileConfiguration().getString("Mine Name") != null) {
-            Name = mineFile.getFileConfiguration().getString("Mine Name");
+            displayName = mineFile.getFileConfiguration().getString("Mine Name");
         }
         if (mineFile.getFileConfiguration().get("World Name") != null) {
             world = mineFile.getFileConfiguration().getString("World Name");
@@ -179,7 +180,7 @@ public class MineFile {
                 String[] loc = mineFile.getFileConfiguration().getString("Signs." + id + ".Location").split(",");
                 if (loc.length == 4) {
                     Location location = new Location(Bukkit.getWorld(loc[0]), Double.parseDouble(loc[1]), Double.parseDouble(loc[2]), Double.parseDouble(loc[3]));
-                    PFSign sign = new PFSign(Name, location, UpdateType.GetUpdateTypeByName(mineFile.getFileConfiguration().getString("Signs." + id + ".Update Type")), UUID.fromString(id));
+                    PFSign sign = new PFSign(configName, location, UpdateType.GetUpdateTypeByName(mineFile.getFileConfiguration().getString("Signs." + id + ".Update Type")), UUID.fromString(id));
                     signs.add(sign);
                 }
             }
@@ -195,7 +196,7 @@ public class MineFile {
                 String[] loc = mineFile.getFileConfiguration().getString("Holograms." + id + ".Location").split(",");
                 if (loc.length == 4) {
                     Location location = new Location(Bukkit.getWorld(loc[0]), Double.parseDouble(loc[1]), Double.parseDouble(loc[2]), Double.parseDouble(loc[3]));
-                    PFHologram hologram = new PFHologram(location, Name, UpdateType.GetUpdateTypeByName(mineFile.getFileConfiguration().getString("Holograms." + id + ".Update Type")), UUID.fromString(id));
+                    PFHologram hologram = new PFHologram(location, configName, UpdateType.GetUpdateTypeByName(mineFile.getFileConfiguration().getString("Holograms." + id + ".Update Type")), UUID.fromString(id));
                     pfHolograms.add(hologram);
                 }
             }
@@ -245,12 +246,12 @@ public class MineFile {
         }
     }
 
-    public String getName() {
-        return Name;
+    public String getConfigName() {
+        return configName;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setConfigName(String configName) {
+        this.configName = configName;
     }
 
     public String getWorld() {

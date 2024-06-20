@@ -2,7 +2,7 @@ package JeNDS.Plugins.PrisonFundations.CustomEnchants.Enchantments;
 
 
 import JeNDS.Plugins.JeNDSAPI.Enchants.CustomEnchant;
-import JeNDS.Plugins.JeNDSAPI.Enchants.EnchantmentWrapper;
+import JeNDS.Plugins.JeNDSAPI.Enchants.CustomEnchantmentWrapper;
 import JeNDS.Plugins.JeNDSAPI.Item.ItemType;
 import JeNDS.Plugins.PrisonFundations.HandBombs.HandBomb;
 import JeNDS.Plugins.PrisonFundations.Main;
@@ -15,7 +15,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
 
 public class Explosion extends CustomEnchant {
-    public static Enchantment explosion = new EnchantmentWrapper("explosion", ItemType.TOOL, "Explosion", 3);
+    public static Enchantment explosion = new CustomEnchantmentWrapper("explosion", ItemType.TOOL, "Explosion", 3);
 
 
     public Explosion() {

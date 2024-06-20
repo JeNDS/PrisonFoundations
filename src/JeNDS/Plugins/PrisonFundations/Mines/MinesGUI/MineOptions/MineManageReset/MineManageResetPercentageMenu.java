@@ -30,7 +30,7 @@ public class MineManageResetPercentageMenu extends PFGUI {
         addItems(Material.REDSTONE_BLOCK, Presets.MainColor + "Remove 50%", null, 41, this);
         addItems(Material.REDSTONE_BLOCK, Presets.MainColor + "Back", null, 45, this);
 
-        setMenuAndInterface(Presets.SecondaryColor + mine.getName() + " Manage Percentage Reset Menu " + mine.getMinePercentageReset() + "%", 54, InventoryType.CHEST, true, fillItem(), Main.getInstance());
+        setMenuAndInterface(Presets.SecondaryColor + mine.getConfigName() + " Manage Percentage Reset Menu " + mine.getMinePercentageReset() + "%", 54, InventoryType.CHEST, true, fillItem(), Main.getInstance());
     }
 
 
@@ -83,7 +83,7 @@ public class MineManageResetPercentageMenu extends PFGUI {
     private void modifyMenuPercentage(Player player, int percentage) {
         if (!Catch.RunningMines.isEmpty()) {
             for (Mine m : Catch.RunningMines) {
-                if (m.getName().contains(m.getName())) {
+                if (m.getConfigName().contains(m.getConfigName())) {
                     if (m.getMinePercentageReset() + percentage <= 95 && m.getMinePercentageReset() + percentage >= 5) {
                         resetPercentage(m.getMinePercentageReset() + percentage, player);
                     } else {
@@ -103,7 +103,7 @@ public class MineManageResetPercentageMenu extends PFGUI {
     private void resetPercentage(int percentage, Player player) {
         if (!Catch.RunningMines.isEmpty()) {
             for (Mine m : Catch.RunningMines) {
-                if (m.getName().contains(m.getName())) {
+                if (m.getConfigName().contains(m.getConfigName())) {
                     m.setMinePercentageReset(percentage);
                     mine.setMinePercentageReset(percentage);
                     MineManageResetPercentageMenu mineManageResetPercentageMenu = new MineManageResetPercentageMenu(lastMenu, mine);

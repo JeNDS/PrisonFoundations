@@ -2,7 +2,7 @@ package JeNDS.Plugins.PrisonFundations.CustomEnchants.Enchantments;
 
 
 import JeNDS.Plugins.JeNDSAPI.Enchants.CustomEnchant;
-import JeNDS.Plugins.JeNDSAPI.Enchants.EnchantmentWrapper;
+import JeNDS.Plugins.JeNDSAPI.Enchants.CustomEnchantmentWrapper;
 import JeNDS.Plugins.JeNDSAPI.Item.ItemType;
 import JeNDS.Plugins.PrisonFundations.Main;
 import JeNDS.Plugins.PrisonFundations.Mines.MineObjects.Mine;
@@ -15,7 +15,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 
 public class AutoSell extends CustomEnchant {
 
-    private final Enchantment autoSell = new EnchantmentWrapper("auto_sell", ItemType.TOOL, "Auto Sell", 1);
+    private final Enchantment autoSell = new CustomEnchantmentWrapper("autosell", ItemType.TOOL, "Auto Sell", 1);
 
 
     public AutoSell() {

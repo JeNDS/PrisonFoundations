@@ -41,8 +41,7 @@ public class MineEvents extends EventManager {
                     new BlockBreakPickup(player, event);
                     if (!DisableExperience) {
                         new BlockBreakEXP(player, event);
-                    }
-                    else {
+                    } else {
                         event.setExpToDrop(0);
                     }
                 } else {

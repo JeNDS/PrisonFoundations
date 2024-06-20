@@ -3,9 +3,6 @@ package JeNDS.Plugins.PrisonFundations.Lenguage;
 
 import JeNDS.Plugins.PrisonFundations.Static.Presets;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LNG {
     //Commands
     private static final String c1 = Presets.MainColor;

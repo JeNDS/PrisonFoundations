@@ -74,12 +74,12 @@ public class MineInfoEvents extends EventManager {
     private void placeMineSign(BlockPlaceEvent event, String name, boolean percentage) {
         ItemStack itemStack = event.getItemInHand();
         for (Mine mine : Catch.RunningMines) {
-            if (itemStack.getItemMeta().getDisplayName().contains(name) && itemStack.getItemMeta().getDisplayName().contains(mine.getName())) {
+            if (itemStack.getItemMeta().getDisplayName().contains(name) && itemStack.getItemMeta().getDisplayName().contains(mine.getConfigName())) {
                 Sign sign = (Sign) event.getBlockPlaced().getState();
                 Bukkit.getScheduler().scheduleSyncDelayedTask(Main.getInstance(), new Runnable() {
                     @Override
                     public void run() {
-                        sign.setLine(0, Presets.MainColor + mine.getName());
+                        sign.setLine(0, Presets.MainColor + mine.getConfigName());
                         sign.setLine(1, Presets.SecondaryColor + name);
                         sign.setLine(2, "");
                         UpdateType singType = null;
@@ -103,7 +103,7 @@ public class MineInfoEvents extends EventManager {
 
     private boolean placeHologram(Player player, Location location, String name, UpdateType updateType) {
         for (Mine mine : Catch.RunningMines) {
-            if (Objects.requireNonNull(player.getInventory().getItemInMainHand().getItemMeta()).getDisplayName().contains(name) && player.getInventory().getItemInMainHand().getItemMeta().getDisplayName().contains(mine.getName())) {
+            if (Objects.requireNonNull(player.getInventory().getItemInMainHand().getItemMeta()).getDisplayName().contains(name) && player.getInventory().getItemInMainHand().getItemMeta().getDisplayName().contains(mine.getConfigName())) {
                 return mine.createHologram(location, updateType);
             }
         }

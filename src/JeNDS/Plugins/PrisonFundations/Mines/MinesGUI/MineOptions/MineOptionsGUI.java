@@ -25,7 +25,7 @@ public class MineOptionsGUI extends PFGUI {
         addItems(Material.DIAMOND_ORE, Presets.MainColor + "Block Types", null, 38, this);
         addItems(Material.CLOCK, Presets.MainColor + "Manage Reset", null, 42, this);
         addItems(Material.REDSTONE_BLOCK, Presets.MainColor + "Back", null, 45, this);
-        setMenuAndInterface(Presets.SecondaryColor + mine.getName() + " Menu", 54, InventoryType.CHEST, true, fillItem(), Main.getInstance());
+        setMenuAndInterface(Presets.SecondaryColor + mine.getConfigName() + " Menu", 54, InventoryType.CHEST, true, fillItem(), Main.getInstance());
     }
 
 
@@ -63,7 +63,7 @@ public class MineOptionsGUI extends PFGUI {
         if (itemAndSlot.get(15).isSimilar(itemStack)) {
             mine.deleteMine();
             player.closeInventory();
-            player.sendMessage(Presets.MainColor + "You have Deleted Mine " + Presets.SecondaryColor + mine.getName());
+            player.sendMessage(Presets.MainColor + "You have Deleted Mine " + Presets.SecondaryColor + mine.getConfigName());
             return true;
         }
         return false;

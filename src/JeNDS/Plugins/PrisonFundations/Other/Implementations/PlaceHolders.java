@@ -56,30 +56,38 @@ public class PlaceHolders extends PlaceholderExpansion {
                     return nextRank(player).getPrefix();
                 }
             }
-            if (currentShop(player) != null)
+            if (currentShop(player) != null) {
                 if (params.equalsIgnoreCase("current_shop_name")) {
                     return currentShop(player).getShopName();
                 }
-            if (params.equalsIgnoreCase("current_multiplier")) {
+                if (params.equalsIgnoreCase("current_shop_displayname")) {
+                    return currentShop(player).getShopDisplayName();
+                }
+            }
+            if (params.equalsIgnoreCase("multiplier")) {
                 if (PFPlayer.GetPFPlayer(player.getUniqueId()) != null) {
                     return Objects.requireNonNull(PFPlayer.GetPFPlayer(player.getUniqueId())).getFinalMultiplier() + "";
                 } else {
-                    return "1.0";
+                    return "1";
                 }
             }
             Mine mine = closetMine(player);
-            if (mine != null) {
-                // 10 block radius
-                if (params.equalsIgnoreCase("closet_mine_name")) {
-                    return mine.getName();
-                }
-                if (params.equalsIgnoreCase("closet_mine_time_until_reset")) {
-                    return mine.getTimeBeforeReset() + "M";
-                }
-                if (params.equalsIgnoreCase("closet_mine_percentage")) {
-                    return mine.getMinePercentage() + "%";
-                }
+            // 10 block radius
+            if (params.equalsIgnoreCase("closet_mine_name")) {
+                if (mine == null) return "No mine near";
+                return mine.getConfigName();
             }
+            if (params.equalsIgnoreCase("closet_mine_time_until_reset")) {
+                if (mine == null) return "No mine near";
+
+                return mine.getTimeBeforeReset() + "M";
+            }
+            if (params.equalsIgnoreCase("closet_mine_percentage")) {
+                if (mine == null) return "No mine near";
+
+                return mine.getMinePercentage() + "%";
+            }
+
         }
 
         return null;

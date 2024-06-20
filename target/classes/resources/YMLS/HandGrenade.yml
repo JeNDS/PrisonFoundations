@@ -1,9 +1,18 @@
+# Hand Grenades
+# Easy Setup
+
+# Bomb name for commands no spaces
 SmallBomb:
+  # The material used for item
   Material: "GHAST_TEAR"
+  # The Name you want on the item
   Name: "&8 Small Bomb"
+  # The lore the item should have
   Lore:
     - "&7 Right click to use"
+  # How big should the explosion be in square example 5square is 25, will create a round shape explosion of 25
   Size: 2
+  # How fast should the item launch at the mine
   Speed: 5
 MediumBomb:
   Material: "GOLD_NUGGET"
@@ -26,3 +35,5 @@ Nuke:
     - "&7 Right click to use"
   Size: 15
   Speed: 1
+
+

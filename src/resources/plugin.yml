@@ -1,7 +1,7 @@
 name: PrisonFoundations
 main: JeNDS.Plugins.PrisonFundations.Main
 api-version: 1.16
-version: 1.4
+version: 3.2
 author: JeNDS
 description: -no desc-
 softdepend: [ PlaceholderAPI,Multiverse-Core ]
@@ -9,40 +9,11 @@ load: POSTWORLD
 depend:
   - Vault
   - JeNDSAPI
-permissions:
-  PF.Admin:
-    children:
-      PF.Rankup.Others: true
-      PF.Sell.Others: true
-      PF.AutoSell.Others: true
-      PF.AutoSmelt.Others: true
-      PF.AutoBlock.Others: true
-  PF.Rankup:
-    description: ''
-  PF.Rankup.Others:
-    children:
-      PF.Rankup: true
-  PF.Sell:
-    description: ''
-  PF.Sell.Others:
-    children:
-      PF.Sell: true
-  PF.AutoSell:
-    description: ''
-  PF.AutoSell.Others:
-    children:
-      PF.AutoSell: true
-  PF.AutoSmelt:
-    description: ''
-  PF.AutoBlock:
-    description: ''
-  PF.AutoSmelt.Others:
-    children:
-      PF.AutoSmelt: true
-  PF.AutoBlock.Others:
-    children:
-      PF.AutoBlock: true
 commands:
+  rank:
+    description: 'Command to Rankup'
+  ranks:
+    description: 'Command to Rankup'
   rankup:
     description: 'Command to Rankup'
   prices:

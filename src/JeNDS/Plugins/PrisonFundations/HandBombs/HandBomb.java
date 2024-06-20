@@ -21,7 +21,6 @@ public class HandBomb {
     private final Player player;
     private int taskID;
 
-
     public HandBomb(int size, int speed, ItemStack bomb, Player player) {
         this.size = size;
         this.speed = speed;

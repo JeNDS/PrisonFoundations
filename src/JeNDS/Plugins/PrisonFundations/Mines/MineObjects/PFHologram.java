@@ -32,7 +32,7 @@ public class PFHologram extends JDHologram {
     private static String[] lines(String mineName, UpdateType updateType) {
         Mine mine = Mine.GetMineFromName(mineName);
         String[] lines = new String[4];
-        lines[0] = Presets.MainColor + mine.getName();
+        lines[0] = Presets.MainColor + mine.getConfigName();
         lines[1] = Presets.SecondaryColor + updateType.getName();
         lines[2] = "";
         if (updateType.equals(UpdateType.MINE_PERCENTAGE)) {

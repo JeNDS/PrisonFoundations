@@ -12,13 +12,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class SignCommands extends CommandManager {
+
     protected static void LoadCommand() {
         if (hasPermission(commandSender, "pf.signs"))
             if (commandArgs[0].equalsIgnoreCase("signs")) {
                 if (commandArgs.length > 1) {
                     MinesSigns();
                 } else {
-                    commandSender.sendMessage(defaultColor + "/PF Signs <MineName> <Percentage | Time>");
+                    commandSender.sendMessage(color1 + "/PF Signs <MineName> <Percentage | Time>");
                 }
             }
 
@@ -32,8 +33,8 @@ public class SignCommands extends CommandManager {
                     tabResult.clear();
                     if (tabArgs.length == 2) {
                         for (Mine mine : Catch.RunningMines) {
-                            if (mine.getName().toLowerCase().startsWith(tabArgs[1].toLowerCase())) {
-                                tabResult.add(mine.getName());
+                            if (mine.getConfigName().toLowerCase().startsWith(tabArgs[1].toLowerCase())) {
+                                tabResult.add(mine.getConfigName());
                             }
                         }
                     }
@@ -50,17 +51,17 @@ public class SignCommands extends CommandManager {
         if (commandArgs.length == 3) {
             if (!Catch.RunningMines.isEmpty()) {
                 for (Mine mine : Catch.RunningMines) {
-                    if (commandArgs[1].equalsIgnoreCase(mine.getName())) {
+                    if (commandArgs[1].equalsIgnoreCase(mine.getConfigName())) {
                         Player player = (Player) commandSender;
                         if (commandArgs[2].equalsIgnoreCase("percentage")) {
-                            if (!player.getInventory().contains(giveSign(mine.getName(), "Percentage"))) {
-                                player.getInventory().addItem(giveSign(mine.getName(), "Percentage"));
+                            if (!player.getInventory().contains(giveSign(mine.getConfigName(), "Percentage"))) {
+                                player.getInventory().addItem(giveSign(mine.getConfigName(), "Percentage"));
                             }
                             return;
                         }
                         if (commandArgs[2].equalsIgnoreCase("time")) {
-                            if (!player.getInventory().contains(giveSign(mine.getName(), "time"))) {
-                                player.getInventory().addItem(giveSign(mine.getName(), "time"));
+                            if (!player.getInventory().contains(giveSign(mine.getConfigName(), "time"))) {
+                                player.getInventory().addItem(giveSign(mine.getConfigName(), "time"));
                             }
                             return;
                         }

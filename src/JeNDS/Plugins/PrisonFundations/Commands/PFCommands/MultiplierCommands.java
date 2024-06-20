@@ -11,7 +11,7 @@ import java.sql.Time;
 import java.util.Objects;
 
 public class MultiplierCommands extends CommandManager {
-
+    //todo redo multipliers to seconds only
     protected static void LoadCommand() {
         if (hasPermission(commandSender, "pf.multipliers"))
             if (commandArgs[0].equalsIgnoreCase("multiplier")) {
@@ -22,7 +22,7 @@ public class MultiplierCommands extends CommandManager {
                     clearCommand();
                     Help();
                 } else {
-                    commandSender.sendMessage(defaultColor + "/PF multiplier Help");
+                    commandSender.sendMessage(color1 + "/PF multiplier Help");
                 }
             }
     }
@@ -128,8 +128,8 @@ public class MultiplierCommands extends CommandManager {
                                         time = new Time(hours, minutes, seconds);
 
                                     } else {
-                                        commandSender.sendMessage(defaultColor + "Invalid Time Format");
-                                        commandSender.sendMessage(defaultColor + "/PF multiplier give {player} {amount} {0:0:0:0 | permanent}");
+                                        commandSender.sendMessage(color1 + "Invalid Time Format");
+                                        commandSender.sendMessage(color1 + "/PF multiplier give {player} {amount} {0:0:0:0 | permanent}");
                                         return;
 
                                     }
@@ -144,14 +144,14 @@ public class MultiplierCommands extends CommandManager {
                                 multiplier = new Multiplier(player.getUniqueId(), amount, true, new Time(0, 0, 0), 0);
                                 pfPlayer.clearMultipliers();
                                 pfPlayer.addMultiplier(multiplier);
-                                commandSender.sendMessage(defaultColor + "You have set " + commandArgs[2] + " multiplier to " + amount + "X");
+                                commandSender.sendMessage(color1 + "You have set " + commandArgs[2] + " multiplier to " + amount + "X");
                             } else {
                                 multiplier = new Multiplier(player.getUniqueId(), amount, permanent, time, days);
                                 pfPlayer.addMultiplier(multiplier);
                                 if (permanent) {
-                                    commandSender.sendMessage(defaultColor + "You have gave " + commandArgs[2] + " a permanent multiplier of " + amount + "X");
+                                    commandSender.sendMessage(color1 + "You have gave " + commandArgs[2] + " a permanent multiplier of " + amount + "X");
                                 } else {
-                                    commandSender.sendMessage(defaultColor + "You have gave " + commandArgs[2] + " a multiplier of " + amount + "X for "
+                                    commandSender.sendMessage(color1 + "You have gave " + commandArgs[2] + " a multiplier of " + amount + "X for "
                                             + multiplier.getDays() + "Days " + multiplier.getTime().getHours() + "Hours " + multiplier.getTime().getMinutes() + "Minutes " + multiplier.getTime().getSeconds() + "Seconds");
                                 }
                             }
@@ -159,12 +159,12 @@ public class MultiplierCommands extends CommandManager {
                         }
                 }
             } else {
-                commandSender.sendMessage(defaultColor + commandArgs[2] + " is not a valid player!");
+                commandSender.sendMessage(color1 + commandArgs[2] + " is not a valid player!");
             }
             if (commandArgs[1].equalsIgnoreCase("give"))
-                commandSender.sendMessage(defaultColor + "/PF multiplier give {player} {amount} {Days:Hour:Minutes:Seconds | permanent}");
+                commandSender.sendMessage(color1 + "/PF multiplier give {player} {amount} {Days:Hour:Minutes:Seconds | permanent}");
             if (commandArgs[1].equalsIgnoreCase("set"))
-                commandSender.sendMessage(defaultColor + "/PF multiplier set {player} {amount}");
+                commandSender.sendMessage(color1 + "/PF multiplier set {player} {amount}");
         }
 
     }
@@ -176,12 +176,12 @@ public class MultiplierCommands extends CommandManager {
                 if (pfPlayer != null) {
                     pfPlayer.clearMultipliers();
                 }
-                commandSender.sendMessage(defaultColor + "You have clear all multipliers from " + commandArgs[2]);
+                commandSender.sendMessage(color1 + "You have clear all multipliers from " + commandArgs[2]);
                 return;
             } else {
-                commandSender.sendMessage(defaultColor + commandArgs[2] + " is not a valid player!");
+                commandSender.sendMessage(color1 + commandArgs[2] + " is not a valid player!");
             }
-            commandSender.sendMessage(defaultColor + "/PF multiplier clear {player}");
+            commandSender.sendMessage(color1 + "/PF multiplier clear {player}");
 
 
         }
@@ -192,12 +192,13 @@ public class MultiplierCommands extends CommandManager {
     private static void Help() {
         if (commandArgs.length == 2) {
             if (commandArgs[1].equalsIgnoreCase("help")) {
-                commandSender.sendMessage(defaultColor + "/PF multiplier give {player} {amount} {Days:Hour:Minutes:Seconds | permanent}");
-                commandSender.sendMessage(defaultColor + "/PF multiplier clear {player}");
+                commandSender.sendMessage(color1 + "/PF multiplier give {player} {amount} {Days:Hour:Minutes:Seconds | permanent}");
+                commandSender.sendMessage(color1 + "/PF multiplier clear {player}");
 
             }
         }
 
     }
+
 
 }

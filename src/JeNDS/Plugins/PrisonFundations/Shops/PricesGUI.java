@@ -43,7 +43,7 @@ public class PricesGUI extends PFGUI {
                 itemSlot++;
             }
         }
-        setMenuAndInterface(shop.getShopName() + " Prices", 45, InventoryType.CHEST, true, Main.getPlugin(Main.class));
+        setMenuAndInterface(shop.getShopDisplayName() + " Prices", 45, InventoryType.CHEST, true, Main.getPlugin(Main.class));
     }
 
     protected String fancyMaterialName(String materialName) {

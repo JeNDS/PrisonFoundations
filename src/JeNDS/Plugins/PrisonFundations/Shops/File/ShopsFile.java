@@ -6,6 +6,7 @@ import JeNDS.Plugins.JeNDSAPI.JDAPI;
 import JeNDS.Plugins.PrisonFundations.Main;
 import JeNDS.Plugins.PrisonFundations.Shops.Shop;
 import JeNDS.Plugins.PrisonFundations.Static.Catch;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 
@@ -23,9 +24,13 @@ public class ShopsFile {
         if (!section.getKeys(false).isEmpty()) {
             for (String shop : section.getKeys(false)) {
                 String inheritance = null;
+                String displayName = shop;
+                if (shopFile.getFileConfiguration().get(shop + ".Display Name") != null)
+                    displayName = shopFile.getFileConfiguration().getString(shop + ".Display Name");
                 if (shopFile.getFileConfiguration().get(shop + ".Inherit") != null)
                     inheritance = shopFile.getFileConfiguration().getString(shop + ".Inherit");
-                Shop shop1 = new Shop(shop, inheritance, combineShopItems(shop));
+                displayName = ChatColor.translateAlternateColorCodes('&', displayName);
+                Shop shop1 = new Shop(shop, displayName, inheritance, combineShopItems(shop));
                 if (!Catch.Shops.contains(shop1)) {
                     Catch.Shops.add(shop1);
                 }

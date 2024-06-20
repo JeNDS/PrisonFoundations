@@ -35,7 +35,7 @@ public class MineResetTypeOptionsMenu extends PFGUI {
 
         addItems(Material.REDSTONE_BLOCK, Presets.MainColor + "Delete", null, 49, this);
         addItems(Material.REDSTONE_BLOCK, Presets.MainColor + "Back", null, 45, this);
-        setMenuAndInterface(Presets.SecondaryColor + mine.getName() + " Reset Type Menu " + blockType.getMaterial().name() + " " + blockType.getPercentage() + "%", 54, InventoryType.CHEST, true, fillItem(), Main.getInstance());
+        setMenuAndInterface(Presets.SecondaryColor + mine.getConfigName() + " Reset Type Menu " + blockType.getMaterial().name() + " " + blockType.getPercentage() + "%", 54, InventoryType.CHEST, true, fillItem(), Main.getInstance());
     }
 
 
@@ -97,7 +97,7 @@ public class MineResetTypeOptionsMenu extends PFGUI {
     private void modifyMenuPercentage(Player player, int percentage) {
         if (!Catch.RunningMines.isEmpty()) {
             for (Mine m : Catch.RunningMines) {
-                if (m.getName().contains(mine.getName())) {
+                if (m.getConfigName().contains(mine.getConfigName())) {
                     if (blockType.getPercentage() + percentage <= 100 && blockType.getPercentage() + percentage >= 5) {
                         resetPercentage(blockType.getPercentage() + percentage, mine, player);
                     } else {

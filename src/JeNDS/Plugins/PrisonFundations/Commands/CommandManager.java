@@ -26,11 +26,12 @@ public class CommandManager implements TabExecutor {
     protected static String[] tabArgs;
     protected static List<String> tabResult = new ArrayList<>();
     protected static boolean IsCommand = false;
-    protected static String defaultColor = Presets.MainColor;
-    protected static String standOutColor = Presets.SecondaryColor;
+    protected static String color1 = Presets.MainColor;
+    protected static String color2 = Presets.SecondaryColor;
+    protected static String color3 = Presets.ThirdColor;
 
     protected static boolean hasPermission(CommandSender sender, String permission) {
-        if (sender.hasPermission("pf.admin")) return true;
+        if (sender.hasPermission("pf.admin") || sender.isOp()) return true;
         return sender.hasPermission(permission);
     }
 
@@ -39,6 +40,8 @@ public class CommandManager implements TabExecutor {
         loadCommand("pf");
         loadCommand("sell");
         loadCommand("rankup");
+        loadCommand("rank");
+        loadCommand("ranks");
         loadCommand("prices");
     }
 
